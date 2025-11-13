@@ -29,7 +29,7 @@
             --text-muted: #6B7280;
             --border: #E8E4DF;
             --accent-cyan: #3498DB;
-            --accent-yellow: #B8E6D5; /* Pale mint instead of yellow */
+            --accent-yellow: #B8E6D5;
         }
 
         html {
@@ -353,10 +353,10 @@
             position: fixed;
             top: 4rem;
             left: 2rem;
-            width: 50%;
+            width: 50vw;
             max-width: 900px;
             min-width: 700px;
-            height: 600px;
+            max-height: 85vh;
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: 24px;
@@ -600,139 +600,41 @@
             line-height: 1.6;
         }
 
-        .timeline {
-            margin-top: 3rem;
-            position: relative;
-            padding-left: 3rem;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
         }
 
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-yellow));
-            opacity: 0.5;
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
         }
 
-        .timeline-item {
-            position: relative;
-            margin-bottom: 3rem;
-            opacity: 0;
-            animation: fade-in-left 0.8s ease forwards;
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
         }
 
-        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
-        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
-        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
-        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
-        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
-
-        @keyframes fade-in-left {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -3.4rem;
-            top: 0;
-            width: 14px;
-            height: 14px;
-            background: var(--accent-cyan);
-            border-radius: 50%;
-            border: 3px solid var(--bg);
-            box-shadow: 0 0 20px rgba(93, 173, 226, 0.5);
-        }
-
-        .timeline-date {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            letter-spacing: 0.1em;
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 0.5rem;
         }
 
-        .timeline-company-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .company-logo {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-            background: white;
-            padding: 5px;
-            border-radius: 8px;
-        }
-
-        .timeline-company {
-            font-size: 1.3rem;
-            font-weight: 500;
-        }
-
-        .timeline-company a {
-            color: var(--text);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .timeline-company a:hover {
-            color: var(--accent-cyan);
-        }
-
-        .timeline-company-note {
+        .stat-label {
             font-size: 0.9rem;
             color: var(--text-muted);
-            font-weight: 400;
-            font-style: italic;
-        }
-
-        .timeline-role {
-            font-size: 1rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-        }
-
-        .timeline-description {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            max-width: 900px;
-            line-height: 1.7;
-            margin-bottom: 1rem;
-        }
-
-        .timeline-bullets {
-            list-style: none;
-            margin-top: 1rem;
-            max-width: 900px;
-        }
-
-        .timeline-bullets li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.8rem;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .timeline-bullets li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         .lab-grid {
@@ -1318,6 +1220,7 @@
             .profile-overlay {
                 width: 90%;
                 max-width: 600px;
+                min-width: auto;
                 height: auto;
                 max-height: 85vh;
                 flex-direction: column;
@@ -1339,6 +1242,10 @@
                 right: 1rem;
                 bottom: 1rem;
                 max-width: 90%;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -1512,7 +1419,7 @@
                     <h2 class="section-numeral">I</h2>
                     <div class="section-header-line"></div>
                 </div>
-                <h3 class="section-title">PROJECTS</h3>
+                <h3 class="section-title">FEATURED PROJECTS</h3>
             </div>
 
             <div class="projects-grid">
@@ -1541,44 +1448,16 @@
                 </div>
 
                 <div class="project-card">
-                    <span class="project-tag">Past Project</span>
-                    <h3>Amplifier Agency</h3>
-                    <p>Event and entertainment agency producing conferences and live shows.</p>
-                    <a href="https://www.facebook.com/groups/381833041885102" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View Community →</a>
-                    <a href="mywork/amplifier-agency.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn more →</a>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-tag">Past Concept</span>
-                    <h3>aeoess</h3>
-                    <p>World's first IoT breathing wearable nose device for personalized breathing analytics.</p>
-                    <a href="https://drive.google.com/file/d/1-W51qctnlSj5Gip0buViqGd34MMEebFF/view?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View deck →</a>
-                    <a href="mywork/aeoess.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn more →</a>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-tag">Past Concept</span>
-                    <h3>SheetHappens</h3>
-                    <p>The world's first "lucky" toilet paper — a playful CPG experiment that never launched publicly.</p>
-                    <a href="https://drive.google.com/file/d/1NkGotUE1WqTJasttrYie-16JVEk0Icqh/view?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View deck →</a>
-                    <a href="mywork/sheethappens.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn more →</a>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-tag">Past Concept</span>
-                    <h3>Pick-a-Poo</h3>
-                    <p>A rival CPG brand to SheetHappens — designed to capture the market from two sides.</p>
-                    <a href="https://drive.google.com/file/d/1YZ2_cISw6GqqB-LvaFSbbMFasG-P27wW/view?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View deck →</a>
-                    <a href="mywork/pickapoo.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn more →</a>
-                </div>
-
-                <div class="project-card">
                     <span class="project-tag">Collection</span>
                     <h3>Creative Projects</h3>
                     <p>Film direction, multimedia installations, and creative experiments that blend art with technology.</p>
                     <a href="https://docs.google.com/document/d/1ps-sqbx0Fc-1NZnV7S40ODrPGAxilEhAiDhA98dPBT4/edit?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View portfolio →</a>
                     <a href="mywork/creative-projects.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn more →</a>
                 </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="mywork/index.html" class="contact-link">View All Projects →</a>
             </div>
         </div>
     </section>
@@ -1594,154 +1473,35 @@
                 <h3 class="section-title">WORK BACKGROUND</h3>
             </div>
 
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">MAY 2024 — PRESENT</div>
-                    <div class="timeline-company-wrapper">
-                        <img src="assets/images/evatar_logo.png" alt="Evatar" class="company-logo">
-                        <div class="timeline-company"><a href="mywork/evatar.html">Evatar.ai</a></div>
+            <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+                <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.8;">
+                    5+ years building zero-to-one products across AI, SaaS, e-commerce, and CPG. 
+                    From scaling startups to founding companies.
+                </p>
+                
+                <!-- Key Highlights -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">9</div>
+                        <div class="stat-label">Companies</div>
                     </div>
-                    <div class="timeline-role">Founder & CEO • Los Angeles, CA</div>
-                    <p class="timeline-description">
-                        Launched agentic GenAI platform from idea to live beta. Acquired 121 users, 400K+ weekly views. Led 8-person team, shipped MVP in 16 weeks.
-                    </p>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Founded</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">$10M+</div>
+                        <div class="stat-label">Revenue Generated</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Years PM Experience</div>
+                    </div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-date">MAY 2024 — AUG 2025</div>
-                    <div class="timeline-company-wrapper">
-                        <img src="assets/images/peropero_logo.jpeg" alt="Pero Pero" class="company-logo">
-                        <div class="timeline-company"><a href="mywork/peropero.html">Pero Pero</a></div>
-                    </div>
-                    <div class="timeline-role">COO • Los Angeles, CA</div>
-                    <p class="timeline-description">
-                        Built brand and store from scratch; developed products, multi-channel sales, and full operational infrastructure. Pet care brand created for Stella Maxwell and Barbara Palvin.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">JUN 2021 — JUL 2022</div>
-                    <div class="timeline-company-wrapper">
-                        <img src="assets/images/authoritytech_logo.jpeg" alt="AuthorityTech" class="company-logo">
-                        <div class="timeline-company"><a href="mywork/authoritytech.html">AuthorityTech</a></div>
-                    </div>
-                    <div class="timeline-role">Sales Operations Manager • Remote</div>
-                    <p class="timeline-description">
-                        Scaled client acquisition by 700% and revenue from $100K to $2M. Built full-cycle sales and marketing operations, automated lead generation for tech startups.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">DEC 2020 — MAR 2022</div>
-                    <div class="timeline-company-wrapper">
-                        <img src="assets/images/OFNATURE%20LOGO.png" alt="ofNature" class="company-logo">
-                        <div class="timeline-company"><a href="mywork/ofnature.html">ofNature</a></div>
-                    </div>
-                    <div class="timeline-role">Co-Founder & CEO • Los Angeles, CA</div>
-                    <p class="timeline-description">
-                        Launched eco CPG brand with products adopted by McDonald's. Raised $150K pre-seed, built Ukraine manufacturing.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">NOV 2020 — MAR 2024</div>
-                    <div class="timeline-company-wrapper">
-                        <img src="assets/images/elegatto_logo.jpeg" alt="Elegatto" class="company-logo">
-                        <div class="timeline-company"><a href="mywork/elegatto.html">Elegatto</a></div>
-                    </div>
-                    <div class="timeline-role">Head of Strategy & Operations • Los Angeles, CA</div>
-                    <p class="timeline-description">
-                        Scaled DTC jewelry brand to $3M ARR. Tripled revenue in 24 months. Secured $300K Meta campaign (2.8x ROAS).
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">FEB 2020 — MAR 2024</div>
-                    <div class="timeline-company-wrapper">
-                        <img src="assets/images/NJF_logo.jpeg" alt="NJF Worldwide" class="company-logo">
-                        <div class="timeline-company"><a href="mywork/njf.html">NJF Worldwide</a></div>
-                    </div>
-                    <div class="timeline-role">Capture Strategist • New York, NY</div>
-                    <p class="timeline-description">
-                        Expanded presence in government contracting sector. Led outbound marketing and stakeholder engagement, helped secure a $159M contract with New York State for COVID-19 test kits.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">SEP 2018 — NOV 2020</div>
-                    <div class="timeline-company-wrapper">
-                        <img src="assets/images/haystraws_logo.jpeg" alt="HAY! Straws" class="company-logo">
-                        <div class="timeline-company"><a href="mywork/hayi.html">HAY! Straws</a></div>
-                    </div>
-                    <div class="timeline-role">Head of Growth & Partnerships • San Francisco, CA</div>
-                    <p class="timeline-description">
-                        Secured 2,000+ B2B accounts including Hilton, Hyatt, Marriott. Generated $4M+ in sales.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">NOV 2016 — SEP 2018</div>
-                    <div class="timeline-company-wrapper">
-                        <img src="assets/images/allset_logo.jpeg" alt="Allset" class="company-logo">
-                        <div class="timeline-company"><a href="mywork/allset.html">Allset</a> <span class="timeline-company-note">(Acquired by SoundHound AI)</span></div>
-                    </div>
-                    <div class="timeline-role">VP of Sales • New York, NY</div>
-                    <p class="timeline-description">
-                        Promoted to VP in 8 months. Scaled from 300 to 3,400+ locations. Enabled $5M Series A.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2012 — 2014</div>
-                    <div class="timeline-company-wrapper">
-                        <div class="company-logo" style="background: #8e44ad;"></div>
-                        <div class="timeline-company"><a href="mywork/legrem.html">Legrem Law Firm</a></div>
-                    </div>
-                    <div class="timeline-role">Strategic Communications & PR Associate • Kyiv, Ukraine</div>
-                    <p class="timeline-description">
-                        Mediated business disputes, managed communications during corporate transitions and bank seizures.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2008 — 2013</div>
-                    <div class="timeline-company-wrapper">
-                        <div class="company-logo" style="background: #e67e22;"></div>
-                        <div class="timeline-company"><a href="mywork/amplifier-agency.html">Amplifier Entertainment Agency</a></div>
-                    </div>
-                    <div class="timeline-role">Founder & Event Organizer • Kyiv, Ukraine</div>
-                    <p class="timeline-description">
-                        Organized UNICEF, USAID, and ICRC conferences and major entertainment events.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2006 — 2007</div>
-                    <div class="timeline-company-wrapper">
-                        <img src="assets/images/m1_logo.jpeg" alt="M1 TV" class="company-logo">
-                        <div class="timeline-company"><a href="mywork/m1tv.html">M1 TV Music Channel</a></div>
-                    </div>
-                    <div class="timeline-role">Assistant Director (Internship) • Kyiv, Ukraine</div>
-                    <p class="timeline-description">
-                        Assisted in directing music videos and live productions — first storytelling experience.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2006 — 2010</div>
-                    <div class="timeline-company-wrapper">
-                        <div class="company-logo" style="background: #34495e;"></div>
-                        <div class="timeline-company">Education</div>
-                    </div>
-                    <div class="timeline-role">B.A. in Film Directing</div>
-                    <p class="timeline-description">
-                        Kyiv National I. K. Karpenko-Kary Theatre, Cinema and Television University
-                    </p>
-                </div>
-
-                <div style="text-align: center; margin-top: 3rem;">
-                    <a href="mywork/index.html" class="contact-link">View Complete Work History →</a>
-                </div>
+                <a href="mywork/index.html" class="contact-link" style="display: inline-block; margin-top: 2rem;">
+                    View Complete Work History →
+                </a>
             </div>
         </div>
     </section>
@@ -2013,7 +1773,7 @@
                 </p>
 
                 <div class="contact-links">
-                    <a href="/cdn-cgi/l/email-protection#ef9b86828eaf8e8a808a9c9cc18c8082" class="contact-link">EMAIL</a>
+                    <a href="mailto:tima@aeoess.com" class="contact-link">EMAIL</a>
                     <a href="https://linkedin.com/in/tymofii-pidlisnyi" class="contact-link" target="_blank">LINKEDIN</a>
                     <a href="https://instagram.com/tima.fey" class="contact-link" target="_blank">INSTAGRAM</a>
                 </div>
@@ -2024,55 +1784,66 @@
     <script>
         // Animated Grain Effect
         const canvas = document.getElementById('grain-canvas');
-        const ctx = canvas.getContext('2d');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
 
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
-        function noise() {
-            const w = ctx.canvas.width;
-            const h = ctx.canvas.height;
-            const iData = ctx.createImageData(w, h);
-            const buffer32 = new Uint32Array(iData.data.buffer);
-            
-            for (let i = 0; i < buffer32.length; i++) {
-                if (Math.random() < 0.02) {
-                    buffer32[i] = 0x88ffffff;
-                }
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
             }
-            
-            ctx.putImageData(iData, 0, 0);
-        }
 
-        function animate() {
-            noise();
-            requestAnimationFrame(animate);
-        }
+            function noise() {
+                const w = ctx.canvas.width;
+                const h = ctx.canvas.height;
+                const iData = ctx.createImageData(w, h);
+                const buffer32 = new Uint32Array(iData.data.buffer);
+                
+                for (let i = 0; i < buffer32.length; i++) {
+                    if (Math.random() < 0.02) {
+                        buffer32[i] = 0x88ffffff;
+                    }
+                }
+                
+                ctx.putImageData(iData, 0, 0);
+            }
 
-        resize();
-        window.addEventListener('resize', resize);
-        animate();
+            function animate() {
+                noise();
+                requestAnimationFrame(animate);
+            }
+
+            resize();
+            window.addEventListener('resize', resize);
+            animate();
+        }
 
         // Cookie Consent Management
         function checkCookieConsent() {
             const consent = localStorage.getItem('cookieConsent');
             if (!consent) {
                 setTimeout(() => {
-                    document.getElementById('cookieBanner').classList.add('show');
+                    const banner = document.getElementById('cookieBanner');
+                    if (banner) {
+                        banner.classList.add('show');
+                    }
                 }, 1000);
             }
         }
 
         function acceptCookies() {
             localStorage.setItem('cookieConsent', 'accepted');
-            document.getElementById('cookieBanner').classList.remove('show');
+            const banner = document.getElementById('cookieBanner');
+            if (banner) {
+                banner.classList.remove('show');
+            }
         }
 
         function rejectCookies() {
             localStorage.setItem('cookieConsent', 'rejected');
-            document.getElementById('cookieBanner').classList.remove('show');
+            const banner = document.getElementById('cookieBanner');
+            if (banner) {
+                banner.classList.remove('show');
+            }
         }
 
         // Theme Toggle
@@ -2083,11 +1854,11 @@
             
             if (currentTheme === 'dark') {
                 body.setAttribute('data-theme', 'bright');
-                themeIcon.textContent = '☀️';
+                if (themeIcon) themeIcon.textContent = '☀️';
                 localStorage.setItem('theme', 'bright');
             } else {
                 body.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = '🌙';
+                if (themeIcon) themeIcon.textContent = '🌙';
                 localStorage.setItem('theme', 'dark');
             }
         }
@@ -2096,7 +1867,10 @@
         window.addEventListener('load', () => {
             const savedTheme = localStorage.getItem('theme') || 'dark';
             document.body.setAttribute('data-theme', savedTheme);
-            document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+            const themeIcon = document.getElementById('theme-icon');
+            if (themeIcon) {
+                themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+            }
             
             checkCookieConsent();
             loadUpvotes();
@@ -2108,42 +1882,46 @@
         const profileOverlay = document.getElementById('profileOverlay');
         let hoverTimeout;
 
-        profilePhoto.addEventListener('mouseenter', () => {
-            hoverTimeout = setTimeout(() => {
+        if (profilePhoto && profileOverlay) {
+            profilePhoto.addEventListener('mouseenter', () => {
+                hoverTimeout = setTimeout(() => {
+                    profileOverlay.classList.add('show');
+                }, 200);
+            });
+
+            profilePhoto.addEventListener('mouseleave', () => {
+                clearTimeout(hoverTimeout);
+            });
+
+            profileOverlay.addEventListener('mouseenter', () => {
+                clearTimeout(hoverTimeout);
                 profileOverlay.classList.add('show');
-            }, 200);
-        });
+            });
 
-        profilePhoto.addEventListener('mouseleave', () => {
-            clearTimeout(hoverTimeout);
-        });
-
-        profileOverlay.addEventListener('mouseenter', () => {
-            clearTimeout(hoverTimeout);
-            profileOverlay.classList.add('show');
-        });
-
-        profileOverlay.addEventListener('mouseleave', () => {
-            profileOverlay.classList.remove('show');
-        });
+            profileOverlay.addEventListener('mouseleave', () => {
+                profileOverlay.classList.remove('show');
+            });
+        }
 
         // Navigation Hide/Show on Scroll
         let lastScrollTop = 0;
         const nav = document.getElementById('mainNav');
         const scrollThreshold = 100;
 
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
-                if (scrollTop > lastScrollTop && scrollTop > 200) {
-                    nav.classList.add('hidden');
-                } else {
-                    nav.classList.remove('hidden');
+        if (nav) {
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
+                    if (scrollTop > lastScrollTop && scrollTop > 200) {
+                        nav.classList.add('hidden');
+                    } else {
+                        nav.classList.remove('hidden');
+                    }
+                    lastScrollTop = scrollTop;
                 }
-                lastScrollTop = scrollTop;
-            }
-        });
+            });
+        }
 
         // Smooth scroll for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2187,14 +1965,16 @@
 
         // Add parallax effect to hero text
         const heroTexts = document.querySelectorAll('.hero-text');
-        window.addEventListener('scroll', () => {
-            const scrolled = window.scrollY;
-            heroTexts.forEach((text, index) => {
-                const speed = 0.5 + (index * 0.1);
-                text.style.transform = `translateY(${scrolled * speed}px)`;
-                text.style.opacity = Math.max(0, 1 - (scrolled / 500));
+        if (heroTexts.length > 0) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.scrollY;
+                heroTexts.forEach((text, index) => {
+                    const speed = 0.5 + (index * 0.1);
+                    text.style.transform = `translateY(${scrolled * speed}px)`;
+                    text.style.opacity = Math.max(0, 1 - (scrolled / 500));
+                });
             });
-        });
+        }
 
         // UPVOTE FUNCTIONALITY
         function generateUserId() {
@@ -2211,13 +1991,18 @@
             const ideas = ['quests', 'onlyfriends', 'gravityseat', 'dataism'];
             
             ideas.forEach(idea => {
-                const count = localStorage.getItem(`upvote_count_${idea}`) || 0;
-                document.getElementById(`upvote-${idea}`).textContent = count;
-                
-                const userVotes = JSON.parse(localStorage.getItem('user_votes') || '{}');
-                if (userVotes[idea]) {
-                    const btn = document.querySelector(`[data-idea="${idea}"]`);
-                    btn.classList.add('voted');
+                const countElement = document.getElementById(`upvote-${idea}`);
+                if (countElement) {
+                    const count = localStorage.getItem(`upvote_count_${idea}`) || 0;
+                    countElement.textContent = count;
+                    
+                    const userVotes = JSON.parse(localStorage.getItem('user_votes') || '{}');
+                    if (userVotes[idea]) {
+                        const btn = document.querySelector(`[data-idea="${idea}"]`);
+                        if (btn) {
+                            btn.classList.add('voted');
+                        }
+                    }
                 }
             });
         }
@@ -2226,6 +2011,8 @@
             const userId = generateUserId();
             const btn = document.querySelector(`[data-idea="${ideaId}"]`);
             const countElement = document.getElementById(`upvote-${ideaId}`);
+            
+            if (!btn || !countElement) return;
             
             let userVotes = JSON.parse(localStorage.getItem('user_votes') || '{}');
             let currentCount = parseInt(localStorage.getItem(`upvote_count_${ideaId}`) || 0);
@@ -2247,16 +2034,24 @@
 
         // COMMENTS FUNCTIONALITY
         function openCommentsModal() {
-            document.getElementById('commentsModal').classList.add('show');
-            loadComments();
+            const modal = document.getElementById('commentsModal');
+            if (modal) {
+                modal.classList.add('show');
+                loadComments();
+            }
         }
 
         function closeCommentsModal() {
-            document.getElementById('commentsModal').classList.remove('show');
+            const modal = document.getElementById('commentsModal');
+            if (modal) {
+                modal.classList.remove('show');
+            }
         }
 
         function loadComments() {
             const commentsList = document.getElementById('commentsList');
+            if (!commentsList) return;
+            
             const comments = JSON.parse(localStorage.getItem('site_comments') || '[]');
             
             if (comments.length === 0) {
@@ -2278,6 +2073,8 @@
         function submitComment() {
             const nameInput = document.getElementById('commentName');
             const textInput = document.getElementById('commentText');
+            
+            if (!nameInput || !textInput) return;
             
             const name = nameInput.value.trim();
             const text = textInput.value.trim();
@@ -2312,11 +2109,14 @@
         }
 
         // Close modal when clicking outside
-        document.getElementById('commentsModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeCommentsModal();
-            }
-        });
+        const commentsModal = document.getElementById('commentsModal');
+        if (commentsModal) {
+            commentsModal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeCommentsModal();
+                }
+            });
+        }
     </script>
 </body>
 </html>
