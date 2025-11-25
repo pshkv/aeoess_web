@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Projects — Tima</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0F0E0D;
+            --bg-secondary: #1A1715;
+            --text: #F5F3F0;
+            --text-muted: #8B9199;
+            --border: #262320;
+            --accent-cyan: #5DADE2;
+            --accent-yellow: #F4D03F;
+        }
+
+        [data-theme="bright"] {
+            --bg: #FDFCFA;
+            --bg-secondary: #F9F7F4;
+            --text: #2B2622;
+            --text-muted: #6B7280;
+            --border: #E8E4DF;
+            --accent-cyan: #3498DB;
+            --accent-yellow: #B8E6D5;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        p {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text-muted);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin: 3rem 0 1.5rem 0;
+            color: var(--text);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin: 2rem 0 1rem 0;
+            color: var(--accent-cyan);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+
+        .highlight {
+            color: var(--accent-cyan);
+            font-weight: 500;
+        }
+
+        .video-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover {
+            border-color: var(--accent-cyan);
+        }
+
+        .video-card h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-card .views {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .video-card .role {
+            font-size: 0.85rem;
+            color: var(--accent-yellow);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .collab-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .collab-section h3 {
+            margin-top: 0;
+        }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .links a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .links a:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(93, 173, 226, 0.1);
+        }
+
+        .impact-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .impact-card h3 {
+            margin-top: 0;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1001;
+            width: 60px;
+            height: 30px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            cursor: pointer;
+            padding: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-cyan);
+        }
+
+        .theme-toggle-slider {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        [data-theme="bright"] .theme-toggle-slider {
+            transform: translateX(30px);
+            background: var(--accent-yellow);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <div class="theme-toggle-slider">
+            <span id="theme-icon">🌙</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        
+        <h1>Creative Projects</h1>
+        
+        <p class="intro">Hobby passion projects where I served as <span class="highlight">co-concept creator, co-director, and co-producer</span>. The film directing background never really left.</p>
+
+        <h2>Music Videos</h2>
+
+        <div class="video-card">
+            <h3>Jagwar Twin — Bad Feeling</h3>
+            <p class="views">14M views</p>
+            <p class="role">Co-concept creator, co-director, co-producer</p>
+            <div class="video-wrapper">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/aPxFKQfv-Co" title="Jagwar Twin - Bad Feeling" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="video-card">
+            <h3>FLO — Caught Up</h3>
+            <p class="views">1.4M views</p>
+            <p class="role">Co-concept creator, co-director, co-producer</p>
+            <div class="video-wrapper">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/5Hf7vEIRVIM" title="FLO - Caught Up" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="video-card">
+            <h3>YVS VILLAGE — Only Fans</h3>
+            <p class="views">Smaller release</p>
+            <p class="role">75% conceptualized and directed by me</p>
+            <div class="video-wrapper">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/tKiIel1eAoM" title="YVS VILLAGE - Only Fans" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="video-card">
+            <h3>Revo AD</h3>
+            <p class="views">Commercial</p>
+            <p class="role">AI-generated script</p>
+            <div class="video-wrapper">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/AMSGqlifo8M" title="Revo AD" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <h2>Ongoing Collaborations</h2>
+
+        <div class="collab-section">
+            <h3>Creative collaborator with Ganna</h3>
+            <p>Ongoing creative partnership exploring visual art and experimental projects.</p>
+            <div class="links">
+                <a href="https://www.instagram.com/artmosphere______/" target="_blank">@artmosphere______</a>
+                <a href="https://www.instagram.com/p/Cs2ESvkoZl6/" target="_blank">Project 1</a>
+                <a href="https://www.instagram.com/reel/CyBxZSRvnyj/" target="_blank">Project 2</a>
+            </div>
+        </div>
+
+        <h2>Social Impact / Nonprofit</h2>
+
+        <div class="impact-card">
+            <h3>Kyiv Auto Club</h3>
+            <p><span class="highlight">Co-founder</span> — Organized large-scale protest actions across Kyiv, mobilizing hundreds of drivers and culminating in the symbolic delivery of a "golden wheel" to the Cabinet of Ministers to protest fuel prices and road conditions in Ukraine.</p>
+            <div class="links">
+                <a href="https://podrobnosti.ua/907173" target="_blank">Press Coverage</a>
+                <a href="https://drive.google.com/file/d/1tYPlSIPRVAELKylAUX8_LcuBsFG94QJX/view?usp=sharing" target="_blank">Archive 1</a>
+                <a href="https://drive.google.com/file/d/1S08naoWo_9A385TGewTcPhqPZzcpChsH/view?usp=sharing" target="_blank">Archive 2</a>
+                <a href="https://www.facebook.com/photo/?fbid=392028320902489&set=pb.100070002377928.-2207520000" target="_blank">Photos</a>
+            </div>
+        </div>
+
+        <a href="index.html#contact" class="back-link">→ Get in Touch</a>
+    </div>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.setAttribute('data-theme', 'bright');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'bright');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        window.addEventListener('load', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.body.setAttribute('data-theme', savedTheme);
+            document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+        });
+    </script>
+</body>
+</html>
