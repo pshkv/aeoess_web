@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tymofii Pidlisnyi — Product Manager & Creative Founder</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -45,7 +48,10 @@
             overflow-x: hidden;
         }
 
-        p, .timeline-description, .project-card p, .lab-card p {
+        p,
+        .timeline-description,
+        .project-card p,
+        .lab-card p {
             font-family: 'Inter', -apple-system, sans-serif;
             color: var(--text-muted);
         }
@@ -67,20 +73,28 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, 
-                rgba(93, 173, 226, 0.1) 0%, 
-                transparent 25%,
-                transparent 75%,
-                rgba(244, 208, 63, 0.1) 100%);
+            background: radial-gradient(circle,
+                    rgba(93, 173, 226, 0.1) 0%,
+                    transparent 25%,
+                    transparent 75%,
+                    rgba(244, 208, 63, 0.1) 100%);
             animation: gradient-rotate 20s linear infinite;
             pointer-events: none;
             z-index: 0;
         }
 
         @keyframes gradient-rotate {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.2); }
-            100% { transform: rotate(360deg) scale(1); }
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(180deg) scale(1.2);
+            }
+
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
         }
 
         .floating-orb {
@@ -121,13 +135,17 @@
         }
 
         @keyframes float {
-            0%, 100% { 
+
+            0%,
+            100% {
                 transform: translate(0, 0) scale(1);
             }
-            33% { 
+
+            33% {
                 transform: translate(30px, -50px) scale(1.1);
             }
-            66% { 
+
+            66% {
                 transform: translate(-30px, 30px) scale(0.9);
             }
         }
@@ -151,6 +169,7 @@
                 transform: translateX(100%);
                 opacity: 0;
             }
+
             to {
                 transform: translateX(0);
                 opacity: 1;
@@ -162,7 +181,7 @@
             padding: 2rem;
             border-radius: 20px;
             text-align: left;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
         .cookie-banner-content h2 {
@@ -206,7 +225,7 @@
 
         .cookie-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
 
         .cookie-btn.accept {
@@ -366,7 +385,7 @@
             opacity: 0;
             pointer-events: none;
             transition: all 0.3s ease;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
             display: flex;
             overflow: hidden;
         }
@@ -445,7 +464,7 @@
         }
 
         .text-glow {
-            text-shadow: 
+            text-shadow:
                 0 0 20px rgba(93, 173, 226, 0.3),
                 0 0 40px rgba(93, 173, 226, 0.2),
                 0 0 80px rgba(93, 173, 226, 0.1);
@@ -510,14 +529,20 @@
             animation: fade-in-up 1s ease forwards;
         }
 
-        .hero-text:nth-child(2) { animation-delay: 0.2s; }
-        .hero-text:nth-child(3) { animation-delay: 0.4s; }
+        .hero-text:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .hero-text:nth-child(3) {
+            animation-delay: 0.4s;
+        }
 
         @keyframes fade-in-up {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
+
             from {
                 opacity: 0;
                 transform: translateY(30px);
@@ -538,6 +563,12 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
+        }
+
+        @media (min-width: 1200px) {
+            .projects-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         .project-card {
@@ -568,7 +599,7 @@
 
         .project-card:hover {
             transform: translateY(-8px);
-            box-shadow: 
+            box-shadow:
                 0 10px 40px rgba(93, 173, 226, 0.1),
                 0 0 0 1px var(--accent-cyan);
         }
@@ -713,8 +744,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
         }
 
         .lab-card h4 {
@@ -1272,9 +1310,18 @@
             }
         }
 
-        .text-center { text-align: center; }
-        .italic { font-style: italic; }
-        .max-w-2xl { max-width: 42rem; margin: 0 auto; }
+        .text-center {
+            text-align: center;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .max-w-2xl {
+            max-width: 42rem;
+            margin: 0 auto;
+        }
 
         .scroll-indicator {
             position: fixed;
@@ -1305,9 +1352,20 @@
         }
 
         @keyframes scroll-animation {
-            0% { transform: translateX(-50%) translateY(0); opacity: 1; }
-            50% { transform: translateX(-50%) translateY(10px); opacity: 0.5; }
-            100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+            0% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(10px);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
         }
 
         .decorative-circle {
@@ -1319,8 +1377,13 @@
         }
 
         @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .circle-1 {
@@ -1341,12 +1404,13 @@
         }
     </style>
 </head>
+
 <body data-theme="dark">
     <div class="moving-gradient"></div>
     <div class="floating-orb orb-1"></div>
     <div class="floating-orb orb-2"></div>
     <div class="floating-orb orb-3"></div>
-    
+
     <div class="decorative-circle circle-1"></div>
     <div class="decorative-circle circle-2"></div>
 
@@ -1356,7 +1420,8 @@
         <div class="cookie-banner-content">
             <h2>COOKIE USE</h2>
             <p>
-                This website uses cookies to allow us to better understand how our site is used. By continuing to use this site, you consent to the Terms of Service and Privacy Policy.
+                This website uses cookies to allow us to better understand how our site is used. By continuing to use
+                this site, you consent to the Terms of Service and Privacy Policy.
             </p>
             <div class="cookie-banner-buttons">
                 <button class="cookie-btn accept" onclick="acceptCookies()">Accept</button>
@@ -1386,15 +1451,25 @@
                 <p>My Bio</p>
             </div>
             <div class="profile-overlay-bio">
-                <p>Hi, I'm Tima. I might look cocky, but I'm not — I'm sensitive, deeply empathetic and often misread. (Ironic, since I shaved my curls at 22 just to be taken seriously.)</p>
-                
-                <p>I'm a polymath — neurodivergent, fascinated by everything from quantum physics to alternative history and esoteric philosophy to how imagination shapes reality. My brain constantly takes things apart and puts them back together.</p>
-                
-                <p>For my first 30 years, I was a dreamer who lived through stories, feelings, and imagination — film directing, creative projects, the scene. Then at 33, something switched. I became obsessed with execution. I taught myself product, operations, systems, and sales — everything needed to turn ideas into something real.</p>
-                
-                <p>Since then, I've learned more than I ever imagined possible — and burned down more times than most would survive: betrayal, war destroying my business, political imprisonment. But every time, I rise again — like a phoenix with a restless mind and an unshakable belief in human imagination.</p>
-                
-                <p>My life's been quite the adventure — some parts might shock you. <a href="bio.html" style="color: var(--accent-cyan); text-decoration: none; font-weight: 500;">Read the full story →</a></p>
+                <p>Hi, I'm Tima. I might look cocky, but I'm not — I'm sensitive, deeply empathetic and often misread.
+                    (Ironic, since I shaved my curls at 22 just to be taken seriously.)</p>
+
+                <p>I'm a polymath — neurodivergent, fascinated by everything from quantum physics to alternative history
+                    and esoteric philosophy to how imagination shapes reality. My brain constantly takes things apart
+                    and puts them back together.</p>
+
+                <p>For my first 30 years, I was a dreamer who lived through stories, feelings, and imagination — film
+                    directing, creative projects, the scene. Then at 33, something switched. I became obsessed with
+                    execution. I taught myself product, operations, systems, and sales — everything needed to turn ideas
+                    into something real.</p>
+
+                <p>Since then, I've learned more than I ever imagined possible — and burned down more times than most
+                    would survive: betrayal, war destroying my business, political imprisonment. But every time, I rise
+                    again — like a phoenix with a restless mind and an unshakable belief in human imagination.</p>
+
+                <p>My life's been quite the adventure — some parts might shock you. <a href="bio.html"
+                        style="color: var(--accent-cyan); text-decoration: none; font-weight: 500;">Read the full story
+                        →</a></p>
             </div>
         </div>
         <img src="assets/images/my_photo.jpg" alt="Tima" class="profile-overlay-photo">
@@ -1418,11 +1493,12 @@
                 <h1 class="hero-text text-glow">VIBE-CODED</h1>
                 <h1 class="hero-text text-glow"><span class="italic gradient-text">WEBSITE</span> UNDER</h1>
                 <h1 class="hero-text text-glow"><span class="italic gradient-text">CONSTRUCTION</span></h1>
-                
+
                 <p class="hero-intro">
                     <em>While I'm still adding things to this website, here's a short bio:</em><br>
-                    I'm Tymofii "Tima" Pidlisnyi — a creative founder unlocking human creativity with AI.<br> 
-                    Currently building Evatar.ai, AI agents for social media that handle execution while you stay creative.<br> 
+                    I'm Tymofii "Tima" Pidlisnyi — a creative founder unlocking human creativity with AI.<br>
+                    Currently building Evatar.ai, AI agents for social media that handle execution while you stay
+                    creative.<br>
                     Cross-functional PM with 5+ years shipping products across AI, SaaS, and e-commerce.
                 </p>
             </div>
@@ -1448,70 +1524,115 @@
 
             <div class="projects-grid">
                 <div class="project-card">
+                    <span class="project-tag active">3D Experience</span>
+                    <h3>Skyscraper</h3>
+                    <p>Quick 3D sketch of my dream tower. It’s a 167-floor skyscraper where the ceiling of floor 1 is
+                        the floor of 160 — the level I “live” on. Full glass under the apartment so you can see all the
+                        way down. Just messing around and building weird ideas for fun.</p>
+                    <a href="https://github.com/Evatar-ai/skyscraper" target="_blank"
+                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">Launch
+                        3D Environment →</a>
+                </div>
+
+                <div class="project-card">
                     <span class="project-tag active">Active</span>
                     <h3>Evatar.ai</h3>
-                    <p>AI agents that run your social media on autopilot. Powered by Eva — Creative Voice-to-Content Assistant.</p>
-                    <a href="https://evatar.ai" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">evatar.ai →</a>
-                    <a href="mywork/evatar.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn more →</a>
+                    <p>AI agents that run your social media on autopilot. Powered by Eva — Creative Voice-to-Content
+                        Assistant.</p>
+                    <a href="https://evatar.ai" target="_blank"
+                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">evatar.ai
+                        →</a>
+                    <a href="mywork/evatar.html"
+                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn
+                        more →</a>
                 </div>
 
                 <div class="project-card">
                     <span class="project-tag active">Active Tool</span>
                     <h3>Prompt Director</h3>
-                    <p>Platform for generating structured, multi-layered AI prompts for creative and product workflows.</p>
-                    <a href="https://prompt-director.rork.app" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">prompt-director.rork.app →</a>
-                    <a href="mywork/prompt-director.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn more →</a>
+                    <p>Platform for generating structured, multi-layered AI prompts for creative and product workflows.
+                    </p>
+                    <a href="https://prompt-director.rork.app" target="_blank"
+                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">prompt-director.rork.app
+                        →</a>
+                    <a href="mywork/prompt-director.html"
+                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn
+                        more →</a>
                 </div>
 
                 <div class="project-card">
                     <span class="project-tag">Past Project</span>
                     <h3>æœss</h3>
                     <p>IoT breathing wearable nose device for personalized breathing analytics and mindfulness.</p>
-                    <a href="https://aeoess.com" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">aeoess.com →</a>
-                    <a href="https://drive.google.com/file/d/1-W51qctnlSj5Gip0buViqGd34MMEebFF/view?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">View deck →</a>
+                    <a href="https://aeoess.com" target="_blank"
+                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">aeoess.com
+                        →</a>
+                    <a href="https://drive.google.com/file/d/1-W51qctnlSj5Gip0buViqGd34MMEebFF/view?usp=sharing"
+                        target="_blank"
+                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">View
+                        deck →</a>
                 </div>
 
                 <div class="project-card">
                     <span class="project-tag active">Music</span>
                     <h3>æœss</h3>
-                    <p>AI-generated music born from a story of love that never happened — released raw and unfiltered.</p>
-                    <a href="https://open.spotify.com/artist/6N4IO6ByfmjqJGbufMAmwA?si=U1z0Lms-RySkycoSXWQsRw" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">Listen on Spotify →</a>
+                    <p>AI-generated music born from a story of love that never happened — released raw and unfiltered.
+                    </p>
+                    <a href="https://open.spotify.com/artist/6N4IO6ByfmjqJGbufMAmwA?si=U1z0Lms-RySkycoSXWQsRw"
+                        target="_blank"
+                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">Listen
+                        on Spotify →</a>
                 </div>
 
                 <div class="project-card">
                     <span class="project-tag">Past Project</span>
                     <h3>ofNature</h3>
-                    <p>Eco CPG brand pioneering acetate-cellulose disposables adopted by McDonald's. Sustainable innovation at scale.</p>
-                    <a href="https://www.crunchbase.com/organization/ofnature" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View on Crunchbase →</a>
-                    <a href="https://drive.google.com/file/d/1UlAwwlZZhV4cDYYZlr-KDF7ZEA_aLR9h/view?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">View deck →</a>
+                    <p>Eco CPG brand pioneering acetate-cellulose disposables adopted by McDonald's. Sustainable
+                        innovation at scale.</p>
+                    <a href="https://www.crunchbase.com/organization/ofnature" target="_blank"
+                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View
+                        on Crunchbase →</a>
+                    <a href="https://drive.google.com/file/d/1UlAwwlZZhV4cDYYZlr-KDF7ZEA_aLR9h/view?usp=sharing"
+                        target="_blank"
+                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">View
+                        deck →</a>
                 </div>
 
                 <div class="project-card">
                     <span class="project-tag">Past Project</span>
                     <h3>SheetHappens</h3>
-                    <p>Premium toilet paper brand concept exploring the intersection of consumer wellness and sustainable design.</p>
-                    <a href="https://drive.google.com/file/d/1NkGotUE1WqTJasttrYie-16JVEk0Icqh/view?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View deck →</a>
-                    <a href="mywork/sheethappens.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn more →</a>
+                    <p>Premium toilet paper brand concept exploring the intersection of consumer wellness and
+                        sustainable design.</p>
+                    <a href="https://drive.google.com/file/d/1NkGotUE1WqTJasttrYie-16JVEk0Icqh/view?usp=sharing"
+                        target="_blank"
+                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View
+                        deck →</a>
+                    <a href="mywork/sheethappens.html"
+                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn
+                        more →</a>
                 </div>
 
                 <div class="project-card">
                     <span class="project-tag">Past Project</span>
                     <h3>Amplifier Agency</h3>
                     <p>Event and entertainment agency producing conferences and live shows.</p>
-                    <a href="https://www.facebook.com/groups/381833041885102" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View Community →</a>
+                    <a href="https://www.facebook.com/groups/381833041885102" target="_blank"
+                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View
+                        Community →</a>
                 </div>
 
                 <div class="project-card">
                     <span class="project-tag">Collection</span>
                     <h3>Creative Projects</h3>
-                    <p>Film direction, multimedia installations, and creative experiments that blend art with technology.</p>
-                    <a href="https://docs.google.com/document/d/1ps-sqbx0Fc-1NZnV7S40ODrPGAxilEhAiDhA98dPBT4/edit?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View portfolio →</a>
+                    <p>Film direction, multimedia installations, and creative experiments that blend art with
+                        technology.</p>
+                    <a href="https://docs.google.com/document/d/1ps-sqbx0Fc-1NZnV7S40ODrPGAxilEhAiDhA98dPBT4/edit?usp=sharing"
+                        target="_blank"
+                        style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View
+                        portfolio →</a>
                 </div>
             </div>
 
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="mywork/index.html" class="contact-link">View All Projects →</a>
-            </div>
         </div>
     </section>
 
@@ -1530,19 +1651,22 @@
                 <div class="lab-card">
                     <div class="lab-status">Active</div>
                     <h4><a href="https://prompt-director.rork.app" target="_blank">Prompt Director</a></h4>
-                    <p>React Native app that helps create cinematic video prompts through conversational AI interviews.</p>
+                    <p>React Native app that helps create cinematic video prompts through conversational AI interviews.
+                    </p>
                 </div>
 
                 <div class="lab-card">
                     <div class="lab-status">Active</div>
                     <h4><a href="https://memoir-vault.rork.app" target="_blank">Memoir App</a></h4>
-                    <p>A storytelling app helping older adults record and share their life stories through voice or video.</p>
+                    <p>A storytelling app helping older adults record and share their life stories through voice or
+                        video.</p>
                 </div>
 
                 <div class="lab-card">
                     <div class="lab-status">Research</div>
                     <h4>ACI — Artificial Creative Intelligence</h4>
-                    <p>Framework for AI that amplifies rather than replaces human creativity. Drawing from film directing experience.</p>
+                    <p>Framework for AI that amplifies rather than replaces human creativity. Drawing from film
+                        directing experience.</p>
                 </div>
 
                 <div class="lab-card">
@@ -1560,7 +1684,9 @@
                 <div class="lab-card">
                     <div class="lab-status">Active</div>
                     <h4>Vibe Coding</h4>
-                    <p>Building and experimenting with apps and webpages through rapid prototyping and creative exploration. This website, Prompt Director, and various other projects are born from this experimental approach to development.</p>
+                    <p>Building and experimenting with apps and webpages through rapid prototyping and creative
+                        exploration. This website, Prompt Director, and various other projects are born from this
+                        experimental approach to development.</p>
                 </div>
             </div>
         </div>
@@ -1579,7 +1705,7 @@
 
             <div class="max-w-2xl text-center" style="margin: 2rem auto;">
                 <p style="font-size: 1.2rem; color: var(--text-muted); line-height: 1.8;">
-                    This is where I drop fresh startup ideas in raw form — open for anyone to explore, remix, or build. 
+                    This is where I drop fresh startup ideas in raw form — open for anyone to explore, remix, or build.
                     If something sparks your curiosity, run with it.
                 </p>
             </div>
@@ -1595,14 +1721,21 @@
                             </div>
                         </div>
                         <p class="idea-tagline">Your neighborhood becomes an open-world game economy</p>
-                        
-                        <p><strong>The Concept:</strong> A geo-based social marketplace that turns the real world into a playable map. Every listing — whether buying, selling, offering a service, or posting a local job — appears as a "quest" pinned on an interactive map.</p>
-                        
-                        <p><strong>How It Works:</strong> To accept a quest, you physically go there — just like entering a mission zone in GTA. Complete it, and you earn XP, tokens, and reputation points. Level up to unlock new roles like "Local Mod" or "Trader."</p>
-                        
-                        <p><strong>The Vision:</strong> Quests isn't just transactions — it's exploration, discovery, and gamified social exchange. Your city becomes an open-world economy where every real-world action earns digital rewards.</p>
-                        
-                        <p><strong>Why It Matters:</strong> Builds community trust through authentic, location-based interactions. Makes local commerce feel like adventure.</p>
+
+                        <p><strong>The Concept:</strong> A geo-based social marketplace that turns the real world into a
+                            playable map. Every listing — whether buying, selling, offering a service, or posting a
+                            local job — appears as a "quest" pinned on an interactive map.</p>
+
+                        <p><strong>How It Works:</strong> To accept a quest, you physically go there — just like
+                            entering a mission zone in GTA. Complete it, and you earn XP, tokens, and reputation points.
+                            Level up to unlock new roles like "Local Mod" or "Trader."</p>
+
+                        <p><strong>The Vision:</strong> Quests isn't just transactions — it's exploration, discovery,
+                            and gamified social exchange. Your city becomes an open-world economy where every real-world
+                            action earns digital rewards.</p>
+
+                        <p><strong>Why It Matters:</strong> Builds community trust through authentic, location-based
+                            interactions. Makes local commerce feel like adventure.</p>
                     </div>
 
                     <div class="idea-separator"></div>
@@ -1616,15 +1749,20 @@
                             </div>
                         </div>
                         <p class="idea-tagline">Book time with someone — just to talk, vent, or feel heard</p>
-                        
-                        <p><strong>The Problem:</strong> Loneliness is an epidemic. People need human connection, but therapy is expensive and dating apps are exhausting.</p>
-                        
-                        <p><strong>The Solution:</strong> A platform where you can book time with someone you follow — not for therapy, not for dating, just for genuine human conversation.</p>
-                        
-                        <p><strong>Who Can Join:</strong> Anyone. You don't need credentials or a massive following. Offer your time, empathy, or experience. Others book short one-on-one calls when they need someone to listen.</p>
-                        
-                        <p><strong>The Magic:</strong> It starts transactional, but doesn't have to stay that way. Sometimes a 15-minute call becomes the beginning of real friendship.</p>
-                        
+
+                        <p><strong>The Problem:</strong> Loneliness is an epidemic. People need human connection, but
+                            therapy is expensive and dating apps are exhausting.</p>
+
+                        <p><strong>The Solution:</strong> A platform where you can book time with someone you follow —
+                            not for therapy, not for dating, just for genuine human conversation.</p>
+
+                        <p><strong>Who Can Join:</strong> Anyone. You don't need credentials or a massive following.
+                            Offer your time, empathy, or experience. Others book short one-on-one calls when they need
+                            someone to listen.</p>
+
+                        <p><strong>The Magic:</strong> It starts transactional, but doesn't have to stay that way.
+                            Sometimes a 15-minute call becomes the beginning of real friendship.</p>
+
                         <p><strong>Bottom Line:</strong> Human connection, made simple, accessible, and real.</p>
                     </div>
 
@@ -1639,16 +1777,22 @@
                             </div>
                         </div>
                         <p class="idea-tagline">A small tilt, a big difference in digestive health</p>
-                        
-                        <p><strong>The Innovation:</strong> A diagonally tilted toilet seat designed to use gravity and posture for better digestive health. You lean back slightly, gravity assists, reducing strain on your spine and pelvic floor.</p>
-                        
-                        <p><strong>The Science:</strong> Traditional toilet seats force an unnatural squatting position. Gravity Seat's angle creates easier, more natural elimination and improved gut function.</p>
-                        
-                        <p><strong>The Market:</strong> 1 in 3 adults struggles with digestive or pelvic floor issues caused by poor toilet posture. The fix? Change the seat angle.</p>
-                        
-                        <p><strong>The Product:</strong> Minimal, ergonomic redesign of something universal. Merges design and wellness into a quiet everyday innovation.</p>
-                        
-                        <p><strong>Why It Works:</strong> Because sometimes the biggest health improvements come from the smallest design changes.</p>
+
+                        <p><strong>The Innovation:</strong> A diagonally tilted toilet seat designed to use gravity and
+                            posture for better digestive health. You lean back slightly, gravity assists, reducing
+                            strain on your spine and pelvic floor.</p>
+
+                        <p><strong>The Science:</strong> Traditional toilet seats force an unnatural squatting position.
+                            Gravity Seat's angle creates easier, more natural elimination and improved gut function.</p>
+
+                        <p><strong>The Market:</strong> 1 in 3 adults struggles with digestive or pelvic floor issues
+                            caused by poor toilet posture. The fix? Change the seat angle.</p>
+
+                        <p><strong>The Product:</strong> Minimal, ergonomic redesign of something universal. Merges
+                            design and wellness into a quiet everyday innovation.</p>
+
+                        <p><strong>Why It Works:</strong> Because sometimes the biggest health improvements come from
+                            the smallest design changes.</p>
                     </div>
 
                     <div class="idea-separator"></div>
@@ -1662,16 +1806,22 @@
                             </div>
                         </div>
                         <p class="idea-tagline">Your photos should pay you, not just train AI for free</p>
-                        
-                        <p><strong>The Reality:</strong> AI companies need your photos and videos — the real-world visual data that makes their models work. Right now, they take it for free.</p>
-                        
-                        <p><strong>The Platform:</strong> Dataism pays users for giving selective access to their iCloud or Google Photos. You choose what to share. You earn based on quality, diversity, and rarity of your content.</p>
-                        
-                        <p><strong>How It Protects You:</strong> All data is anonymized. Your privacy stays intact while you generate income from the digital footprint you already produce.</p>
-                        
-                        <p><strong>The Business Model:</strong> AI companies license content through Dataism. Fair, transparent compensation for individual data contributors.</p>
-                        
-                        <p><strong>The Bigger Idea:</strong> Creating a data economy where individuals are actually compensated. Your data should work for you, not the other way around.</p>
+
+                        <p><strong>The Reality:</strong> AI companies need your photos and videos — the real-world
+                            visual data that makes their models work. Right now, they take it for free.</p>
+
+                        <p><strong>The Platform:</strong> Dataism pays users for giving selective access to their iCloud
+                            or Google Photos. You choose what to share. You earn based on quality, diversity, and rarity
+                            of your content.</p>
+
+                        <p><strong>How It Protects You:</strong> All data is anonymized. Your privacy stays intact while
+                            you generate income from the digital footprint you already produce.</p>
+
+                        <p><strong>The Business Model:</strong> AI companies license content through Dataism. Fair,
+                            transparent compensation for individual data contributors.</p>
+
+                        <p><strong>The Bigger Idea:</strong> Creating a data economy where individuals are actually
+                            compensated. Your data should work for you, not the other way around.</p>
                     </div>
                 </div>
 
@@ -1695,7 +1845,7 @@
                 <h3>Community Thoughts</h3>
                 <button class="modal-close" onclick="closeCommentsModal()">×</button>
             </div>
-            
+
             <div class="comments-list" id="commentsList">
                 <!-- Comments will be loaded here -->
             </div>
@@ -1730,7 +1880,8 @@
                     <div class="now-icon">⚡</div>
                     <div>
                         <h4>Fundraising & Collaboration</h4>
-                        <p>Constantly learning, experimenting, and building connections with investors and creators. If you're into AI startups or creative tech — let's chat.</p>
+                        <p>Constantly learning, experimenting, and building connections with investors and creators. If
+                            you're into AI startups or creative tech — let's chat.</p>
                     </div>
                 </div>
 
@@ -1738,7 +1889,9 @@
                     <div class="now-icon">🧩</div>
                     <div>
                         <h4>AI Agents & Automation</h4>
-                        <p>Building custom AI agents for any industry — from customer engagement to workflow automation. I also design and run complete marketing systems: inbound, outbound, and retention automation, including full infrastructure setup.</p>
+                        <p>Building custom AI agents for any industry — from customer engagement to workflow automation.
+                            I also design and run complete marketing systems: inbound, outbound, and retention
+                            automation, including full infrastructure setup.</p>
                     </div>
                 </div>
 
@@ -1746,7 +1899,9 @@
                     <div class="now-icon">💡</div>
                     <div>
                         <h4>Strategy, Ideation & Product Development</h4>
-                        <p>Helping founders brainstorm and solve product challenges. From feature ideation and creative problem-solving to prototyping and supplier connections — I help bring ideas to life and turn them into market-ready products.</p>
+                        <p>Helping founders brainstorm and solve product challenges. From feature ideation and creative
+                            problem-solving to prototyping and supplier connections — I help bring ideas to life and
+                            turn them into market-ready products.</p>
                     </div>
                 </div>
 
@@ -1754,7 +1909,10 @@
                     <div class="now-icon">🗞️</div>
                     <div>
                         <h4>PR & Media Strategy</h4>
-                        <p>Helping brands gain visibility and credibility through powerful storytelling and earned media. I can help get you featured in top publications such as Forbes, Business Insider, TechCrunch, Wired, TIME, Able News, and Fast Company — turning your story into meaningful press coverage.</p>
+                        <p>Helping brands gain visibility and credibility through powerful storytelling and earned
+                            media. I can help get you featured in top publications such as Forbes, Business Insider,
+                            TechCrunch, Wired, TIME, Able News, and Fast Company — turning your story into meaningful
+                            press coverage.</p>
                     </div>
                 </div>
             </div>
@@ -1776,21 +1934,25 @@
                 <h2 class="contact-cta text-glow">
                     Let's build something <span class="italic gradient-text">unseen</span>.
                 </h2>
-                
+
                 <p class="contact-intro">
-                    Open to conversations about AI, startups, product development, or creative projects that push boundaries.
+                    Open to conversations about AI, startups, product development, or creative projects that push
+                    boundaries.
                 </p>
 
                 <div class="contact-links">
-                    <a href="/cdn-cgi/l/email-protection#8bffe2e6eacbeaeee4eef8f8a5e8e4e6" class="contact-link">EMAIL</a>
-                    <a href="https://linkedin.com/in/tymofii-pidlisnyi" class="contact-link" target="_blank">LINKEDIN</a>
+                    <a href="/cdn-cgi/l/email-protection#8bffe2e6eacbeaeee4eef8f8a5e8e4e6"
+                        class="contact-link">EMAIL</a>
+                    <a href="https://linkedin.com/in/tymofii-pidlisnyi" class="contact-link"
+                        target="_blank">LINKEDIN</a>
                     <a href="https://instagram.com/tima.fey" class="contact-link" target="_blank">INSTAGRAM</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
         // Animated Grain Effect
         const canvas = document.getElementById('grain-canvas');
         if (canvas) {
@@ -1804,19 +1966,19 @@
             function noise() {
                 const w = ctx.canvas.width;
                 const h = ctx.canvas.height;
-                
+
                 // Don't create image data if dimensions are invalid
                 if (w <= 0 || h <= 0) return;
-                
+
                 const iData = ctx.createImageData(w, h);
                 const buffer32 = new Uint32Array(iData.data.buffer);
-                
+
                 for (let i = 0; i < buffer32.length; i++) {
                     if (Math.random() < 0.02) {
                         buffer32[i] = 0x88ffffff;
                     }
                 }
-                
+
                 ctx.putImageData(iData, 0, 0);
             }
 
@@ -1867,7 +2029,7 @@
             const body = document.body;
             const themeIcon = document.getElementById('theme-icon');
             const currentTheme = body.getAttribute('data-theme');
-            
+
             if (currentTheme === 'dark') {
                 body.setAttribute('data-theme', 'bright');
                 if (themeIcon) themeIcon.textContent = '☀️';
@@ -1887,7 +2049,7 @@
             if (themeIcon) {
                 themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
             }
-            
+
             checkCookieConsent();
             loadUpvotes();
             loadComments();
@@ -1927,7 +2089,7 @@
         if (nav) {
             window.addEventListener('scroll', () => {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
+
                 if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
                     if (scrollTop > lastScrollTop && scrollTop > 200) {
                         nav.classList.add('hidden');
@@ -2005,13 +2167,13 @@
         function loadUpvotes() {
             const userId = generateUserId();
             const ideas = ['quests', 'onlyfriends', 'gravityseat', 'dataism'];
-            
+
             ideas.forEach(idea => {
                 const countElement = document.getElementById(`upvote-${idea}`);
                 if (countElement) {
                     const count = localStorage.getItem(`upvote_count_${idea}`) || 0;
                     countElement.textContent = count;
-                    
+
                     const userVotes = JSON.parse(localStorage.getItem('user_votes') || '{}');
                     if (userVotes[idea]) {
                         const btn = document.querySelector(`[data-idea="${idea}"]`);
@@ -2027,12 +2189,12 @@
             const userId = generateUserId();
             const btn = document.querySelector(`[data-idea="${ideaId}"]`);
             const countElement = document.getElementById(`upvote-${ideaId}`);
-            
+
             if (!btn || !countElement) return;
-            
+
             let userVotes = JSON.parse(localStorage.getItem('user_votes') || '{}');
             let currentCount = parseInt(localStorage.getItem(`upvote_count_${ideaId}`) || 0);
-            
+
             if (userVotes[ideaId]) {
                 currentCount = Math.max(0, currentCount - 1);
                 delete userVotes[ideaId];
@@ -2042,7 +2204,7 @@
                 userVotes[ideaId] = true;
                 btn.classList.add('voted');
             }
-            
+
             localStorage.setItem(`upvote_count_${ideaId}`, currentCount);
             localStorage.setItem('user_votes', JSON.stringify(userVotes));
             countElement.textContent = currentCount;
@@ -2067,14 +2229,14 @@
         function loadComments() {
             const commentsList = document.getElementById('commentsList');
             if (!commentsList) return;
-            
+
             const comments = JSON.parse(localStorage.getItem('site_comments') || '[]');
-            
+
             if (comments.length === 0) {
                 commentsList.innerHTML = '<p style="text-align: center; color: var(--text-muted); padding: 2rem;">No comments yet. Be the first to share your thoughts!</p>';
                 return;
             }
-            
+
             commentsList.innerHTML = comments.map(comment => `
                 <div class="comment-item">
                     <div class="comment-header">
@@ -2089,45 +2251,45 @@
         function submitComment() {
             const nameInput = document.getElementById('commentName');
             const textInput = document.getElementById('commentText');
-            
+
             if (!nameInput || !textInput) return;
-            
+
             const name = nameInput.value.trim();
             const text = textInput.value.trim();
-            
+
             if (!name || !text) {
                 alert('Please fill in both name and comment fields.');
                 return;
             }
-            
+
             const comments = JSON.parse(localStorage.getItem('site_comments') || '[]');
-            
+
             const newComment = {
                 name: name,
                 text: text,
-                date: new Date().toLocaleDateString('en-US', { 
-                    month: 'short', 
-                    day: 'numeric', 
-                    year: 'numeric' 
+                date: new Date().toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
                 }),
                 timestamp: Date.now()
             };
-            
+
             comments.push(newComment);
             localStorage.setItem('site_comments', JSON.stringify(comments));
-            
+
             nameInput.value = '';
             textInput.value = '';
-            
+
             loadComments();
-            
+
             alert('Thank you for your comment!');
         }
 
         // Close modal when clicking outside
         const commentsModal = document.getElementById('commentsModal');
         if (commentsModal) {
-            commentsModal.addEventListener('click', function(e) {
+            commentsModal.addEventListener('click', function (e) {
                 if (e.target === this) {
                     closeCommentsModal();
                 }
@@ -2135,4 +2297,5 @@
         }
     </script>
 </body>
+
 </html>
