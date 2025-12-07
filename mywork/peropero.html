@@ -1,88 +1,955 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pero Pero - Tymofii Pidlisnyi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>PeroPero — Tymofii Pidlisnyi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --bg: #0F0E0D;
-            --bg-secondary: #1A1715;
-            --text: #F5F3F0;
-            --text-muted: #8B9199;
-            --border: #262320;
-            --accent-cyan: #5DADE2;
-            --accent-yellow: #F4D03F;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        :root {
+            --bg: #09090b;
+            --bg-secondary: rgba(24, 24, 27, 0.8);
+            --text: #fafafa;
+            --text-muted: #a1a1aa;
+            --border: rgba(63, 63, 70, 0.5);
+            --accent-primary: #ec4899;
+            --accent-secondary: #f472b6;
+            --accent-tertiary: #fb7185;
+            --glow: rgba(236, 72, 153, 0.3);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.7;
-            padding: 4rem 2rem;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        .container { max-width: 900px; margin: 0 auto; }
-        .back-link {
-            display: inline-block;
-            color: var(--accent-cyan);
-            text-decoration: none;
-            margin-bottom: 3rem;
+
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse 80% 50% at 20% -20%, rgba(236, 72, 153, 0.15), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 0%, rgba(244, 114, 182, 0.12), transparent),
+                radial-gradient(ellipse 50% 30% at 50% 100%, rgba(251, 113, 133, 0.08), transparent);
+            animation: gradientShift 15s ease-in-out infinite;
         }
-        .header {
+
+        @keyframes gradientShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .grid-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            position: relative;
+        }
+
+        .nav {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 2rem;
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border);
+            margin-bottom: 4rem;
         }
-        .company-logo {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            background: white;
-            padding: 15px;
-            border-radius: 16px;
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
         }
-        h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+
+        .back-btn:hover {
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+            transform: translateX(-5px);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 2rem 0 4rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .hero-logo {
+            width: 160px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 30px rgba(236, 72, 153, 0.3));
+            border-radius: 20px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            background: linear-gradient(135deg, rgba(113, 113, 122, 0.8), rgba(82, 82, 91, 0.8));
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: white;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: gradientText 5s ease infinite;
+            letter-spacing: -0.02em;
         }
-        .meta { font-size: 0.95rem; color: var(--text-muted); margin-top: 0.5rem; }
-        .section { margin-bottom: 3rem; }
-        h2 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--accent-cyan); }
-        p, li {
+
+        @keyframes gradientText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-tagline {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 400;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            box-shadow: 0 4px 20px rgba(236, 72, 153, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(236, 72, 153, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text);
+            border-color: var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Founders Banner */
+        .founders-banner {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(244, 114, 182, 0.1));
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            margin: 2rem 0 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .founders-banner .label {
+            font-size: 0.8rem;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+        }
+
+        .founders-banner .names {
+            font-size: 1.1rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(236, 72, 153, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 1.5rem;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 2px;
+        }
+
+        .content-text {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: var(--accent-secondary);
+            font-weight: 500;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+            margin-bottom: 2rem;
+        }
+
+        /* Feature List */
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
             color: var(--text-muted);
             font-family: 'Inter', sans-serif;
-            margin-bottom: 1rem;
             font-size: 1.05rem;
+            line-height: 1.8;
         }
-        ul { padding-left: 1.5rem; }
-        li { margin-bottom: 0.75rem; }
+
+        .feature-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            border-radius: 1px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            border: 3px solid var(--bg);
+            box-shadow: 0 0 0 3px var(--accent-primary);
+        }
+
+        .timeline-item:nth-child(2)::before {
+            background: var(--accent-secondary);
+            box-shadow: 0 0 0 3px var(--accent-secondary);
+        }
+
+        .timeline-item:nth-child(3)::before {
+            background: var(--accent-tertiary);
+            box-shadow: 0 0 0 3px var(--accent-tertiary);
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item:nth-child(2) .timeline-date { color: var(--accent-secondary); }
+        .timeline-item:nth-child(3) .timeline-date { color: var(--accent-tertiary); }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .product-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .product-card:hover {
+            border-color: rgba(236, 72, 153, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(236, 72, 153, 0.15);
+        }
+
+        .product-card .product-img {
+            width: 100%;
+            height: 160px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .product-card .name {
+            font-size: 0.9rem;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+
+        .product-card .detail {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 900px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Results Pills */
+        .results-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .result-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .result-pill:hover {
+            border-color: var(--accent-primary);
+            color: var(--text);
+        }
+
+        .result-pill .icon {
+            font-size: 1.1rem;
+        }
+
+        /* Role Grid */
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .role-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .role-card:hover {
+            border-color: rgba(236, 72, 153, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .role-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .role-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        /* Resources */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .resource-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--text);
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-4px);
+        }
+
+        .resource-link .icon {
+            font-size: 1.5rem;
+        }
+
+        .resource-link span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .role-grid {
+                grid-template-columns: 1fr;
+            }
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 2rem 1.25rem;
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-tagline {
+                font-size: 1.1rem;
+            }
+            .stat-number {
+                font-size: 2rem;
+            }
+            .cta-group {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
+
 <body>
+    <div class="bg-gradient"></div>
+    <div class="grid-pattern"></div>
+
     <div class="container">
-        <a href="index.html" class="back-link">← Back to All Roles</a>
-        
-        <div class="header">
-            <img src="../peropero_logo.png" alt="Pero Pero" class="company-logo">
-            <div>
-                <h1>Pero Pero</h1>
-                <div class="meta">COO • Los Angeles, CA</div>
-                <div class="meta">May 2024 — Aug 2025</div>
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="../index.html" class="back-btn">← Back to Home</a>
+        </nav>
+
+        <!-- Hero Section -->
+        <header class="hero">
+            <img src="https://myperopero.com/cdn/shop/files/2.png?v=1717698593&width=500" alt="PeroPero Logo" class="hero-logo">
+            <div class="status-badge">Past Project</div>
+            <h1 class="hero-title">PeroPero</h1>
+            <p class="hero-tagline">Built a premium pet grooming brand end-to-end — from product development to e-commerce launch.</p>
+            
+            <div class="hero-meta">
+                <div class="hero-meta-item">
+                    <span>📅</span>
+                    <span>2023 — 2024</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span>👤</span>
+                    <span>COO</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span>📍</span>
+                    <span>Los Angeles, CA</span>
+                </div>
             </div>
+
+            <div class="cta-group">
+                <a href="https://myperopero.com" target="_blank" class="btn btn-primary">Visit Store →</a>
+                <a href="https://instagram.com/myperopero" target="_blank" class="btn btn-secondary">Instagram</a>
+            </div>
+        </header>
+
+        <!-- Founders Banner -->
+        <div class="founders-banner fade-in">
+            <div class="label">🌟 Co-Founded by</div>
+            <div class="names">Stella Maxwell · Barbara Palvin & other prominent co-founders</div>
         </div>
 
-        <div class="section">
-            <h2>Coming Soon</h2>
-            <p>Detailed information about this role will be added soon. For now, please see the summary on the main work page.</p>
-            <p><a href="https://myperopero.com" target="_blank" style="color: var(--accent-cyan);">Visit Pero Pero →</a></p>
-        </div>
+        <!-- Stats Section -->
+        <section class="stats-section fade-in">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">9</div>
+                    <div class="stat-label">Co-Founders</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Products Launched</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">🇺🇸</div>
+                    <div class="stat-label">Made in USA</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">🐕</div>
+                    <div class="stat-label">Premium Pet Care</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Story -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">The Story</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">The Foundation</div>
+                    <div class="timeline-title">Joined as COO to operationalize the vision.</div>
+                    <div class="timeline-content">
+                        Started with brand identity and one product concept. Tasked with building everything else — 
+                        product development, manufacturing, e-commerce, fulfillment, and go-to-market.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">The Build</div>
+                    <div class="timeline-title">End-to-end product development.</div>
+                    <div class="timeline-content">
+                        Sourced vendors, manufacturers, and labs. Managed sampling cycles and FDA certifications. 
+                        Developed custom fragrance with California perfumer. Built international supply chain 
+                        spanning US and Asia.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">The Launch</div>
+                    <div class="timeline-title">Full e-commerce operation live.</div>
+                    <div class="timeline-content">
+                        Launched complete Shopify store with 5 products. Built inventory systems, fulfillment workflows, 
+                        and marketing infrastructure. Products now available and selling at myperopero.com.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products I Built -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Products I Developed</h2>
+            </div>
+            <div class="product-grid">
+                <a href="https://myperopero.com/products/silky-clean-revitalizing-pet-shampoo-and-conditioner-16-9oz" target="_blank" class="product-card">
+                    <img src="https://myperopero.com/cdn/shop/files/silky-clean-2-in-1-shampoo-conditioner-6000571.png?v=1753524982&width=400" alt="Shampoo & Conditioner" class="product-img">
+                    <div class="name">2-in-1 Shampoo & Conditioner</div>
+                    <div class="detail">$34.99 · Manuka Honey & Jojoba</div>
+                </a>
+                <a href="https://myperopero.com/products/freshen-up-conditioning-refreshening-spray" target="_blank" class="product-card">
+                    <img src="https://myperopero.com/cdn/shop/files/freshen-up-healthy-coat-conditioning-and-refreshening-spray-8oz-201198.png?v=1753399696&width=400" alt="Conditioning Spray" class="product-img">
+                    <div class="name">Conditioning & Deodorizing Spray</div>
+                    <div class="detail">$29.99 · Custom Fragrance</div>
+                </a>
+                <a href="https://myperopero.com/products/wipes" target="_blank" class="product-card">
+                    <img src="https://myperopero.com/cdn/shop/files/1_9acab771-5342-4244-9aad-038dd81c42ee-950217.png?v=1753399732&width=400" alt="Pet Wipes" class="product-img">
+                    <div class="name">Fresh Friends Pet Wipes</div>
+                    <div class="detail">$14.99 · Lyocell Biodegradable</div>
+                </a>
+                <a href="https://myperopero.com/products/keep-it-clean-dog-waste-bags" target="_blank" class="product-card">
+                    <img src="https://myperopero.com/cdn/shop/files/keep-it-clean-dog-waste-bags-12-pack-446436.png?v=1743446972&width=400" alt="Waste Bags" class="product-img">
+                    <div class="name">Keep It Clean Waste Bags</div>
+                    <div class="detail">From $6.49 · Certified Biodegradable</div>
+                </a>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="https://myperopero.com/collections/all" target="_blank" class="cta-btn">Shop All Products →</a>
+            </div>
+        </section>
+
+        <!-- What I Built -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">What I Built</h2>
+            </div>
+            <div class="role-grid">
+                <div class="role-card">
+                    <h3><span class="role-icon">🏭</span> Product Development</h3>
+                    <ul class="feature-list">
+                        <li>Found and vetted manufacturers, labs, suppliers</li>
+                        <li>Managed sampling and iteration cycles</li>
+                        <li>Navigated FDA regulations and certifications</li>
+                        <li>Developed custom fragrance with CA perfumer</li>
+                        <li>Designed packaging, wrote all copy</li>
+                    </ul>
+                </div>
+                <div class="role-card">
+                    <h3><span class="role-icon">🛒</span> E-Commerce & Ops</h3>
+                    <ul class="feature-list">
+                        <li>Built entire Shopify store from scratch</li>
+                        <li>Set up fulfillment and inventory systems</li>
+                        <li>Created SKU architecture</li>
+                        <li>Implemented automations</li>
+                        <li>Managed international logistics</li>
+                    </ul>
+                </div>
+                <div class="role-card">
+                    <h3><span class="role-icon">🌍</span> Supply Chain</h3>
+                    <ul class="feature-list">
+                        <li>US manufacturing for most products</li>
+                        <li>China sourcing for bags (premium materials)</li>
+                        <li>Packaging from multiple countries</li>
+                        <li>Solved international shipping regulations</li>
+                        <li>Coordinated sample shipping worldwide</li>
+                    </ul>
+                </div>
+                <div class="role-card">
+                    <h3><span class="role-icon">📢</span> Go-to-Market</h3>
+                    <ul class="feature-list">
+                        <li>Launched all sales channels</li>
+                        <li>Set up marketing infrastructure</li>
+                        <li>Produced content when team disengaged</li>
+                        <li>Built brand presence from zero</li>
+                        <li>Managed 9 stakeholder opinions on everything</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        
+
+        <!-- Results -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">What Got Done</h2>
+            </div>
+            <div class="results-grid">
+                <div class="result-pill"><span class="icon">🛒</span> Full Shopify store launched</div>
+                <div class="result-pill"><span class="icon">📦</span> 5 products developed end-to-end</div>
+                <div class="result-pill"><span class="icon">🇺🇸</span> US manufacturing established</div>
+                <div class="result-pill"><span class="icon">✅</span> FDA/vet certifications obtained</div>
+                <div class="result-pill"><span class="icon">🌸</span> Custom fragrance developed</div>
+                <div class="result-pill"><span class="icon">📊</span> Full inventory/SKU system built</div>
+                <div class="result-pill"><span class="icon">🌍</span> International supply chain</div>
+                <div class="result-pill"><span class="icon">🐕</span> Live & selling at myperopero.com</div>
+            </div>
+        </section>
+
+        <!-- What I Learned -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Key Capabilities</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="feature-list">
+                    <li>End-to-end product development from concept to shelf-ready goods</li>
+                    <li>Managing complex stakeholder dynamics across multiple time zones</li>
+                    <li>International supply chain coordination (US manufacturing + Asia sourcing)</li>
+                    <li>Custom fragrance development is both art and science</li>
+                    <li>FDA compliance and certification processes for pet products</li>
+                    <li>Building e-commerce infrastructure that scales</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Resources -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Resources</h2>
+            </div>
+            <div class="resources-grid">
+                <a href="https://myperopero.com" target="_blank" class="resource-link">
+                    <span class="icon">🛒</span>
+                    <span>Live Store</span>
+                </a>
+                <a href="https://instagram.com/myperopero" target="_blank" class="resource-link">
+                    <span class="icon">📸</span>
+                    <span>Instagram</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <a href="../index.html" class="back-btn">← Back to Home</a>
+        </footer>
     </div>
+
+    <script>
+        // Scroll Animations
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(el => observer.observe(el));
+        }
+
+        document.addEventListener('DOMContentLoaded', handleScrollAnimations);
+    </script>
 </body>
+
 </html>
