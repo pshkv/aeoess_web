@@ -12,7 +12,6 @@
         rel="stylesheet">
     <style>
         :root {
-            /* Light theme (default) */
             --bg-primary: #f8fafc;
             --bg-secondary: #ffffff;
             --bg-tertiary: #f1f5f9;
@@ -55,16 +54,8 @@
             --glass-border: rgba(51, 65, 85, 0.5);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 80px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
         body {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -75,13 +66,10 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* Animated Background Orbs */
         .bg-orbs {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
             z-index: -1;
             overflow: hidden;
@@ -96,58 +84,35 @@
         }
 
         .orb-1 {
-            width: 600px;
-            height: 600px;
+            width: 600px; height: 600px;
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            top: -200px;
-            right: -200px;
-            animation-delay: 0s;
+            top: -200px; right: -200px;
         }
 
         .orb-2 {
-            width: 400px;
-            height: 400px;
+            width: 400px; height: 400px;
             background: linear-gradient(135deg, #818cf8, #c4b5fd);
-            bottom: -100px;
-            left: -100px;
+            bottom: -100px; left: -100px;
             animation-delay: -7s;
         }
 
         .orb-3 {
-            width: 300px;
-            height: 300px;
+            width: 300px; height: 300px;
             background: linear-gradient(135deg, var(--accent-secondary), #67e8f9);
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             animation-delay: -14s;
         }
 
         @keyframes float {
-
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            25% {
-                transform: translate(30px, -30px) scale(1.05);
-            }
-
-            50% {
-                transform: translate(-20px, 20px) scale(0.95);
-            }
-
-            75% {
-                transform: translate(-30px, -20px) scale(1.02);
-            }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.05); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(-30px, -20px) scale(1.02); }
         }
 
-        /* Navigation */
         .nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             padding: 1rem 2rem;
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
@@ -178,7 +143,14 @@
             background: var(--accent-light);
         }
 
-        .theme-toggle {
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .theme-toggle,
+        .design-switcher {
             background: var(--bg-tertiary);
             border: 1px solid var(--border-color);
             border-radius: 100px;
@@ -190,16 +162,49 @@
             width: 44px;
             height: 44px;
             transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 1.1rem;
         }
 
-        .theme-toggle:hover {
+        .theme-toggle:hover,
+        .design-switcher:hover {
             border-color: var(--accent-primary);
             transform: scale(1.05);
         }
 
+        .design-switcher {
+            position: relative;
+        }
+
+        .design-switcher:hover {
+            background: #fef3c7;
+            border-color: #f59e0b;
+        }
+
+        .switcher-tooltip {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            box-shadow: var(--shadow-md);
+        }
+
+        .design-switcher:hover .switcher-tooltip {
+            opacity: 1;
+        }
+
         .theme-toggle svg {
-            width: 20px;
-            height: 20px;
+            width: 20px; height: 20px;
             fill: none;
             stroke: var(--text-primary);
             stroke-width: 2;
@@ -208,27 +213,13 @@
             transition: transform 0.3s ease;
         }
 
-        .theme-toggle:hover svg {
-            transform: rotate(15deg);
-        }
+        .theme-toggle:hover svg { transform: rotate(15deg); }
 
-        [data-theme="dark"] .sun-icon {
-            display: block;
-        }
+        [data-theme="dark"] .sun-icon { display: block; }
+        [data-theme="dark"] .moon-icon { display: none; }
+        [data-theme="light"] .sun-icon { display: none; }
+        [data-theme="light"] .moon-icon { display: block; }
 
-        [data-theme="dark"] .moon-icon {
-            display: none;
-        }
-
-        [data-theme="light"] .sun-icon {
-            display: none;
-        }
-
-        [data-theme="light"] .moon-icon {
-            display: block;
-        }
-
-        /* Hero Section - Enhanced Split Layout */
         .hero {
             min-height: 100vh;
             display: grid;
@@ -256,10 +247,7 @@
         }
 
         @media (max-width: 1024px) {
-            .hero-content {
-                align-items: center;
-                order: 2;
-            }
+            .hero-content { align-items: center; order: 2; }
         }
 
         .hero-device {
@@ -270,9 +258,7 @@
         }
 
         @media (max-width: 1024px) {
-            .hero-device {
-                order: 1;
-            }
+            .hero-device { order: 1; }
         }
 
         .hero-device-image {
@@ -286,22 +272,14 @@
         }
 
         @keyframes heroFloat {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-15px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
         .hero-device::before {
             content: '';
             position: absolute;
-            width: 80%;
-            height: 80%;
+            width: 80%; height: 80%;
             background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
             border-radius: 50%;
             filter: blur(60px);
@@ -310,17 +288,8 @@
         }
 
         @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 0.5;
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.8;
-                transform: scale(1.1);
-            }
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
         }
 
         .hero-eyebrow {
@@ -339,23 +308,15 @@
         }
 
         .hero-eyebrow .dot {
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             background: var(--accent-primary);
             border-radius: 50%;
             animation: blink 2s ease-in-out infinite;
         }
 
         @keyframes blink {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.3;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
 
         .hero-logo {
@@ -365,9 +326,7 @@
             animation: fadeInUp 0.8s ease forwards;
         }
 
-        [data-theme="dark"] .hero-logo {
-            filter: brightness(1.2);
-        }
+        [data-theme="dark"] .hero-logo { filter: brightness(1.2); }
 
         .hero-pronunciation {
             font-family: 'JetBrains Mono', monospace;
@@ -390,9 +349,7 @@
         }
 
         @media (max-width: 1024px) {
-            .hero h1 {
-                max-width: 600px;
-            }
+            .hero h1 { max-width: 600px; }
         }
 
         .hero h1 .gradient-text {
@@ -412,9 +369,7 @@
         }
 
         @media (max-width: 1024px) {
-            .hero-cta-row {
-                justify-content: center;
-            }
+            .hero-cta-row { justify-content: center; }
         }
 
         .btn-primary {
@@ -458,7 +413,6 @@
             transform: translateY(-2px);
         }
 
-        /* Insight Box */
         .insight-box {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -475,8 +429,7 @@
         .insight-box::before {
             content: '💨';
             position: absolute;
-            top: 2rem;
-            right: 2rem;
+            top: 2rem; right: 2rem;
             font-size: 3rem;
             opacity: 0.1;
         }
@@ -499,7 +452,6 @@
             max-width: 600px;
         }
 
-        /* Stats Row */
         .stats-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -509,9 +461,7 @@
         }
 
         @media (max-width: 768px) {
-            .stats-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
         }
 
         .stat-card {
@@ -530,10 +480,7 @@
             border-color: var(--accent-primary);
         }
 
-        .stat-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.75rem;
-        }
+        .stat-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
 
         .stat-value {
             font-size: 1.75rem;
@@ -550,7 +497,6 @@
             margin-top: 0.25rem;
         }
 
-        /* Main Content */
         .main-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -569,9 +515,7 @@
             transform: translateY(0);
         }
 
-        .section-header {
-            margin-bottom: 3rem;
-        }
+        .section-header { margin-bottom: 3rem; }
 
         .section-label {
             font-family: 'JetBrains Mono', monospace;
@@ -597,7 +541,6 @@
             font-size: 1.1rem;
         }
 
-        /* Two Column */
         .two-column {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -605,9 +548,7 @@
         }
 
         @media (max-width: 768px) {
-            .two-column {
-                grid-template-columns: 1fr;
-            }
+            .two-column { grid-template-columns: 1fr; }
         }
 
         .column-card {
@@ -633,13 +574,8 @@
             color: var(--text-primary);
         }
 
-        .column-card h3 .icon {
-            font-size: 1.5rem;
-        }
-
-        .column-card ul {
-            list-style: none;
-        }
+        .column-card h3 .icon { font-size: 1.5rem; }
+        .column-card ul { list-style: none; }
 
         .column-card ul li {
             padding: 0.75rem 0;
@@ -650,9 +586,7 @@
             font-size: 0.95rem;
         }
 
-        .column-card ul li:last-child {
-            border-bottom: none;
-        }
+        .column-card ul li:last-child { border-bottom: none; }
 
         .column-card ul li::before {
             content: '→';
@@ -662,7 +596,6 @@
             font-weight: 600;
         }
 
-        /* Vision Box */
         .vision-box {
             background: linear-gradient(135deg, var(--accent-light) 0%, rgba(139, 92, 246, 0.1) 100%);
             border: 1px solid var(--accent-primary);
@@ -698,24 +631,14 @@
             font-style: italic;
         }
 
-        /* Image Gallery */
         .image-gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
         }
 
-        @media (max-width: 900px) {
-            .image-gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .image-gallery {
-                grid-template-columns: 1fr;
-            }
-        }
+        @media (max-width: 900px) { .image-gallery { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .image-gallery { grid-template-columns: 1fr; } }
 
         .gallery-item {
             background: var(--bg-secondary);
@@ -740,13 +663,9 @@
             transition: transform 0.3s ease;
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
+        .gallery-item:hover img { transform: scale(1.05); }
 
-        .gallery-item figcaption {
-            padding: 1.25rem;
-        }
+        .gallery-item figcaption { padding: 1.25rem; }
 
         .gallery-item figcaption h4 {
             font-size: 0.95rem;
@@ -760,18 +679,13 @@
             color: var(--text-muted);
         }
 
-        /* Design Gallery - Larger */
         .design-gallery {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
         }
 
-        @media (max-width: 768px) {
-            .design-gallery {
-                grid-template-columns: 1fr;
-            }
-        }
+        @media (max-width: 768px) { .design-gallery { grid-template-columns: 1fr; } }
 
         .design-item {
             background: var(--bg-secondary);
@@ -817,7 +731,6 @@
             color: var(--text-muted);
         }
 
-        /* Tech Stack Tags */
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
@@ -842,7 +755,6 @@
             transform: translateY(-2px);
         }
 
-        /* Timeline */
         .timeline {
             position: relative;
             padding-left: 3rem;
@@ -852,8 +764,7 @@
             content: '';
             position: absolute;
             left: 0.75rem;
-            top: 0;
-            bottom: 0;
+            top: 0; bottom: 0;
             width: 2px;
             background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
             border-radius: 2px;
@@ -864,17 +775,14 @@
             padding-bottom: 3rem;
         }
 
-        .timeline-item:last-child {
-            padding-bottom: 0;
-        }
+        .timeline-item:last-child { padding-bottom: 0; }
 
         .timeline-item::before {
             content: '';
             position: absolute;
             left: -2.5rem;
             top: 0.25rem;
-            width: 16px;
-            height: 16px;
+            width: 16px; height: 16px;
             background: var(--accent-primary);
             border-radius: 50%;
             border: 3px solid var(--bg-primary);
@@ -900,7 +808,6 @@
             font-size: 0.95rem;
         }
 
-        /* Resources */
         .resources-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -926,10 +833,7 @@
             border-color: var(--accent-primary);
         }
 
-        .resource-icon {
-            font-size: 2rem;
-            flex-shrink: 0;
-        }
+        .resource-icon { font-size: 2rem; flex-shrink: 0; }
 
         .resource-card h4 {
             color: var(--text-primary);
@@ -943,7 +847,6 @@
             font-size: 0.85rem;
         }
 
-        /* Checklist */
         .checklist {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -977,11 +880,7 @@
             font-size: 0.95rem;
         }
 
-        /* Learnings */
-        .learnings-grid {
-            display: grid;
-            gap: 1.5rem;
-        }
+        .learnings-grid { display: grid; gap: 1.5rem; }
 
         .learning-card {
             display: flex;
@@ -1007,46 +906,9 @@
             width: 3rem;
         }
 
-        .learning-card p {
-            color: var(--text-secondary);
-        }
+        .learning-card p { color: var(--text-secondary); }
+        .learning-card p strong { color: var(--text-primary); }
 
-        .learning-card p strong {
-            color: var(--text-primary);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 4rem 2rem;
-            border-top: 1px solid var(--border-color);
-            background: var(--bg-secondary);
-        }
-
-        footer p {
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        footer strong {
-            color: var(--text-primary);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Marketing Box */
         .marketing-box {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -1077,47 +939,66 @@
             line-height: 1.7;
         }
 
-        /* Scroll Progress */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+        }
+
+        footer p {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        footer strong { color: var(--text-primary); }
+
         .scroll-progress {
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 0%;
             height: 3px;
             background: var(--accent-gradient);
             z-index: 1001;
             transition: width 0.1s ease;
         }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 
 <body>
-    <!-- Scroll Progress -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- Background Orbs -->
     <div class="bg-orbs">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
         <div class="orb orb-3"></div>
     </div>
 
-    <!-- Navigation -->
     <nav class="nav">
         <a href="index.html" class="back-link">← Back to Portfolio</a>
-        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-            <svg class="sun-icon" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="5" />
-                <path
-                    d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-            </svg>
-            <svg class="moon-icon" viewBox="0 0 24 24">
-                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-            </svg>
-        </button>
+        <div class="nav-controls">
+            <a href="aeoess_v2.html" class="design-switcher" title="Try Blueprint Design">
+                🎨
+                <span class="switcher-tooltip">Blueprint Version</span>
+            </a>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <svg class="sun-icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5"/>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                </svg>
+            </button>
+        </div>
     </nav>
 
-    <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
             <div class="hero-eyebrow">
@@ -1128,28 +1009,18 @@
             </div>
 
             <img src="../assets/aeoess/aeoess_logo-05.png" alt="ÆOESS Logo" class="hero-logo">
-
             <div class="hero-pronunciation">[áios]</div>
 
-            <h1>An IoT breath-training wearable with AI coaching — <span class="gradient-text">the Peloton for
-                    breathing.</span></h1>
+            <h1>An IoT breath-training wearable with AI coaching — <span class="gradient-text">the Peloton for breathing.</span></h1>
 
             <div class="hero-cta-row">
-                <a href="https://drive.google.com/file/d/1-W51qctnlSj5Gip0buViqGd34MMEebFF/view?usp=sharing"
-                    target="_blank" class="btn-primary">
-                    📄 View Pitch Deck
-                </a>
-                <a href="https://aeoess.com" target="_blank" class="btn-secondary">
-                    🌐 aeoess.com
-                </a>
+                <a href="https://drive.google.com/file/d/1-W51qctnlSj5Gip0buViqGd34MMEebFF/view?usp=sharing" target="_blank" class="btn-primary">📄 View Pitch Deck</a>
+                <a href="https://aeoess.com" target="_blank" class="btn-secondary">🌐 aeoess.com</a>
             </div>
 
             <div class="insight-box">
                 <div class="insight-label">The Core Insight</div>
-                <blockquote>
-                    "Breathing is the only autonomic function humans can consciously control — training it changes
-                    everything."
-                </blockquote>
+                <blockquote>"Breathing is the only autonomic function humans can consciously control — training it changes everything."</blockquote>
             </div>
         </div>
 
@@ -1158,7 +1029,6 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
     <section class="stats-section" style="padding: 0 2rem 4rem; max-width: 1400px; margin: 0 auto;">
         <div class="stats-row" style="opacity: 1; animation: none;">
             <div class="stat-card">
@@ -1185,7 +1055,6 @@
     </section>
 
     <div class="main-content">
-        <!-- Problem & Solution -->
         <section>
             <div class="section-header">
                 <span class="section-label">The Opportunity</span>
@@ -1215,7 +1084,6 @@
             </div>
         </section>
 
-        <!-- Vision -->
         <section>
             <div class="section-header">
                 <span class="section-label">Long-Term Vision</span>
@@ -1223,84 +1091,48 @@
             </div>
             <div class="vision-box">
                 <h3>The Peloton for Breathing</h3>
-                <p>
-                    ÆOESS isn't a meditation app in hardware form. It's physical, measurable,
-                    repeatable performance training — treating breath the way a gym treats muscles.
-                    The diaphragm is muscle tissue. It responds to progressive resistance.
-                </p>
-                <p>
-                    The device captures airflow patterns through dual optical sensors. The AI coach
-                    interprets patterns, detects dysfunction, and guides users through personalized
-                    training cycles.
-                </p>
-                <p>
-                    Long-term vision: An always-on companion that understands your physiological state —
-                    stress patterns, emotional regulation, performance readiness — and helps you
-                    consciously control what was previously unconscious.
-                </p>
-                <div class="vision-quote">
-                    "There is no Peloton for breathing. So I decided to build it."
-                </div>
+                <p>ÆOESS isn't a meditation app in hardware form. It's physical, measurable, repeatable performance training — treating breath the way a gym treats muscles. The diaphragm is muscle tissue. It responds to progressive resistance.</p>
+                <p>The device captures airflow patterns through dual optical sensors. The AI coach interprets patterns, detects dysfunction, and guides users through personalized training cycles.</p>
+                <p>Long-term vision: An always-on companion that understands your physiological state — stress patterns, emotional regulation, performance readiness — and helps you consciously control what was previously unconscious.</p>
+                <div class="vision-quote">"There is no Peloton for breathing. So I decided to build it."</div>
             </div>
 
             <div class="marketing-box">
                 <h4>🧊 Go-to-Market: Wim Hof Community First</h4>
-                <p>The Wim Hof Method community represents the perfect initial market — highly engaged practitioners who already understand the value of breath work but lack tools to measure and optimize their practice. This community provides built-in distribution through instructors, events, and online communities before expanding to broader wellness audiences.</p>
+                <p>The Wim Hof Method community represents the perfect initial market — highly engaged practitioners who already understand the value of breath work but lack tools to measure and optimize their practice.</p>
             </div>
         </section>
 
-        <!-- Hardware Development -->
         <section>
             <div class="section-header">
                 <span class="section-label">Prototyping</span>
                 <h2 class="section-title">Hardware Development</h2>
-                <p class="section-description">
-                    The journey from concept to working prototype involved multiple iterations of device geometry,
-                    sensor integration, and electronics design.
-                </p>
+                <p class="section-description">The journey from concept to working prototype involved multiple iterations of device geometry, sensor integration, and electronics design.</p>
             </div>
             <div class="image-gallery">
                 <figure class="gallery-item">
                     <img src="../assets/aeoess/mvp2.jpg" alt="MVP v2 Core Assembly">
-                    <figcaption>
-                        <h4>MVP v2 — Core Assembly</h4>
-                        <p>Early prototype with sensor integration</p>
-                    </figcaption>
+                    <figcaption><h4>MVP v2 — Core Assembly</h4><p>Early prototype with sensor integration</p></figcaption>
                 </figure>
                 <figure class="gallery-item">
                     <img src="../assets/aeoess/iteration3.jpg" alt="Form Factor">
-                    <figcaption>
-                        <h4>Form Factor Iteration</h4>
-                        <p>Device + charging case ergonomics</p>
-                    </figcaption>
+                    <figcaption><h4>Form Factor Iteration</h4><p>Device + charging case ergonomics</p></figcaption>
                 </figure>
                 <figure class="gallery-item">
                     <img src="../assets/aeoess/iteration4.jpg" alt="Case Design">
-                    <figcaption>
-                        <h4>Case & Nasal Inserts</h4>
-                        <p>Silicone inserts with carrying case</p>
-                    </figcaption>
+                    <figcaption><h4>Case & Nasal Inserts</h4><p>Silicone inserts with carrying case</p></figcaption>
                 </figure>
                 <figure class="gallery-item">
                     <img src="../assets/aeoess/electronics3.jpg" alt="Electronics">
-                    <figcaption>
-                        <h4>Sensor + MCU Integration</h4>
-                        <p>Compact electronics for nasal form</p>
-                    </figcaption>
+                    <figcaption><h4>Sensor + MCU Integration</h4><p>Compact electronics for nasal form</p></figcaption>
                 </figure>
                 <figure class="gallery-item">
                     <img src="../assets/aeoess/electronics4.jpg" alt="PCB Layout">
-                    <figcaption>
-                        <h4>Electronics Layout</h4>
-                        <p>PCB design for miniaturization</p>
-                    </figcaption>
+                    <figcaption><h4>Electronics Layout</h4><p>PCB design for miniaturization</p></figcaption>
                 </figure>
                 <figure class="gallery-item">
                     <img src="../assets/aeoess/mvp5.jpg" alt="Late Stage">
-                    <figcaption>
-                        <h4>Late-Stage Prototype</h4>
-                        <p>Near-final form with integrated sensors</p>
-                    </figcaption>
+                    <figcaption><h4>Late-Stage Prototype</h4><p>Near-final form with integrated sensors</p></figcaption>
                 </figure>
             </div>
 
@@ -1326,57 +1158,37 @@
             </div>
         </section>
 
-        <!-- Industrial Design -->
         <section>
             <div class="section-header">
                 <span class="section-label">Industrial Design</span>
                 <h2 class="section-title">From MVP to Production</h2>
-                <p class="section-description">
-                    Two major design phases: functional MVP for validation, then production-ready design
-                    balancing aesthetics with manufacturability.
-                </p>
+                <p class="section-description">Two major design phases: functional MVP for validation, then production-ready design balancing aesthetics with manufacturability.</p>
             </div>
             <div class="design-gallery">
                 <figure class="design-item">
                     <img src="../assets/aeoess/1.4.png" alt="Design Angles">
-                    <figcaption>
-                        <h4>Production Design — Multiple Angles</h4>
-                        <p>Final form factor from different viewing perspectives</p>
-                    </figcaption>
+                    <figcaption><h4>Production Design — Multiple Angles</h4><p>Final form factor from different viewing perspectives</p></figcaption>
                 </figure>
                 <figure class="design-item">
                     <img src="../assets/aeoess/1.10.png" alt="Technical View">
-                    <figcaption>
-                        <h4>Technical Aesthetic</h4>
-                        <p>Tech-forward design language with visible precision</p>
-                    </figcaption>
+                    <figcaption><h4>Technical Aesthetic</h4><p>Tech-forward design language with visible precision</p></figcaption>
                 </figure>
                 <figure class="design-item">
                     <img src="../assets/aeoess/1.13.png" alt="Organic Form">
-                    <figcaption>
-                        <h4>Form Exploration</h4>
-                        <p>Organic curves inspired by breathing rhythms</p>
-                    </figcaption>
+                    <figcaption><h4>Form Exploration</h4><p>Organic curves inspired by breathing rhythms</p></figcaption>
                 </figure>
                 <figure class="design-item">
                     <img src="../assets/aeoess/1.19.png" alt="Component View">
-                    <figcaption>
-                        <h4>Internal Components</h4>
-                        <p>View showing sensor placement and design details</p>
-                    </figcaption>
+                    <figcaption><h4>Internal Components</h4><p>View showing sensor placement and design details</p></figcaption>
                 </figure>
             </div>
         </section>
 
-        <!-- AI Coach -->
         <section>
             <div class="section-header">
                 <span class="section-label">Intelligence</span>
                 <h2 class="section-title">AI Coach System</h2>
-                <p class="section-description">
-                    Hardware alone isn't enough. People need guidance, motivation, feedback, and personalization.
-                    The AI layer transforms raw sensor data into actionable coaching.
-                </p>
+                <p class="section-description">Hardware alone isn't enough. People need guidance, motivation, feedback, and personalization. The AI layer transforms raw sensor data into actionable coaching.</p>
             </div>
             <div class="two-column">
                 <div class="column-card">
@@ -1410,7 +1222,6 @@
             </div>
         </section>
 
-        <!-- Timeline -->
         <section>
             <div class="section-header">
                 <span class="section-label">Timeline</span>
@@ -1420,31 +1231,26 @@
                 <div class="timeline-item">
                     <h4>Month 1-2</h4>
                     <h3>Concept & Research</h3>
-                    <p>Explored resistance breathing mechanics. Researched sensor options, airflow measurement
-                        techniques, and competitive landscape. Established core hypothesis and product vision.</p>
+                    <p>Explored resistance breathing mechanics. Researched sensor options, airflow measurement techniques, and competitive landscape.</p>
                 </div>
                 <div class="timeline-item">
                     <h4>Month 2-3</h4>
                     <h3>MVP Prototyping</h3>
-                    <p>Built early MVP hardware with pressure sensing. Tested nasal insert geometries. Integrated
-                        sensors with microcontroller. Started brand identity development.</p>
+                    <p>Built early MVP hardware with pressure sensing. Tested nasal insert geometries. Integrated sensors with microcontroller.</p>
                 </div>
                 <div class="timeline-item">
                     <h4>Month 4-5</h4>
                     <h3>Electronics & App Architecture</h3>
-                    <p>Developed BLE communication protocol. Designed app architecture and data pipeline. Built
-                        breathing pattern analysis logic.</p>
+                    <p>Developed BLE communication protocol. Designed app architecture and data pipeline. Built breathing pattern analysis logic.</p>
                 </div>
                 <div class="timeline-item">
                     <h4>Month 5-6</h4>
                     <h3>Production Design & Pitch</h3>
-                    <p>Commissioned professional industrial design for production. Created comprehensive pitch deck.
-                        Refined positioning. Project paused to focus on Evatar.ai.</p>
+                    <p>Commissioned professional industrial design for production. Created comprehensive pitch deck. Project paused to focus on Evatar.ai.</p>
                 </div>
             </div>
         </section>
 
-        <!-- What Got Built -->
         <section>
             <div class="section-header">
                 <span class="section-label">Deliverables</span>
@@ -1462,87 +1268,61 @@
             </div>
         </section>
 
-        <!-- Resources -->
         <section>
             <div class="section-header">
                 <span class="section-label">Downloads</span>
                 <h2 class="section-title">Resources</h2>
             </div>
             <div class="resources-grid">
-                <a href="https://drive.google.com/file/d/1-W51qctnlSj5Gip0buViqGd34MMEebFF/view?usp=sharing"
-                    target="_blank" class="resource-card">
+                <a href="https://drive.google.com/file/d/1-W51qctnlSj5Gip0buViqGd34MMEebFF/view?usp=sharing" target="_blank" class="resource-card">
                     <span class="resource-icon">📊</span>
-                    <div>
-                        <h4>Investor Pitch Deck</h4>
-                        <p>Complete deck with market analysis, product vision, and strategy</p>
-                    </div>
+                    <div><h4>Investor Pitch Deck</h4><p>Complete deck with market analysis, product vision, and strategy</p></div>
                 </a>
                 <a href="https://aeoess.com" target="_blank" class="resource-card">
                     <span class="resource-icon">🌐</span>
-                    <div>
-                        <h4>Product Website</h4>
-                        <p>aeoess.com — landing page and brand presence</p>
-                    </div>
+                    <div><h4>Product Website</h4><p>aeoess.com — landing page and brand presence</p></div>
                 </a>
                 <a href="../assets/aeoess/aeoess_id.pdf" target="_blank" class="resource-card">
                     <span class="resource-icon">🎨</span>
-                    <div>
-                        <h4>Brand Identity Guide</h4>
-                        <p>Logo, colors, typography, and applications</p>
-                    </div>
+                    <div><h4>Brand Identity Guide</h4><p>Logo, colors, typography, and applications</p></div>
                 </a>
                 <a href="../assets/aeoess/aeoess_design_concepts.pdf" target="_blank" class="resource-card">
                     <span class="resource-icon">✨</span>
-                    <div>
-                        <h4>Design Concepts</h4>
-                        <p>Early brand directions explored</p>
-                    </div>
+                    <div><h4>Design Concepts</h4><p>Early brand directions explored</p></div>
                 </a>
                 <a href="../assets/aeoess/mathematical_modeling_respiratory.pdf" target="_blank" class="resource-card">
                     <span class="resource-icon">📄</span>
-                    <div>
-                        <h4>Respiratory Signal Research</h4>
-                        <p>Mathematical modeling of breath-to-signal processing</p>
-                    </div>
+                    <div><h4>Respiratory Signal Research</h4><p>Mathematical modeling of breath-to-signal processing</p></div>
                 </a>
             </div>
         </section>
 
-        <!-- Learnings -->
         <section>
             <div class="section-header">
                 <span class="section-label">Reflection</span>
                 <h2 class="section-title">What I Learned</h2>
-                <p class="section-description">
-                    This was my first hardware product — taking an idea from napkin sketch to working prototype,
-                    industrial design renders, and investor-ready pitch.
-                </p>
+                <p class="section-description">This was my first hardware product — taking an idea from napkin sketch to working prototype, industrial design renders, and investor-ready pitch.</p>
             </div>
             <div class="learnings-grid">
                 <div class="learning-card">
                     <span class="learning-number">01</span>
-                    <p><strong>Hardware requires different thinking than software.</strong> Physical constraints,
-                        manufacturing tolerances, and supply chains add complexity that doesn't exist in code.</p>
+                    <p><strong>Hardware requires different thinking than software.</strong> Physical constraints, manufacturing tolerances, and supply chains add complexity that doesn't exist in code.</p>
                 </div>
                 <div class="learning-card">
                     <span class="learning-number">02</span>
-                    <p><strong>The gap between "prototype works" and "manufacturable product" is enormous.</strong> What
-                        works in a lab often fails at scale.</p>
+                    <p><strong>The gap between "prototype works" and "manufacturable product" is enormous.</strong> What works in a lab often fails at scale.</p>
                 </div>
                 <div class="learning-card">
                     <span class="learning-number">03</span>
-                    <p><strong>Industrial design isn't decoration — it's core to user adoption.</strong> People won't
-                        use something daily if it doesn't feel premium.</p>
+                    <p><strong>Industrial design isn't decoration — it's core to user adoption.</strong> People won't use something daily if it doesn't feel premium.</p>
                 </div>
                 <div class="learning-card">
                     <span class="learning-number">04</span>
-                    <p><strong>Sensor selection and signal processing are their own deep domains.</strong> The "easy"
-                        part turned out to require significant research.</p>
+                    <p><strong>Sensor selection and signal processing are their own deep domains.</strong> The "easy" part turned out to require significant research.</p>
                 </div>
                 <div class="learning-card">
                     <span class="learning-number">05</span>
-                    <p><strong>Sometimes the timing isn't right, and that's okay.</strong> The IP and learnings aren't
-                        going anywhere.</p>
+                    <p><strong>Sometimes the timing isn't right, and that's okay.</strong> The IP and learnings aren't going anywhere.</p>
                 </div>
             </div>
         </section>
@@ -1554,7 +1334,6 @@
     </footer>
 
     <script>
-        // Theme Toggle
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
@@ -1563,11 +1342,9 @@
             localStorage.setItem('theme', newTheme);
         }
 
-        // Load saved theme or default to light
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
 
-        // Scroll Progress
         window.addEventListener('scroll', () => {
             const scrollProgress = document.getElementById('scrollProgress');
             const scrollTop = document.documentElement.scrollTop;
@@ -1576,7 +1353,6 @@
             scrollProgress.style.width = progress + '%';
         });
 
-        // Intersection Observer for section animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1590,5 +1366,4 @@
         });
     </script>
 </body>
-
 </html>

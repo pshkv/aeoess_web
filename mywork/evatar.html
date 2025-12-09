@@ -7,11 +7,7 @@
     <title>Evatar.ai — Tymofii Pidlisnyi</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --bg: #09090b;
@@ -25,9 +21,7 @@
             --glow: rgba(6, 182, 212, 0.3);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Space Grotesk', -apple-system, sans-serif;
@@ -37,13 +31,9 @@
             overflow-x: hidden;
         }
 
-        /* Animated Background */
         .bg-gradient {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             z-index: -1;
             background: 
                 radial-gradient(ellipse 80% 50% at 20% -20%, rgba(6, 182, 212, 0.15), transparent),
@@ -57,13 +47,9 @@
             50% { opacity: 0.7; }
         }
 
-        /* Grid Pattern Overlay */
         .grid-pattern {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             z-index: -1;
             background-image: 
                 linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
@@ -78,7 +64,6 @@
             position: relative;
         }
 
-        /* Navigation */
         .nav {
             display: flex;
             justify-content: space-between;
@@ -107,7 +92,14 @@
             transform: translateX(-5px);
         }
 
-        .theme-toggle {
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .theme-toggle,
+        .design-switcher {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: 8px;
@@ -116,13 +108,43 @@
             font-size: 1.1rem;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
         }
 
-        .theme-toggle:hover {
+        .theme-toggle:hover,
+        .design-switcher:hover {
             border-color: var(--accent-primary);
         }
 
-        /* Hero Section */
+        .design-switcher:hover {
+            background: #fef3c7;
+            border-color: #f59e0b;
+        }
+
+        .switcher-tooltip {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.65rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            color: var(--text-muted);
+        }
+
+        .design-switcher:hover .switcher-tooltip { opacity: 1; }
+
         .hero {
             text-align: center;
             padding: 2rem 0 4rem;
@@ -132,11 +154,9 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
+            width: 600px; height: 600px;
             background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
             opacity: 0.5;
             pointer-events: none;
@@ -160,8 +180,7 @@
 
         .status-badge::before {
             content: '';
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             background: white;
             border-radius: 50%;
             animation: blink 1.5s ease-in-out infinite;
@@ -217,7 +236,6 @@
             gap: 0.5rem;
         }
 
-        /* CTA Buttons */
         .cta-group {
             display: flex;
             justify-content: center;
@@ -262,18 +280,10 @@
             transform: translateY(-2px);
         }
 
-        .ph-badge {
-            transition: transform 0.3s ease;
-        }
+        .ph-badge { transition: transform 0.3s ease; }
+        .ph-badge:hover { transform: translateY(-2px); }
 
-        .ph-badge:hover {
-            transform: translateY(-2px);
-        }
-
-        /* Stats Section */
-        .stats-section {
-            padding: 4rem 0;
-        }
+        .stats-section { padding: 4rem 0; }
 
         .stats-grid {
             display: grid;
@@ -296,9 +306,7 @@
         .stat-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 2px;
             background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
             opacity: 0;
@@ -311,9 +319,7 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .stat-card:hover::before {
-            opacity: 1;
-        }
+        .stat-card:hover::before { opacity: 1; }
 
         .stat-number {
             font-size: 3rem;
@@ -333,14 +339,9 @@
             font-weight: 500;
         }
 
-        /* Content Sections */
-        .section {
-            padding: 4rem 0;
-        }
+        .section { padding: 4rem 0; }
 
-        .section-header {
-            margin-bottom: 2rem;
-        }
+        .section-header { margin-bottom: 2rem; }
 
         .section-title {
             font-size: 2rem;
@@ -367,7 +368,6 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Glass Card */
         .glass-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
@@ -377,10 +377,7 @@
             margin-bottom: 2rem;
         }
 
-        /* Feature List */
-        .feature-list {
-            list-style: none;
-        }
+        .feature-list { list-style: none; }
 
         .feature-list li {
             position: relative;
@@ -400,7 +397,6 @@
             font-weight: bold;
         }
 
-        /* Product Features Grid */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -432,8 +428,7 @@
         }
 
         .feature-icon {
-            width: 36px;
-            height: 36px;
+            width: 36px; height: 36px;
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             border-radius: 10px;
             display: flex;
@@ -442,34 +437,12 @@
             font-size: 1.1rem;
         }
 
-        /* Video Container */
         .video-wrapper {
             position: relative;
             border-radius: 20px;
             overflow: hidden;
             border: 1px solid var(--border);
             background: var(--bg-secondary);
-        }
-
-        .video-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, transparent, var(--accent-primary), transparent 30%);
-            animation: rotate 4s linear infinite;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .video-wrapper:hover::before {
-            opacity: 0.3;
-        }
-
-        @keyframes rotate {
-            100% { transform: rotate(360deg); }
         }
 
         .video-container {
@@ -481,14 +454,11 @@
 
         .video-container iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             border: none;
         }
 
-        /* Traction Pills */
         .traction-grid {
             display: flex;
             flex-wrap: wrap;
@@ -515,11 +485,8 @@
             color: var(--text);
         }
 
-        .traction-pill .icon {
-            font-size: 1.1rem;
-        }
+        .traction-pill .icon { font-size: 1.1rem; }
 
-        /* Resources Links */
         .resources-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -546,16 +513,13 @@
             transform: translateY(-4px);
         }
 
-        .resource-link .icon {
-            font-size: 1.5rem;
-        }
+        .resource-link .icon { font-size: 1.5rem; }
 
         .resource-link span {
             font-size: 0.9rem;
             color: var(--text-muted);
         }
 
-        /* Footer */
         .footer {
             text-align: center;
             padding: 4rem 0 2rem;
@@ -563,42 +527,21 @@
             margin-top: 4rem;
         }
 
-        /* Responsive */
         @media (max-width: 900px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            .resources-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .features-grid { grid-template-columns: 1fr; }
+            .resources-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 600px) {
-            .container {
-                padding: 2rem 1.25rem;
-            }
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            .hero-tagline {
-                font-size: 1.2rem;
-            }
-            .stat-number {
-                font-size: 2.25rem;
-            }
-            .cta-group {
-                flex-direction: column;
-            }
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
+            .container { padding: 2rem 1.25rem; }
+            .hero-title { font-size: 2.5rem; }
+            .hero-tagline { font-size: 1.2rem; }
+            .stat-number { font-size: 2.25rem; }
+            .cta-group { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
         }
 
-        /* Scroll Animations */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -617,31 +560,26 @@
     <div class="grid-pattern"></div>
 
     <div class="container">
-        <!-- Navigation -->
         <nav class="nav">
             <a href="../index.html" class="back-btn">← Back to Home</a>
-            <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">🌙</button>
+            <div class="nav-controls">
+                <a href="evatar_v2.html" class="design-switcher" title="Try Cyberpunk Design">
+                    🎨
+                    <span class="switcher-tooltip">Cyberpunk Version</span>
+                </a>
+                <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">🌙</button>
+            </div>
         </nav>
 
-        <!-- Hero Section -->
         <header class="hero">
             <div class="status-badge">Active Project</div>
             <h1 class="hero-title">Evatar.ai</h1>
             <p class="hero-tagline">AI agents that run your social media on autopilot</p>
             
             <div class="hero-meta">
-                <div class="hero-meta-item">
-                    <span>📅</span>
-                    <span>May 2024 — Present</span>
-                </div>
-                <div class="hero-meta-item">
-                    <span>👤</span>
-                    <span>Founder & CEO</span>
-                </div>
-                <div class="hero-meta-item">
-                    <span>📍</span>
-                    <span>Los Angeles, CA</span>
-                </div>
+                <div class="hero-meta-item"><span>📅</span><span>May 2024 — Present</span></div>
+                <div class="hero-meta-item"><span>👤</span><span>Founder & CEO</span></div>
+                <div class="hero-meta-item"><span>📍</span><span>Los Angeles, CA</span></div>
             </div>
 
             <div class="cta-group">
@@ -654,33 +592,29 @@
             </div>
         </header>
 
-        <!-- Stats Section -->
         <section class="stats-section fade-in">
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-number" data-target="163">0</div>
+                    <div class="stat-number" data-target="163">163</div>
                     <div class="stat-label">Users</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" data-target="1.6" data-suffix="M+">0</div>
+                    <div class="stat-number">1.6M+</div>
                     <div class="stat-label">Monthly Impressions</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" data-target="20" data-prefix="~" data-suffix="%">0</div>
+                    <div class="stat-number">~20%</div>
                     <div class="stat-label">Conversion Rate</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" data-target="16">0</div>
+                    <div class="stat-number">16</div>
                     <div class="stat-label">Weeks to MVP</div>
                 </div>
             </div>
         </section>
 
-        <!-- Overview -->
         <section class="section fade-in">
-            <div class="section-header">
-                <h2 class="section-title">Overview</h2>
-            </div>
+            <div class="section-header"><h2 class="section-title">Overview</h2></div>
             <p class="content-text">
                 Evatar is an agentic AI platform that automates your entire social media presence.
                 At the center is Eva — a voice-to-content creative assistant that turns raw thoughts
@@ -694,31 +628,19 @@
             </p>
         </section>
 
-        <!-- Product Demo -->
         <section class="section fade-in">
-            <div class="section-header">
-                <h2 class="section-title">Product Demo</h2>
-            </div>
+            <div class="section-header"><h2 class="section-title">Product Demo</h2></div>
             <div class="video-wrapper">
                 <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/8N0dR8BUx0M"
-                        title="Evatar Demo"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-                    </iframe>
+                    <iframe src="https://www.youtube.com/embed/8N0dR8BUx0M" title="Evatar Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
 
-        <!-- Problem -->
         <section class="section fade-in">
-            <div class="section-header">
-                <h2 class="section-title">The Problem</h2>
-            </div>
+            <div class="section-header"><h2 class="section-title">The Problem</h2></div>
             <div class="glass-card">
-                <p class="content-text" style="margin-bottom: 1.5rem;">
-                    Social media is essential but exhausting for founders and small teams.
-                </p>
+                <p class="content-text" style="margin-bottom: 1.5rem;">Social media is essential but exhausting for founders and small teams.</p>
                 <ul class="feature-list">
                     <li>Constant content ideation and planning</li>
                     <li>Platform-specific formatting and optimization</li>
@@ -733,11 +655,8 @@
             </div>
         </section>
 
-        <!-- Core Product -->
         <section class="section fade-in">
-            <div class="section-header">
-                <h2 class="section-title">Core Product</h2>
-            </div>
+            <div class="section-header"><h2 class="section-title">Core Product</h2></div>
             <div class="features-grid">
                 <div class="feature-card">
                     <h3><span class="feature-icon">🎙️</span> Eva — Creative Assistant</h3>
@@ -778,11 +697,8 @@
             </div>
         </section>
 
-        <!-- Traction -->
         <section class="section fade-in">
-            <div class="section-header">
-                <h2 class="section-title">Traction</h2>
-            </div>
+            <div class="section-header"><h2 class="section-title">Traction</h2></div>
             <div class="traction-grid">
                 <div class="traction-pill"><span class="icon">📊</span> 163 users → 1.6M+ monthly impressions</div>
                 <div class="traction-pill"><span class="icon">💰</span> ~20% free-to-paid conversion</div>
@@ -793,11 +709,8 @@
             </div>
         </section>
 
-        <!-- Learnings -->
         <section class="section fade-in">
-            <div class="section-header">
-                <h2 class="section-title">What I Learned</h2>
-            </div>
+            <div class="section-header"><h2 class="section-title">What I Learned</h2></div>
             <div class="glass-card">
                 <ul class="feature-list">
                     <li>Consistency beats perfect content every time</li>
@@ -810,11 +723,8 @@
             </div>
         </section>
 
-        <!-- What's Next -->
         <section class="section fade-in">
-            <div class="section-header">
-                <h2 class="section-title">What's Next</h2>
-            </div>
+            <div class="section-header"><h2 class="section-title">What's Next</h2></div>
             <div class="glass-card">
                 <ul class="feature-list">
                     <li>Full mobile app with voice-first Eva assistant</li>
@@ -827,82 +737,34 @@
             </div>
         </section>
 
-        <!-- Resources -->
         <section class="section fade-in">
-            <div class="section-header">
-                <h2 class="section-title">Resources</h2>
-            </div>
+            <div class="section-header"><h2 class="section-title">Resources</h2></div>
             <div class="resources-grid">
-                <a href="https://evatar.ai" target="_blank" class="resource-link">
-                    <span class="icon">🌐</span>
-                    <span>Product Website</span>
-                </a>
-                <a href="https://evatarai.notion.site/Welcome-to-Evatar-ai-Resources-Hub-1af032bd27a3805aaaaec4192c3d1016" target="_blank" class="resource-link">
-                    <span class="icon">📚</span>
-                    <span>Documentation</span>
-                </a>
-                <a href="https://twitter.com/evatar_ai" target="_blank" class="resource-link">
-                    <span class="icon">𝕏</span>
-                    <span>Twitter/X</span>
-                </a>
-                <a href="https://youtube.com/@evatar-ai" target="_blank" class="resource-link">
-                    <span class="icon">▶️</span>
-                    <span>YouTube</span>
-                </a>
+                <a href="https://evatar.ai" target="_blank" class="resource-link"><span class="icon">🌐</span><span>Product Website</span></a>
+                <a href="https://evatarai.notion.site/Welcome-to-Evatar-ai-Resources-Hub-1af032bd27a3805aaaaec4192c3d1016" target="_blank" class="resource-link"><span class="icon">📚</span><span>Documentation</span></a>
+                <a href="https://twitter.com/evatar_ai" target="_blank" class="resource-link"><span class="icon">𝕏</span><span>Twitter/X</span></a>
+                <a href="https://youtube.com/@evatar-ai" target="_blank" class="resource-link"><span class="icon">▶️</span><span>YouTube</span></a>
             </div>
         </section>
 
-        <!-- Footer -->
         <footer class="footer">
             <a href="../index.html" class="back-btn">← Back to Home</a>
         </footer>
     </div>
 
     <script>
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.stat-number[data-target]');
-            
-            counters.forEach(counter => {
-                const target = parseFloat(counter.getAttribute('data-target'));
-                const prefix = counter.getAttribute('data-prefix') || '';
-                const suffix = counter.getAttribute('data-suffix') || '';
-                const isDecimal = target % 1 !== 0;
-                const duration = 2000;
-                const steps = 60;
-                const increment = target / steps;
-                let current = 0;
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    counter.textContent = prefix + (isDecimal ? current.toFixed(1) : Math.floor(current)) + suffix;
-                }, duration / steps);
-            });
-        }
-
-        // Scroll Animations
         function handleScrollAnimations() {
             const elements = document.querySelectorAll('.fade-in');
-            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        if (entry.target.querySelector('.stat-number')) {
-                            animateCounters();
-                        }
                     }
                 });
             }, { threshold: 0.1 });
-
             elements.forEach(el => observer.observe(el));
         }
 
-        // Theme Toggle
         function toggleTheme() {
             const body = document.body;
             const btn = document.getElementById('theme-toggle');
@@ -925,7 +787,6 @@
             }
         }
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', handleScrollAnimations);
     </script>
 </body>
