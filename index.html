@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tymofii Pidlisnyi — Product Manager & Creative Founder</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap"
         rel="stylesheet">
     <style>
         * {
@@ -588,6 +588,7 @@
             letter-spacing: 0.1em;
             transition: all 0.3s ease;
             position: relative;
+            cursor: pointer;
         }
 
         .nav-item a:hover {
@@ -610,6 +611,35 @@
             opacity: 1;
         }
 
+        /* ===== RESUME NAV ITEM HIGHLIGHT ===== */
+        .nav-item.highlight a {
+            color: var(--accent-yellow);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-item.highlight a::after {
+            content: '→';
+            margin-left: 0.5rem;
+            opacity: 0;
+            transform: translateX(-5px);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .nav-item.highlight a:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .nav-item.highlight a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .nav-item.highlight a::before {
+            background: var(--accent-yellow);
+        }
+
         .logo-container {
             position: fixed;
             top: 2rem;
@@ -620,19 +650,63 @@
             gap: 1rem;
         }
 
+        /* ===== ENHANCED PROFILE PHOTO - LARGER WITH GLOW ===== */
         .profile-photo {
-            width: 50px;
-            height: 50px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             border: 2px solid var(--border);
             object-fit: cover;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            animation: profileGlow 3s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes profileGlow {
+            0%, 100% {
+                box-shadow: 
+                    0 0 20px rgba(93, 173, 226, 0.3),
+                    0 0 40px rgba(93, 173, 226, 0.1);
+                border-color: rgba(93, 173, 226, 0.5);
+            }
+            50% {
+                box-shadow: 
+                    0 0 30px rgba(244, 208, 63, 0.4),
+                    0 0 60px rgba(244, 208, 63, 0.2);
+                border-color: rgba(244, 208, 63, 0.6);
+            }
         }
 
         .profile-photo:hover {
             border-color: var(--accent-cyan);
             transform: scale(1.1);
+            box-shadow: 
+                0 0 40px rgba(93, 173, 226, 0.5),
+                0 0 80px rgba(93, 173, 226, 0.3);
+            animation: none;
+        }
+
+        /* Click hint indicator */
+        .logo-container::after {
+            content: 'Click me';
+            position: absolute;
+            left: 80px;
+            top: 70px;
+            font-size: 0.65rem;
+            color: var(--accent-cyan);
+            letter-spacing: 0.1em;
+            opacity: 0;
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            animation: hintPulse 2s ease-in-out infinite;
+            animation-delay: 3s;
+        }
+
+        @keyframes hintPulse {
+            0%, 100% { opacity: 0; transform: translateY(-5px); }
+            10%, 90% { opacity: 0.7; transform: translateY(0); }
         }
 
         .logo {
@@ -646,6 +720,7 @@
             flex-direction: column;
         }
 
+        /* ===== ENHANCED PROFILE OVERLAY ===== */
         .profile-overlay {
             position: fixed;
             top: 4rem;
@@ -656,14 +731,16 @@
             min-width: 900px;
             height: 80vh;
             max-height: 700px;
-            background: var(--bg-secondary);
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(26, 23, 21, 0.98) 100%);
             border: 1px solid var(--border);
             border-radius: 24px;
             z-index: 999;
             opacity: 0;
             pointer-events: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.5),
+                0 0 100px rgba(93, 173, 226, 0.1);
             display: flex;
             overflow: hidden;
         }
@@ -710,35 +787,55 @@
             flex-shrink: 0;
         }
 
+        /* Enhanced overlay typography */
         .profile-overlay-name h3 {
-            font-size: 1.8rem;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 500;
             margin-bottom: 0.3rem;
             background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: 0.02em;
         }
 
         .profile-overlay-name p {
-            font-size: 0.95rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            letter-spacing: 0.05em;
-            margin-bottom: 2rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
         }
 
         .profile-overlay-bio {
             color: var(--text);
-            font-size: 0.95rem;
-            line-height: 1.75;
+            font-size: 1.05rem;
+            line-height: 1.85;
             font-family: 'Inter', sans-serif;
         }
 
         .profile-overlay-bio p {
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
             color: var(--text);
+            opacity: 0.9;
         }
 
         .profile-overlay-bio p:last-child {
             margin-bottom: 0;
+        }
+
+        .profile-overlay-bio a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .profile-overlay-bio a:hover {
+            color: var(--accent-yellow);
+            border-bottom-color: var(--accent-yellow);
         }
 
         .text-glow {
@@ -1056,22 +1153,47 @@
             line-height: 1.5;
         }
 
+        /* ===== ENHANCED NEW IDEAS SECTION ===== */
         .ideas-single-box {
-            width: 55%;
-            height: 45vh;
+            width: 70%;
+            max-width: 900px;
+            height: 55vh;
             margin: 3rem auto;
-            background: var(--bg-secondary);
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(38, 35, 32, 0.8) 100%);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 3rem;
+            border-radius: 24px;
+            padding: 0;
             position: relative;
             overflow: hidden;
             transition: all 0.4s ease;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .ideas-single-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-yellow), var(--accent-cyan));
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .ideas-single-box:hover {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 10px 40px rgba(93, 173, 226, 0.15);
+            border-color: rgba(93, 173, 226, 0.3);
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.4),
+                0 0 60px rgba(93, 173, 226, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
         .ideas-scroll-indicator {
@@ -1092,7 +1214,7 @@
             height: 100%;
             overflow-y: auto;
             overflow-x: hidden;
-            padding-right: 1.5rem;
+            padding: 3rem 3.5rem;
             scrollbar-width: thin;
             scrollbar-color: var(--accent-cyan) transparent;
         }
@@ -1116,6 +1238,16 @@
 
         .idea-item {
             margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(15, 14, 13, 0.5);
+            border-radius: 16px;
+            border: 1px solid rgba(38, 35, 32, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .idea-item:hover {
+            border-color: rgba(93, 173, 226, 0.3);
+            background: rgba(15, 14, 13, 0.7);
         }
 
         .idea-item:last-child {
@@ -1130,7 +1262,9 @@
         }
 
         .idea-item h3 {
-            font-size: 1.8rem;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 500;
             background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -1144,16 +1278,17 @@
             gap: 0.3rem;
             background: var(--bg);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 0.5rem 0.8rem;
+            border-radius: 10px;
+            padding: 0.6rem 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 50px;
+            min-width: 55px;
         }
 
         .upvote-btn:hover {
             border-color: var(--accent-cyan);
             transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(93, 173, 226, 0.2);
         }
 
         .upvote-btn.voted {
@@ -1184,26 +1319,30 @@
         }
 
         .idea-tagline {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 500;
             color: var(--text);
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
             line-height: 1.5;
+            font-style: italic;
+            opacity: 0.9;
         }
 
         .idea-item p {
             color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.7;
-            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            line-height: 1.75;
+            margin-bottom: 0.9rem;
             font-family: 'Inter', sans-serif;
         }
 
+        .idea-item p strong {
+            color: var(--accent-cyan);
+            font-weight: 500;
+        }
+
         .idea-separator {
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border), transparent);
-            margin: 2.5rem 0;
+            display: none;
         }
 
         .comments-button {
@@ -1685,6 +1824,27 @@
                 font-size: 0.8rem;
                 letter-spacing: 0.2em;
             }
+
+            .profile-photo {
+                width: 55px;
+                height: 55px;
+            }
+
+            .logo-container::after {
+                display: none;
+            }
+
+            .ideas-scrollable {
+                padding: 2rem 1.5rem;
+            }
+
+            .idea-item {
+                padding: 1.5rem;
+            }
+
+            .idea-item h3 {
+                font-size: 1.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1875,7 +2035,7 @@
     </audio>
 
     <div class="logo-container">
-        <img src="assets/images/my_photo.jpg" alt="Tima" class="profile-photo" id="profilePhoto">
+        <img src="assets/images/my_photo.jpg" alt="Tima" class="profile-photo" id="profilePhoto" onclick="toggleProfileOverlay()">
         <a href="/" class="logo">
             <span>TYMOFII</span>
             <span>PIDLISNYI</span>
@@ -1886,7 +2046,7 @@
         <div class="profile-overlay-content">
             <div class="profile-overlay-name">
                 <h3>Tymofii "Tima" Pidlisnyi</h3>
-                <p>My Bio</p>
+                <p>Product Manager & Creative Founder</p>
             </div>
             <div class="profile-overlay-bio">
                 <p>Hi, I'm Tima. I might look cocky, but I'm not — I'm sensitive, deeply empathetic and often misread.
@@ -1905,9 +2065,7 @@
                     would survive: betrayal, war destroying my business, political imprisonment. But every time, I rise
                     again — like a phoenix with a restless mind and an unshakable belief in human imagination.</p>
 
-                <p>My life's been quite the adventure — some parts might shock you. <a href="bio.html"
-                        style="color: var(--accent-cyan); text-decoration: none; font-weight: 500;">Read the full story
-                        →</a></p>
+                <p>My life's been quite the adventure — some parts might shock you. <a href="bio.html">Read the full story →</a></p>
             </div>
         </div>
         <img src="assets/images/my_photo.jpg" alt="Tima" class="profile-overlay-photo">
@@ -1915,12 +2073,11 @@
 
     <nav id="mainNav">
         <ul class="nav-links">
-            <li class="nav-item"><a href="#about">ABOUT</a></li>
+            <li class="nav-item"><a onclick="openProfileOverlay()">ABOUT</a></li>
             <li class="nav-item"><a href="#projects">PROJECTS</a></li>
-            <li class="nav-item"><a href="mywork/index.html">WORK</a></li>
+            <li class="nav-item highlight"><a href="mywork/index.html">RÉSUMÉ</a></li>
             <li class="nav-item"><a href="#lab">LAB</a></li>
             <li class="nav-item"><a href="#ideas">IDEAS</a></li>
-
             <li class="nav-item"><a href="#contact">CONNECT</a></li>
         </ul>
     </nav>
@@ -2149,8 +2306,6 @@
                             interactions. Makes local commerce feel like adventure.</p>
                     </div>
 
-                    <div class="idea-separator"></div>
-
                     <div class="idea-item">
                         <div class="idea-header">
                             <h3>OnlyFriends</h3>
@@ -2176,8 +2331,6 @@
 
                         <p><strong>Bottom Line:</strong> Human connection, made simple, accessible, and real.</p>
                     </div>
-
-                    <div class="idea-separator"></div>
 
                     <div class="idea-item">
                         <div class="idea-header">
@@ -2205,8 +2358,6 @@
                         <p><strong>Why It Works:</strong> Because sometimes the biggest health improvements come from
                             the smallest design changes.</p>
                     </div>
-
-                    <div class="idea-separator"></div>
 
                     <div class="idea-item">
                         <div class="idea-header">
@@ -2299,7 +2450,7 @@
                 </p>
 
                 <div class="contact-links">
-                    <a href="/cdn-cgi/l/email-protection#8bffe2e6eacbeaeee4eef8f8a5e8e4e6"
+                    <a href="mailto:tima@aeoess.com"
                         class="contact-link">EMAIL</a>
                     <a href="https://linkedin.com/in/tymofii-pidlisnyi" class="contact-link"
                         target="_blank">LINKEDIN</a>
@@ -2311,7 +2462,6 @@
         </div>
     </section>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
         // Animated Grain Effect
         const canvas = document.getElementById('grain-canvas');
@@ -2327,7 +2477,6 @@
                 const w = ctx.canvas.width;
                 const h = ctx.canvas.height;
 
-                // Don't create image data if dimensions are invalid
                 if (w <= 0 || h <= 0) return;
 
                 const iData = ctx.createImageData(w, h);
@@ -2349,7 +2498,6 @@
 
             resize();
             window.addEventListener('resize', resize);
-            // Wait a frame before starting animation
             requestAnimationFrame(() => {
                 animate();
             });
@@ -2426,7 +2574,7 @@
             const player = document.getElementById('musicPlayer');
 
             if (audio.paused) {
-                audio.volume = 0.15; // Very low volume
+                audio.volume = 0.15;
                 audio.play().then(() => {
                     btn.textContent = '❚❚';
                     btn.classList.add('playing');
@@ -2456,10 +2604,22 @@
             loadComments();
         });
 
-        // Profile Photo Hover Overlay
+        // ===== PROFILE OVERLAY FUNCTIONS =====
         const profilePhoto = document.getElementById('profilePhoto');
         const profileOverlay = document.getElementById('profileOverlay');
         let hoverTimeout;
+
+        function openProfileOverlay() {
+            if (profileOverlay) {
+                profileOverlay.classList.add('show');
+            }
+        }
+
+        function toggleProfileOverlay() {
+            if (profileOverlay) {
+                profileOverlay.classList.toggle('show');
+            }
+        }
 
         if (profilePhoto && profileOverlay) {
             profilePhoto.addEventListener('mouseenter', () => {
@@ -2482,6 +2642,15 @@
             });
         }
 
+        // Close overlay when clicking outside
+        document.addEventListener('click', (e) => {
+            if (profileOverlay && profileOverlay.classList.contains('show')) {
+                if (!profileOverlay.contains(e.target) && !profilePhoto.contains(e.target)) {
+                    profileOverlay.classList.remove('show');
+                }
+            }
+        });
+
         // Navigation Hide/Show on Scroll
         let lastScrollTop = 0;
         const nav = document.getElementById('mainNav');
@@ -2502,16 +2671,19 @@
             });
         }
 
-        // Smooth scroll for navigation
+        // Smooth scroll for navigation (except for onclick handlers)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                const href = this.getAttribute('href');
+                if (href && href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 }
             });
         });
