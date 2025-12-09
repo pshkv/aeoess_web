@@ -1,301 +1,588 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7QVCJGMKR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Story Behind the Work — Tima</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #111111;
+      --bg-card: #161616;
+      --text-primary: #f5f5f0;
+      --text-secondary: #a3a39a;
+      --text-muted: #6b6b63;
+      --accent: #d4a853;
+      --accent-glow: rgba(212, 168, 83, 0.15);
+      --border: #2a2a2a;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+    }
 
-  gtag('config', 'G-S7QVCJGMKR');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Tima — Full Biography</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        :root {
-            --bg: #0F0E0D;
-            --bg-secondary: #1A1715;
-            --text: #F5F3F0;
-            --text-muted: #8B9199;
-            --border: #262320;
-            --accent-cyan: #5DADE2;
-            --accent-yellow: #F4D03F;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        [data-theme="bright"] {
-            --bg: #FDFCFA;
-            --bg-secondary: #F9F7F4;
-            --text: #2B2622;
-            --text-muted: #6B7280;
-            --border: #E8E4DF;
-            --accent-cyan: #3498DB;
-            --accent-yellow: #B8E6D5;
-        }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 1000;
+    }
 
-        body {
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            transition: background-color 0.5s ease, color 0.5s ease;
-        }
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: linear-gradient(to bottom, var(--bg-primary) 0%, transparent 100%);
+    }
 
-        p {
-            font-family: 'Inter', -apple-system, sans-serif;
-            color: var(--text-muted);
-        }
+    .nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
+    .nav a:hover {
+      color: var(--accent);
+    }
 
-        .back-link {
-            display: inline-block;
-            color: var(--accent-cyan);
-            text-decoration: none;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-        }
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem;
+      position: relative;
+    }
 
-        .back-link:hover {
-            transform: translateX(-5px);
-        }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 120px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: pulse 2s ease-in-out infinite;
+    }
 
-        h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
 
-        h2 {
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
-            margin: 3rem 0 1.5rem 0;
-            color: var(--text);
-        }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.2s forwards;
+    }
 
-        h3 {
-            font-size: 1.3rem;
-            margin: 2rem 0 1rem 0;
-            color: var(--accent-cyan);
-        }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.4s forwards;
+    }
 
-        p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            line-height: 1.9;
-        }
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
 
-        .highlight {
-            color: var(--accent-cyan);
-            font-weight: 500;
-        }
+    .hero-tagline {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--text-secondary);
+      max-width: 500px;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.6s forwards;
+    }
 
-        .quote {
-            border-left: 3px solid var(--accent-cyan);
-            padding-left: 1.5rem;
-            margin: 2rem 0;
-            font-style: italic;
-            color: var(--text);
-        }
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .theme-toggle {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            z-index: 1001;
-            width: 60px;
-            height: 30px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 30px;
-            cursor: pointer;
-            padding: 3px;
-            transition: all 0.3s ease;
-        }
+    /* Main content */
+    .content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
 
-        .theme-toggle:hover {
-            border-color: var(--accent-cyan);
-        }
+    /* Section styles */
+    .section {
+      margin-bottom: 5rem;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: reveal 0.8s ease forwards;
+    }
 
-        .theme-toggle-slider {
-            width: 24px;
-            height: 24px;
-            background: var(--accent-cyan);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-        }
+    .section:nth-child(1) { animation-delay: 0.1s; }
+    .section:nth-child(2) { animation-delay: 0.15s; }
+    .section:nth-child(3) { animation-delay: 0.2s; }
+    .section:nth-child(4) { animation-delay: 0.25s; }
+    .section:nth-child(5) { animation-delay: 0.3s; }
+    .section:nth-child(6) { animation-delay: 0.35s; }
+    .section:nth-child(7) { animation-delay: 0.4s; }
+    .section:nth-child(8) { animation-delay: 0.45s; }
+    .section:nth-child(9) { animation-delay: 0.5s; }
+    .section:nth-child(10) { animation-delay: 0.55s; }
+    .section:nth-child(11) { animation-delay: 0.6s; }
 
-        [data-theme="bright"] .theme-toggle-slider {
-            transform: translateX(30px);
-            background: var(--accent-yellow);
-        }
+    @keyframes reveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 2rem 1.5rem;
-            }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
 
-            h1 {
-                font-size: 2rem;
-            }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
 
-            h2 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    .section h2 {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .section p {
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+      font-size: 1rem;
+    }
+
+    .section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Blockquote */
+    .quote {
+      position: relative;
+      padding: 2rem 0;
+      margin: 3rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .quote blockquote {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    .quote::before {
+      content: '"';
+      position: absolute;
+      top: -0.5rem;
+      left: -0.5rem;
+      font-family: var(--font-display);
+      font-size: 6rem;
+      color: var(--accent);
+      opacity: 0.2;
+      line-height: 1;
+    }
+
+    /* Highlight card */
+    .highlight-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .highlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--accent);
+    }
+
+    .highlight-card p {
+      color: var(--text-primary);
+      font-size: 1.05rem;
+      margin-bottom: 0;
+    }
+
+    /* Philosophy card - special styling */
+    .philosophy-card {
+      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(212, 168, 83, 0.05) 100%);
+      border: 1px solid var(--accent);
+      padding: 2.5rem;
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .philosophy-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+
+    .philosophy-card .philosophy-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .philosophy-card blockquote {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    /* Stats row */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 3rem 0;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Footer CTA */
+    .footer-cta {
+      text-align: center;
+      padding: 6rem 2rem;
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+    }
+
+    .footer-cta h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .footer-cta p {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.875rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
+
+    .btn svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .btn:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .section h2 {
+        font-size: 1.75rem;
+      }
+
+      .quote blockquote {
+        font-size: 1.35rem;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .content {
+        padding: 0 1.5rem 4rem;
+      }
+    }
+
+    /* Smooth scroll anchor offset */
+    .section[id] {
+      scroll-margin-top: 100px;
+    }
+  </style>
 </head>
-<body data-theme="dark">
-    <div class="theme-toggle" onclick="toggleTheme()">
-        <div class="theme-toggle-slider">
-            <span id="theme-icon">🌙</span>
-        </div>
-    </div>
+<body>
 
-    <div class="container">
-        <a href="index.html" class="back-link">← Back to Home</a>
-        
-        <h1>The Story Behind the Work</h1>
-        
-        <h2>Who I Am</h2>
+  <nav class="nav">
+    <a href="index.html">← Back to Home</a>
+    <a href="#contact">Get in Touch</a>
+  </nav>
 
-        <p>I consider myself a <span class="highlight">polymath</span>. I know a little about everything. I'm very curious and very open, which sometimes makes people think I don't respect boundaries, especially when we first meet. I'm passionate about information — probably because I'm neurodivergent and have too many thoughts happening at once. I'm obsessed with the human mind's ability to fantasize and make stories. Whether something is true or not, theories and hypotheses capture my imagination. I believe my imagination is borderless.</p>
+  <header class="hero">
+    <span class="hero-subtitle">Full Biography</span>
+    <h1 class="hero-title">The Story Behind<br>the <em>Work</em></h1>
+    <p class="hero-tagline">Polymath. Builder. Phoenix.</p>
+  </header>
 
-        <p>I'm into alternative history, fringe theories, the stuff most people dismiss. Being into imagination doesn't mean I believe everything — I just look at it differently. Belief is a kind of program; I like to collect information I might connect to something later.</p>
+  <main class="content">
 
-        <p>I'm passionate about history, astronomy, physics, neurology — basically human knowledge. I'm not an expert in everything, but I do believe I have a deep understanding of many concepts.</p>
+    <section class="section" id="who">
+      <span class="section-label">01 — Identity</span>
+      <h2>Who I Am</h2>
+      <p>I consider myself a polymath. I know a little about everything. I'm very curious and very open, which sometimes makes people think I don't respect boundaries, especially when we first meet. I'm passionate about information — probably because I'm neurodivergent and have too many thoughts happening at once. I'm obsessed with the human mind's ability to fantasize and make stories. Whether something is true or not, theories and hypotheses capture my imagination. I believe my imagination is borderless.</p>
+      <p>I'm into alternative history, fringe theories, the stuff most people dismiss. Being into imagination doesn't mean I believe everything — I just look at it differently. Belief is a kind of program; I like to collect information I might connect to something later.</p>
+      <p>I'm passionate about history, astronomy, physics, neurology — basically human knowledge. I'm not an expert in everything, but I do believe I have a deep understanding of many concepts.</p>
+      <p>My brain is always trying to interpret and understand things. I pull things apart and put them back together so I know what they're made of, how they work, what else they can do, and what's overlooked. I understand mechanics, quantum physics, computers, even LLM system design and architecture. I understand algorithms and code, though not well enough to write production code. What's worse is I often forget words, which makes me stumble when I describe concepts and can't reference the right term. That can make me shy even though I can definitely explain the ideas.</p>
+      <p>I'm an introverted extrovert. It's odd — I'm very outgoing when I'm around people, but I mostly choose to spend time alone. It's rare to meet people who are as excited to engage with my salad of mixed thoughts as I am. I'm often "too much," so many of the most interesting conversations happen in my head. Still, there are people who match that energy — people who get excited about ideas, who want to go deep instead of staying shallow.</p>
+      <p>I play chess a lot — bullet games, probably a couple dozen a day. It's a replacement for social media scrolling and also a safe space. It's how I check my brain activity and clarity. If I play clean, finish before the clock, and win, I know I'm in shape.</p>
+    </section>
 
-        <p>My brain is always trying to interpret and understand things. I pull things apart and put them back together so I know what they're made of, how they work, what else they can do, and what's overlooked. I understand mechanics, quantum physics, computers, even LLM system design and architecture. I understand algorithms and code, though not well enough to write production code. What's worse is I often forget words, which makes me stumble when I describe concepts and can't reference the right term. That can make me shy even though I can definitely explain the ideas.</p>
+    <section class="section" id="sensitive">
+      <span class="section-label">02 — Perception</span>
+      <h2>The Sensitive Sweetheart in Disguise</h2>
+      <p>I joke that there's a 13-year-old girl living inside me — I cry at touching moments in films, at kindness, at old couples holding hands. I'm very sensitive, and I love that about myself. But I look like the opposite. People assume I'm cocky or intimidating before they know me. Many men — especially "alpha" types — get weird around me simply because I'm open, I start conversations, and I ask questions. They feel like I'm trying to dominate, but I'm not. It's just my face combined with the fact that I hate awkwardness.</p>
+      <p>People are awkward. They overthink boundaries in odd ways. I always feel people's reactions and emotions — the "vibe." I'm very sensitive to it. That's why I talk to everyone: to fix the vibe, the energetic bond we create when we're close.</p>
+    </section>
 
-        <p>I'm an <span class="highlight">introverted extrovert</span>. It's odd — I'm very outgoing when I'm around people, but I mostly choose to spend time alone. It's rare to meet people who are as excited to engage with my salad of mixed thoughts as I am. I'm often "too much," so many of the most interesting conversations happen in my head. Still, there are many cool people I love talking to — curious people, nerds, PhDs.</p>
+    <section class="section" id="resilience">
+      <span class="section-label">03 — Resilience</span>
+      <h2>Maybe Too Much</h2>
+      
+      <div class="quote">
+        <blockquote>I'm the phoenix. I've burned to ashes and come back many times.</blockquote>
+      </div>
 
-        <p>I play chess a lot — bullet games, probably a couple dozen a day. It's a replacement for social media scrolling and also a safe space. It's how I check my brain activity and clarity. If I play clean, finish before the clock, and win, I know I'm in shape.</p>
+      <p>I push beyond normal limits. I take risks and make sacrifices that people think are too much. I have a different endurance threshold — not physical pain, but how much I can handle emotionally. When I started building my startup I invested everything in it, even at the cost of my mental health. Instead of paying for an apartment and personal bills, I risked homelessness and ate less so startup bills were covered. People left me for it, but I continued.</p>
+      <p>I don't give up — not on belief, not on my character, not on people. Even when I was betrayed by close friends and partners, I didn't change who I am. I try to be kind and altruistic — yes, that's its own kind of ego — and it's built into my beliefs.</p>
+      <p>I forgive people. I don't get angry, which is a problem because instead of restoring myself and setting boundaries, I digest everything and keep it inside. Worse, forgiving too fast lets people do it again. It's not healthy. But it's not easy to break me.</p>
+    </section>
 
-        <h2>The Sensitive Sweetheart in Disguise</h2>
+    <section class="section" id="ukraine">
+      <span class="section-label">04 — Origins</span>
+      <h2>Early Life in Ukraine</h2>
+      <p>My parents are extremely educated and honest. My father has near-encyclopedic knowledge. My mother built social projects — a mental health hotline, HIV and TB programs, rehab programs. That's where my values come from.</p>
+      <p>In my early career I worked in TV and wanted to become a director, so I studied film directing. There wasn't a real film industry in Ukraine, so I worked across creative fields — project manager and creative director for event agencies. I ran brand activations for Coca-Cola, Budweiser, Philip Morris, banks, and others. I also produced entertainment events — private parties with big budgets. It was a scene.</p>
+      <p>I worked in corporate law too, at a firm handling complex business disputes. Ukraine in those years was messy — corruption was normalized, and navigating business often meant navigating conflict. I learned a lot about strategy, negotiation, and how power really works.</p>
+      <p>I also ran operations for a car-rental company — during the UEFA events we operated over 100 vehicles. I built our internal security team and became our investigator, tracking down stolen cars through digital trails and traveling across Ukraine to recover them. Our success rate was about two out of three.</p>
+    </section>
 
-        <p>I joke that there's a 13-year-old girl living inside me — I cry at touching moments in films, at kindness, at old couples holding hands. I'm very sensitive, and I love that about myself. But I look like the opposite. People assume I'm cocky or intimidating before they know me. Many men — especially "alpha" types — get weird around me simply because I'm open, I start conversations, and I ask questions. They feel like I'm trying to dominate, but I'm not. It's just my face combined with the fact that I hate awkwardness.</p>
-
-        <p>People are awkward. They overthink boundaries in odd ways. I always feel people's reactions and emotions — the "vibe." I'm very sensitive to it. That's why I talk to everyone: to fix the vibe, the energetic bond we create when we're close.</p>
-
-        <h2>Resilience (Maybe Too Much)</h2>
-
-        <p class="quote">"I'm the phoenix. I've burned to ashes and come back many times."</p>
-
-        <p>I push beyond normal limits. I take risks and make sacrifices that people think are too much. I have a different endurance threshold — not physical pain, but how much I can handle emotionally. When I started building my startup I invested everything in it, even at the cost of my mental health. Instead of paying for an apartment and personal bills, I risked homelessness and ate less so startup bills were covered. People left me for it, but I continued.</p>
-
-        <p>I don't give up — not on belief, not on my character, not on people. Even when I was betrayed by close friends and partners, I didn't change who I am. I try to be kind and altruistic — yes, that's its own kind of ego — and it's built into my beliefs.</p>
-
-        <p>I forgive people. I don't get angry, which is a problem because instead of restoring myself and setting boundaries, I digest everything and keep it inside. Worse, forgiving too fast lets people do it again. It's not healthy. But it's not easy to break me.</p>
-
-        <h2>Early Life in Ukraine</h2>
-
-        <p>My parents are extremely educated and honest. My father has near-encyclopedic knowledge. My mother built social projects — a mental health hotline, HIV and TB programs, rehab programs. That's where my values come from.</p>
-
-        <p>In my early career I worked in TV and wanted to become a director, so I studied <span class="highlight">film directing</span>. There wasn't a real film industry in Ukraine, so I worked across creative fields — project manager and creative director for event agencies. I ran brand activations for Coca-Cola, Budweiser, Philip Morris, banks, and others. I also produced entertainment events — private parties with big budgets. It was a scene.</p>
-
-        <p>I worked in corporate law too, at a firm handling complex business disputes. Ukraine in those years was messy — corruption was normalized, and navigating business often meant navigating conflict. I learned a lot about strategy, negotiation, and how power really works.</p>
-
-        <p>I also ran operations for a car-rental company — during the UEFA events we operated over 100 vehicles. I built our internal security team and became our investigator, tracking down stolen cars through digital trails and traveling across Ukraine to recover them. Our success rate was about two out of three.</p>
-
-        <h2>Maidan, the Catapult, and Prison</h2>
-
-        <p>In winter 2013 the <span class="highlight">Maidan revolution</span> began. We protested against Yanukovych's corrupt regime and its anti-European direction. The protests lasted months. At times it turned violent.</p>
-
-        <p>At one point protestors needed a smoke wall — burning tires — to block snipers and police lines. We were already supporting Maidan with supplies. But people carrying tires to the barricades were targeted and shot. We thought, "We can throw them over with a catapult." I found blueprints online and brought them to our construction crew. They built a ballista-style catapult. We delivered it to Maidan. It worked. Tires flew to the fire without risking lives. It drew a lot of attention.</p>
-
+    <section class="section" id="maidan">
+      <span class="section-label">05 — Revolution</span>
+      <h2>Maidan, the Catapult, and Prison</h2>
+      <p>In winter 2013 the Maidan revolution began. We protested against Yanukovych's corrupt regime and its anti-European direction. The protests lasted months. At times it turned violent.</p>
+      <p>At one point protestors needed a smoke wall — burning tires — to block snipers and police lines. We were already supporting Maidan with supplies. But people carrying tires to the barricades were targeted and shot. We thought, "We can throw them over with a catapult." I found blueprints online and brought them to our construction crew. They built a ballista-style catapult. We delivered it to Maidan. It worked. Tires flew to the fire without risking lives. It drew a lot of attention.</p>
+      
+      <div class="highlight-card">
         <p>One morning, special forces raided my apartment. They tried to plant evidence — cash in my pockets that wasn't mine, a brick of white powder in my bag. I refused to touch it. They took me to detention. That night, on the evening news, the Minister of Internal Affairs announced I had been detained for extremist actions to overthrow the government. I realized it was serious.</p>
+      </div>
 
-        <p>I spent almost two months in jail. Six weeks later, Maidan won. The regime fled the country. Parliament voted to free political prisoners by name — including me. I was released.</p>
+      <p>I spent almost two months in jail. Six weeks later, Maidan won. The regime fled the country. Parliament voted to free political prisoners by name — including me. I was released.</p>
+      <p>But victory's power faded. Russia seized Crimea and started war in Donbas. Attention shifted. I received a summons to reopen the same case. My lawyer told me serious money had been set aside to fight us. I decided my country didn't love me. I got a US visa, flew to LA, and applied for asylum.</p>
+    </section>
 
-        <p>But victory's power faded. Russia seized Crimea and started war in Donbas. Attention shifted. I received a summons to reopen the same case. My lawyer told me millions had been set aside to fight us. I decided my country didn't love me. I got a US visa, flew to LA, and applied for asylum.</p>
+    <section class="section" id="us">
+      <span class="section-label">06 — America</span>
+      <h2>The US: Starting Over</h2>
+      <p>When I arrived, I thought I knew English. I couldn't speak at all. I worked immigrant jobs — moving, waiting tables. I flipped furniture from Craigslist. In New York I got a real estate license, tried rentals, went back to restaurants.</p>
+      <p>Then a salesperson from Allset walked into the restaurant where I worked. They were a foodtech company with a real sales team — six full-time reps doing door-to-door. They offered commission for anyone who could sign up restaurants. I took the opportunity.</p>
+      <p>Door-to-door wasn't working for me — my English was rough and the method was slow. So I hacked their system. I had a friend build a scraper to pull restaurant contacts from Yelp. I set up Outreach.io and created email sequences with a "legend" — subject lines about private dining reservations that got nearly perfect open rates. Restaurant managers always read those. The pitch followed: corporate clients want to dine at your restaurant, they spend more than average, join our platform.</p>
+      <p>The replies flooded in. But many wanted calls, and my English couldn't deliver the pitch. So I partnered with an American friend — a bartender I'd worked with — to take the calls. I trained him on the platform and we started closing deals at scale. We made $25,000 in commission. The CEO offered us both full-time positions.</p>
+      <p>Within three months, the two of us were closing around 60 deals a month. The entire six-person sales team had been averaging 30. We implemented the system across the team, and Allset built a dedicated lead-gen department around our approach. Within a year, they were closing 200 partnerships a month.</p>
+      <p>But the platform had a user problem. They were burning investment on $10 signup credits that people gamed for cheap lunches. Restaurants churned because they never saw real customers. I proposed a fix: redistribute credits strategically to drive traffic to new partners. I also had marketing create content featuring each new restaurant — their story, tagged on social. Churn dropped. Restaurant owners were happy. This same playbook helped us land chains who wanted to test one location first — we'd flood that location with users, prove the value, then sign the whole group.</p>
+      <p>Then I proposed something bigger: the corporate segment. Instead of just restaurants, we'd sign up companies who wanted to provide meal credits to employees. This gave us real, recurring users — not credit-gamers. It became a lifeline. The CEO used it to justify another funding round. Eight months after I joined as a commission-only rep with broken English, I was promoted to VP of Sales.</p>
+    </section>
 
-        <h2>The US: Starting Over</h2>
+    <section class="section" id="growth">
+      <span class="section-label">07 — Growth</span>
+      <h2>HAY! Straws and ofNature</h2>
+      <p>After Allset I joined HAY! Straws. We sold sustainable straws to major hospitality chains — Hilton, Hyatt, Marriott, Sysco — shipping containers worldwide and generating over $4M in sales across 2,000+ B2B accounts. I also invented a new product format: I snipped a piece of reed one day and realized it could work as a straw. We turned that into a scalable, manufacturable product that's now adopted globally.</p>
+      <p>I pitched McDonald's and Starbucks too, but they needed machine-manufactured straws at industrial scale. HAY! couldn't deliver that. The rejection planted a seed. I started exploring cellulose acetate — a biodegradable material that could be machine-produced. That research led me to found ofNature.</p>
+      <p>We raised $150K pre-seed, built manufacturing in Ukraine, and scaled to $120K/month in beta output. Then February 2022 happened. War killed the company. We lost team members. My cofounder fled. I told my investors I'd build another startup to cover their loss.</p>
+      <p>In 2025, McDonald's announced they're adopting cellulose acetate straws globally. The same material we pioneered. We were just too early.</p>
+    </section>
 
-        <p>When I arrived, I thought I knew English. I couldn't speak at all. I worked immigrant jobs — moving, waiting tables. I flipped furniture from Craigslist. In New York I got a real estate license, tried rentals, went back to restaurants.</p>
+    <section class="section" id="ventures">
+      <span class="section-label">08 — Building</span>
+      <h2>Ventures and Evatar</h2>
+      <p>During COVID we pivoted to selling PPE. I partnered with a friend and we won a $159M contract with New York State public schools. We also founded a sales agency and sold PR services, filling top placements and selling over $1M in a year.</p>
+      <p>At the same time I worked for Elegatto, a DTC brand. I joined to learn business end to end. We scaled from $100K to $3M ARR.</p>
+      <p>I developed concepts and MVPs for other ventures. With ÆOESS — a breathing IoT device I still believe in — I went furthest: built a hardware prototype, started software development, created the business plan and pitch deck. But without a medical cofounder and the credibility that background provides, it never got the traction it deserved.</p>
+      <p>Then Evatar — first validated in 2023 when I posted avatar videos with generated news and companies reached out wanting to use it. I partnered with my cofounder Nik. We built, launched, pivoted, had ups and downs. We're still going.</p>
 
-        <p>Then <span class="highlight">Allset</span> approached me to sign up the restaurant where I worked. That's how I joined. I went from commission-only rep to <span class="highlight">VP of Sales in eight months</span>.</p>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">160+</div>
+          <div class="stat-label">Users</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">1.6M</div>
+          <div class="stat-label">Monthly Impressions</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">$3M</div>
+          <div class="stat-label">Peak ARR (Elegatto)</div>
+        </div>
+      </div>
+    </section>
 
-        <p>After Allset I joined <span class="highlight">HAY! Straws</span> — selling sustainable straws to hospitality giants like McDonald's, Starbucks, and PepsiCo. I launched new products too — reed straws after snipping a piece from a plant and realizing it was a great alternative, and a cellulose acetate concept that eventually led me to found ofNature.</p>
+    <section class="section" id="shift">
+      <span class="section-label">09 — Transformation</span>
+      <h2>The Shift at 33</h2>
+      <p>My first 30 years were light. I didn't take things too seriously. I was good at whatever I got into, then left as soon as it wasn't fun — same with education and career. I went to three different universities and dropped out. Same with jobs.</p>
+      <p>I was always curious, learning on the go. My priorities until my 30s were creative flight and searching for myself. Career wasn't a priority. I wanted fun and love. I loved parties. I felt like the center, in VIP zones with beautiful people, dancing and enjoying myself. I'm not from a rich family; we never had enough money, yet I always paid for everyone, even with my last dollar. I wanted to feel rich, so I acted like one.</p>
+      <p>Around 33 something clicked. That lifestyle lost its shine. I became obsessed with building and getting things done. Parties and empty conversations became empty for real. I cut them out and started working 70–80 hours a week. Since then I've burned out countless times, but I keep rising.</p>
+    </section>
 
-        <p>During COVID we pivoted to selling PPE. I partnered with a friend and we won a <span class="highlight">$159M contract</span> with New York State public schools. We also founded a sales agency and sold PR services, filling top placements and selling over $1M in a year.</p>
+    <section class="section" id="work">
+      <span class="section-label">10 — Philosophy</span>
+      <h2>How I Work</h2>
+      <p>I connect dots across fields — film taught me story, sales taught me people, operations taught me systems, product lets me use all three. I prefer zero to one because it forces honesty. Either you make something real or you don't.</p>
+      
+      <div class="philosophy-card">
+        <div class="philosophy-label">What I Believe About AI</div>
+        <blockquote>People want less interfaces and more outcomes.</blockquote>
+      </div>
 
-        <p>At the same time I worked for <span class="highlight">Elegatto</span>, a DTC brand. I joined to learn business end to end. We scaled from $100K to $3M ARR.</p>
+      <p>This is how I build. I don't want to create another dashboard people have to learn. I want to build tools that do the work — that take intent and deliver results. The best interface is no interface. The best product is one that makes itself invisible while making your life better.</p>
+      <p>I fix the vibe in rooms because I can feel it. I forgive too much and I'm learning boundaries. I burn down and rise again. I do not quit.</p>
+      <p>I believe imagination is a muscle. Tools should help it grow. I believe in kindness, courage, and shipping.</p>
 
-        <p>Then war started in February 2022. It killed both ofNature and other projects I was building. We lost team members. My cofounder fled. I told my investors I'd build another startup to cover their loss.</p>
+      <div class="quote">
+        <blockquote>The embarrassment of failure is an underexplored emotion. Just go out there and make a fool of yourself.</blockquote>
+      </div>
+    </section>
 
-        <p>I also developed concepts and MVPs for other ventures. With <span class="highlight">ÆOESS</span> — a breathing IoT device I still believe in — I went furthest: built a hardware prototype, started software development, created the business plan and pitch deck. But without a medical cofounder and the credibility that background provides, it never got the traction it deserved.</p>
+  </main>
 
-        <p>Then <span class="highlight">Evatar</span> — first validated in 2023 when I posted avatar videos with generated news and companies reached out wanting to use it. I partnered with my cofounder Nik. We built, launched, pivoted, had ups and downs. We're still going.</p>
+  <footer class="footer-cta" id="contact">
+    <h3>Let's Connect</h3>
+    <p>Whether you want to collaborate, chat about ideas, or just say hello.</p>
+    <a href="index.html#contact" class="btn">
+      Get in Touch
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+      </svg>
+    </a>
+  </footer>
 
-        <h2>The Shift at 33</h2>
-
-        <p>My first 30 years were light. I didn't take things too seriously. I was good at whatever I got into, then left as soon as it wasn't fun — same with education and career. I went to three different universities and dropped out. Same with jobs.</p>
-
-        <p>I was always curious, learning on the go. My priorities until my 30s were creative flight and searching for myself. Career wasn't a priority. I wanted fun and love. I loved parties. I felt like the center, in VIP zones with beautiful people, dancing and enjoying myself. I'm not from a rich family; we never had enough money, yet I always paid for everyone, even with my last dollar. I wanted to feel rich, so I acted like one.</p>
-
-        <p>Around 33 something clicked. That lifestyle lost its shine. I became obsessed with building and getting things done. Parties and empty conversations became empty for real. I cut them out and started working 70–80 hours a week. Since then I've burned out countless times, but I keep rising.</p>
-
-        <h2>How I Work and What I Believe</h2>
-
-        <p>I connect dots across fields — film taught me story, sales taught me people, operations taught me systems, product lets me use all three. I prefer zero to one because it forces honesty. Either you make something real or you don't.</p>
-
-        <p>I fix the vibe in rooms because I can feel it. I forgive too much and I'm learning boundaries. I burn down and rise again. I do not quit.</p>
-
-        <p>I believe imagination is a muscle. Tools should help it grow. I believe in kindness, courage, and shipping.</p>
-
-        <p class="quote">"The embarrassment of failure is an underexplored emotion. Just go out there and make a fool of yourself."</p>
-
-        <a href="index.html#contact" class="back-link">→ Get in Touch</a>
-
-        <p style="font-size: 0.75rem; color: var(--text-muted); opacity: 0.6; margin-top: 4rem; font-style: italic;">This is a true story told to an LLM and interpreted by it. Some phrasings I didn't bother to fix — I just let my AI tell about me.</p>
-    </div>
-
-    <script>
-        // Theme Toggle
-        function toggleTheme() {
-            const body = document.body;
-            const themeIcon = document.getElementById('theme-icon');
-            const currentTheme = body.getAttribute('data-theme');
-            
-            if (currentTheme === 'dark') {
-                body.setAttribute('data-theme', 'bright');
-                themeIcon.textContent = '☀️';
-                localStorage.setItem('theme', 'bright');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = '🌙';
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-
-        // Load saved theme
-        window.addEventListener('load', () => {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            document.body.setAttribute('data-theme', savedTheme);
-            document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
-        });
-    </script>
 </body>
 </html>
