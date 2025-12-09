@@ -157,9 +157,9 @@
       }
     }
 
-    /* Main content */
+    /* Main content - WIDER for desktop */
     .content {
-      max-width: 720px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 0 2rem 6rem;
     }
@@ -180,9 +180,6 @@
     .section:nth-child(6) { animation-delay: 0.35s; }
     .section:nth-child(7) { animation-delay: 0.4s; }
     .section:nth-child(8) { animation-delay: 0.45s; }
-    .section:nth-child(9) { animation-delay: 0.5s; }
-    .section:nth-child(10) { animation-delay: 0.55s; }
-    .section:nth-child(11) { animation-delay: 0.6s; }
 
     @keyframes reveal {
       to {
@@ -211,7 +208,7 @@
 
     .section h2 {
       font-family: var(--font-display);
-      font-size: 2.25rem;
+      font-size: 2.5rem;
       font-weight: 400;
       margin-bottom: 1.5rem;
       line-height: 1.2;
@@ -220,7 +217,8 @@
     .section p {
       color: var(--text-secondary);
       margin-bottom: 1.25rem;
-      font-size: 1rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
     }
 
     .section p:last-child {
@@ -282,7 +280,7 @@
       margin-bottom: 0;
     }
 
-    /* Philosophy card - special styling */
+    /* Philosophy card */
     .philosophy-card {
       background: linear-gradient(135deg, var(--bg-card) 0%, rgba(212, 168, 83, 0.05) 100%);
       border: 1px solid var(--accent);
@@ -320,7 +318,7 @@
       margin: 0;
     }
 
-    /* Stats row */
+    /* Stats row - UPDATED with founder metrics */
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -400,84 +398,177 @@
       transform: translateX(4px);
     }
 
-    /* Responsive */
+    /* Large desktop */
+    @media (min-width: 1200px) {
+      .content {
+        max-width: 960px;
+      }
+      
+      .section h2 {
+        font-size: 2.75rem;
+      }
+      
+      .section p {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* Tablet */
+    @media (max-width: 900px) {
+      .content {
+        max-width: 100%;
+        padding: 0 1.5rem 4rem;
+      }
+
+      .section h2 {
+        font-size: 2rem;
+      }
+
+      .section p {
+        font-size: 1rem;
+      }
+    }
+
+    /* Mobile */
     @media (max-width: 640px) {
+      .nav {
+        padding: 1rem 1.25rem;
+      }
+
+      .hero {
+        padding: 4rem 1.5rem;
+        min-height: 80vh;
+      }
+
       .hero-title {
         font-size: 2.5rem;
       }
 
+      .hero-tagline {
+        font-size: 1rem;
+      }
+
+      .content {
+        padding: 0 1.25rem 3rem;
+      }
+
+      .section {
+        margin-bottom: 3rem;
+      }
+
       .section h2 {
         font-size: 1.75rem;
+        margin-bottom: 1rem;
+      }
+
+      .section p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 1rem;
+      }
+
+      .section-label {
+        font-size: 0.65rem;
       }
 
       .quote blockquote {
         font-size: 1.35rem;
       }
 
+      .quote::before {
+        font-size: 4rem;
+      }
+
+      .highlight-card {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+      }
+
+      .highlight-card p {
+        font-size: 0.95rem;
+      }
+
+      .philosophy-card {
+        padding: 1.5rem;
+      }
+
+      .philosophy-card blockquote {
+        font-size: 1.25rem;
+      }
+
       .stats {
         grid-template-columns: 1fr;
         gap: 2rem;
+        padding: 1.5rem 0;
+        margin: 2rem 0;
       }
 
-      .content {
-        padding: 0 1.5rem 4rem;
+      .stat-value {
+        font-size: 2rem;
+      }
+
+      .stat-label {
+        font-size: 0.7rem;
+      }
+
+      .footer-cta {
+        padding: 4rem 1.5rem;
+      }
+
+      .footer-cta h3 {
+        font-size: 1.5rem;
+      }
+
+      .btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.8rem;
       }
     }
 
-    /* Smooth scroll anchor offset */
-    .section[id] {
-      scroll-margin-top: 100px;
+    /* Very small screens */
+    @media (max-width: 400px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .section h2 {
+        font-size: 1.5rem;
+      }
+
+      .quote blockquote {
+        font-size: 1.15rem;
+      }
     }
   </style>
 </head>
 <body>
-
   <nav class="nav">
     <a href="index.html">← Back to Home</a>
-    <a href="#contact">Get in Touch</a>
+    <a href="index.html#contact">Get in Touch</a>
   </nav>
 
   <header class="hero">
-    <span class="hero-subtitle">Full Biography</span>
-    <h1 class="hero-title">The Story Behind<br>the <em>Work</em></h1>
-    <p class="hero-tagline">Polymath. Builder. Phoenix.</p>
+    <span class="hero-subtitle">The Story Behind the Work</span>
+    <h1 class="hero-title">From <em>Dreamer</em><br>to <em>Builder</em></h1>
+    <p class="hero-tagline">A journey through revolution, reinvention, and the relentless pursuit of building things that matter.</p>
   </header>
 
   <main class="content">
-
-    <section class="section" id="who">
-      <span class="section-label">01 — Identity</span>
+    <section class="section" id="intro">
+      <span class="section-label">01 — Character</span>
       <h2>Who I Am</h2>
-      <p>I consider myself a polymath. I know a little about everything. I'm very curious and very open, which sometimes makes people think I don't respect boundaries, especially when we first meet. I'm passionate about information — probably because I'm neurodivergent and have too many thoughts happening at once. I'm obsessed with the human mind's ability to fantasize and make stories. Whether something is true or not, theories and hypotheses capture my imagination. I believe my imagination is borderless.</p>
-      <p>I'm into alternative history, fringe theories, the stuff most people dismiss. Being into imagination doesn't mean I believe everything — I just look at it differently. Belief is a kind of program; I like to collect information I might connect to something later.</p>
-      <p>I'm passionate about history, astronomy, physics, neurology — basically human knowledge. I'm not an expert in everything, but I do believe I have a deep understanding of many concepts.</p>
-      <p>My brain is always trying to interpret and understand things. I pull things apart and put them back together so I know what they're made of, how they work, what else they can do, and what's overlooked. I understand mechanics, quantum physics, computers, even LLM system design and architecture. I understand algorithms and code, though not well enough to write production code. What's worse is I often forget words, which makes me stumble when I describe concepts and can't reference the right term. That can make me shy even though I can definitely explain the ideas.</p>
-      <p>I'm an introverted extrovert. It's odd — I'm very outgoing when I'm around people, but I mostly choose to spend time alone. It's rare to meet people who are as excited to engage with my salad of mixed thoughts as I am. I'm often "too much," so many of the most interesting conversations happen in my head. Still, there are people who match that energy — people who get excited about ideas, who want to go deep instead of staying shallow.</p>
-      <p>I play chess a lot — bullet games, probably a couple dozen a day. It's a replacement for social media scrolling and also a safe space. It's how I check my brain activity and clarity. If I play clean, finish before the clock, and win, I know I'm in shape.</p>
-    </section>
-
-    <section class="section" id="sensitive">
-      <span class="section-label">02 — Perception</span>
-      <h2>The Sensitive Sweetheart in Disguise</h2>
-      <p>I joke that there's a 13-year-old girl living inside me — I cry at touching moments in films, at kindness, at old couples holding hands. I'm very sensitive, and I love that about myself. But I look like the opposite. People assume I'm cocky or intimidating before they know me. Many men — especially "alpha" types — get weird around me simply because I'm open, I start conversations, and I ask questions. They feel like I'm trying to dominate, but I'm not. It's just my face combined with the fact that I hate awkwardness.</p>
-      <p>People are awkward. They overthink boundaries in odd ways. I always feel people's reactions and emotions — the "vibe." I'm very sensitive to it. That's why I talk to everyone: to fix the vibe, the energetic bond we create when we're close.</p>
-    </section>
-
-    <section class="section" id="resilience">
-      <span class="section-label">03 — Resilience</span>
-      <h2>Maybe Too Much</h2>
+      <p>I might look cocky, but I'm not. I'm sensitive, deeply empathetic and often misread — it's ironic, because I shaved my curls at 22 just to be taken seriously. I'm a polymath: neurodivergent, curious about everything from quantum physics to alternative history and esoteric philosophy. My brain constantly takes things apart and puts them back together.</p>
       
       <div class="quote">
-        <blockquote>I'm the phoenix. I've burned to ashes and come back many times.</blockquote>
+        <blockquote>I don't give up — not on belief, not on my character, not on people.</blockquote>
       </div>
-
-      <p>I push beyond normal limits. I take risks and make sacrifices that people think are too much. I have a different endurance threshold — not physical pain, but how much I can handle emotionally. When I started building my startup I invested everything in it, even at the cost of my mental health. Instead of paying for an apartment and personal bills, I risked homelessness and ate less so startup bills were covered. People left me for it, but I continued.</p>
+      
       <p>I don't give up — not on belief, not on my character, not on people. Even when I was betrayed by close friends and partners, I didn't change who I am. I try to be kind and altruistic — yes, that's its own kind of ego — and it's built into my beliefs.</p>
       <p>I forgive people. I don't get angry, which is a problem because instead of restoring myself and setting boundaries, I digest everything and keep it inside. Worse, forgiving too fast lets people do it again. It's not healthy. But it's not easy to break me.</p>
     </section>
 
     <section class="section" id="ukraine">
-      <span class="section-label">04 — Origins</span>
+      <span class="section-label">02 — Origins</span>
       <h2>Early Life in Ukraine</h2>
       <p>My parents are extremely educated and honest. My father has near-encyclopedic knowledge. My mother built social projects — a mental health hotline, HIV and TB programs, rehab programs. That's where my values come from.</p>
       <p>In my early career I worked in TV and wanted to become a director, so I studied film directing. There wasn't a real film industry in Ukraine, so I worked across creative fields — project manager and creative director for event agencies. I ran brand activations for Coca-Cola, Budweiser, Philip Morris, banks, and others. I also produced entertainment events — private parties with big budgets. It was a scene.</p>
@@ -486,7 +577,7 @@
     </section>
 
     <section class="section" id="maidan">
-      <span class="section-label">05 — Revolution</span>
+      <span class="section-label">03 — Revolution</span>
       <h2>Maidan, the Catapult, and Prison</h2>
       <p>In winter 2013 the Maidan revolution began. We protested against Yanukovych's corrupt regime and its anti-European direction. The protests lasted months. At times it turned violent.</p>
       <p>At one point protestors needed a smoke wall — burning tires — to block snipers and police lines. We were already supporting Maidan with supplies. But people carrying tires to the barricades were targeted and shot. We thought, "We can throw them over with a catapult." I found blueprints online and brought them to our construction crew. They built a ballista-style catapult. We delivered it to Maidan. It worked. Tires flew to the fire without risking lives. It drew a lot of attention.</p>
@@ -500,7 +591,7 @@
     </section>
 
     <section class="section" id="us">
-      <span class="section-label">06 — America</span>
+      <span class="section-label">04 — America</span>
       <h2>The US: Starting Over</h2>
       <p>When I arrived, I thought I knew English. I couldn't speak at all. I worked immigrant jobs — moving, waiting tables. I flipped furniture from Craigslist. In New York I got a real estate license, tried rentals, went back to restaurants.</p>
       <p>Then a salesperson from Allset walked into the restaurant where I worked. They were a foodtech company with a real sales team — six full-time reps doing door-to-door. They offered commission for anyone who could sign up restaurants. I took the opportunity.</p>
@@ -512,7 +603,7 @@
     </section>
 
     <section class="section" id="growth">
-      <span class="section-label">07 — Growth</span>
+      <span class="section-label">05 — Growth</span>
       <h2>HAY! Straws and ofNature</h2>
       <p>After Allset I joined HAY! Straws. We sold sustainable straws to major hospitality chains — Hilton, Hyatt, Marriott, Sysco — shipping containers worldwide and generating over $4M in sales across 2,000+ B2B accounts. I also invented a new product format: I snipped a piece of reed one day and realized it could work as a straw. We turned that into a scalable, manufacturable product that's now adopted globally.</p>
       <p>I pitched McDonald's and Starbucks too, but they needed machine-manufactured straws at industrial scale. HAY! couldn't deliver that. The rejection planted a seed. I started exploring cellulose acetate — a biodegradable material that could be machine-produced. That research led me to found ofNature.</p>
@@ -521,7 +612,7 @@
     </section>
 
     <section class="section" id="ventures">
-      <span class="section-label">08 — Building</span>
+      <span class="section-label">06 — Building</span>
       <h2>Ventures and Evatar</h2>
       <p>During COVID we pivoted to selling PPE. I partnered with a friend and we won a $159M contract with New York State public schools. We also founded a sales agency and sold PR services, filling top placements and selling over $1M in a year.</p>
       <p>At the same time I worked for Elegatto, a DTC brand. I joined to learn business end to end. We scaled from $100K to $3M ARR.</p>
@@ -530,22 +621,22 @@
 
       <div class="stats">
         <div class="stat">
-          <div class="stat-value">160+</div>
-          <div class="stat-label">Users</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">1.6M</div>
-          <div class="stat-label">Monthly Impressions</div>
+          <div class="stat-value">6×</div>
+          <div class="stat-label">Founder / Co-Founder</div>
         </div>
         <div class="stat">
           <div class="stat-value">$3M</div>
           <div class="stat-label">Peak ARR (Elegatto)</div>
         </div>
+        <div class="stat">
+          <div class="stat-value">VP</div>
+          <div class="stat-label">Sales (Allset)</div>
+        </div>
       </div>
     </section>
 
     <section class="section" id="shift">
-      <span class="section-label">09 — Transformation</span>
+      <span class="section-label">07 — Transformation</span>
       <h2>The Shift at 33</h2>
       <p>My first 30 years were light. I didn't take things too seriously. I was good at whatever I got into, then left as soon as it wasn't fun — same with education and career. I went to three different universities and dropped out. Same with jobs.</p>
       <p>I was always curious, learning on the go. My priorities until my 30s were creative flight and searching for myself. Career wasn't a priority. I wanted fun and love. I loved parties. I felt like the center, in VIP zones with beautiful people, dancing and enjoying myself. I'm not from a rich family; we never had enough money, yet I always paid for everyone, even with my last dollar. I wanted to feel rich, so I acted like one.</p>
@@ -553,7 +644,7 @@
     </section>
 
     <section class="section" id="work">
-      <span class="section-label">10 — Philosophy</span>
+      <span class="section-label">08 — Philosophy</span>
       <h2>How I Work</h2>
       <p>I connect dots across fields — film taught me story, sales taught me people, operations taught me systems, product lets me use all three. I prefer zero to one because it forces honesty. Either you make something real or you don't.</p>
       
