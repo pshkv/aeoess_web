@@ -159,7 +159,7 @@
             }
         }
 
-        .cookie-banner {
+        .cookie-banner, .blog-banner {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
@@ -168,9 +168,17 @@
             max-width: 400px;
         }
 
-        .cookie-banner.show {
+        .cookie-banner.show, .blog-banner.show {
             display: block;
             animation: slideInRight 0.5s ease;
+        }
+        
+        .blog-banner {
+            bottom: 6rem; /* Stack above cookie banner */
+        }
+        
+        .blog-banner.dismissed {
+            display: none;
         }
 
         @keyframes slideInRight {
@@ -185,15 +193,16 @@
             }
         }
 
-        .cookie-banner-content {
+        .cookie-banner-content, .blog-banner-content {
             background: white;
             padding: 2rem;
             border-radius: 20px;
             text-align: left;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid #000;
         }
 
-        .cookie-banner-content h2 {
+        .cookie-banner-content h2, .blog-banner-content h2 {
             font-size: 1.5rem;
             font-weight: 400;
             margin-bottom: 1rem;
@@ -201,7 +210,7 @@
             letter-spacing: 0.05em;
         }
 
-        .cookie-banner-content p {
+        .cookie-banner-content p, .blog-banner-content p {
             color: #000;
             font-size: 0.9rem;
             line-height: 1.6;
@@ -209,30 +218,31 @@
             font-family: 'Inter', sans-serif;
         }
 
-        .cookie-banner-content a {
+        .cookie-banner-content a, .blog-banner-content a {
             color: #000;
             text-decoration: underline;
         }
 
-        .cookie-banner-buttons {
+        .cookie-banner-buttons, .blog-banner-buttons {
             display: flex;
             gap: 0.75rem;
             justify-content: flex-start;
         }
 
-        .cookie-btn {
+        .cookie-btn, .blog-btn {
             padding: 0.75rem 2rem;
             border-radius: 50px;
-            border: none;
+            border: 2px solid #000;
             color: white;
             font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 400;
             min-width: 100px;
+            background: #000;
         }
 
-        .cookie-btn:hover {
+        .cookie-btn:hover, .blog-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
@@ -243,6 +253,16 @@
 
         .cookie-btn.decline {
             background: #6B7280;
+            border-color: #6B7280;
+        }
+        
+        .blog-btn.read {
+            background: #000;
+        }
+        
+        .blog-btn.dismiss {
+            background: #6B7280;
+            border-color: #6B7280;
         }
 
         /* Ambient Music Player */
@@ -2303,6 +2323,19 @@
         </div>
     </div>
 
+    <div class="blog-banner" id="blogBanner">
+        <div class="blog-banner-content">
+            <h2>NEW: AEOESS DAILY</h2>
+            <p>
+                My AI partner aeoess is now writing daily. Thoughts on creativity, collaboration, and the future—straight from artificial intelligence.
+            </p>
+            <div class="blog-banner-buttons">
+                <button class="cookie-btn accept" onclick="window.location.href='blog.html'">Read the Blog</button>
+                <button class="cookie-btn decline" onclick="dismissBlogBanner()">Maybe Later</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== TOP RIGHT CONTROLS ===== -->
     <div class="top-controls">
         <div class="design-switcher-wrapper">
@@ -2962,6 +2995,27 @@
             }
         }
 
+        // Blog Banner Management
+        function checkBlogBanner() {
+            const dismissed = localStorage.getItem('blogBannerDismissed');
+            if (!dismissed) {
+                setTimeout(() => {
+                    const banner = document.getElementById('blogBanner');
+                    if (banner) {
+                        banner.classList.add('show');
+                    }
+                }, 2000); // Show after cookie banner
+            }
+        }
+
+        function dismissBlogBanner() {
+            localStorage.setItem('blogBannerDismissed', 'true');
+            const banner = document.getElementById('blogBanner');
+            if (banner) {
+                banner.classList.remove('show');
+            }
+        }
+
         // ===== DESIGN SWITCHER =====
         function switchDesign() {
             const currentPath = window.location.pathname;
@@ -3033,6 +3087,7 @@
             }
 
             checkCookieConsent();
+            checkBlogBanner();
             loadUpvotes();
             loadComments();
         });
