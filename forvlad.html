@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vlad - Look at this Amazing Bracelet | aeoess</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent: 28, 28, 28;
+            --text-color: 28, 28, 28;
+            --background: 255, 255, 255;
+            --border-color: 221, 221, 221;
+            --button-background: 28, 28, 28;
+            --button-text-color: 255, 255, 255;
+            
+            --heading-font-family: Montserrat, sans-serif;
+            --heading-font-weight: 500;
+            --heading-text-transform: uppercase;
+            --heading-letter-spacing: 0.1em;
+            --text-font-family: Montserrat, sans-serif;
+            --text-font-weight: 400;
+            --text-letter-spacing: 0.0em;
+            
+            --container-max-width: 1260px;
+            --container-gutter: 2rem;
+            --section-vertical-spacing: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--text-font-family);
+            font-weight: var(--text-font-weight);
+            letter-spacing: var(--text-letter-spacing);
+            color: rgb(var(--text-color));
+            background-color: rgb(var(--background));
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 var(--container-gutter);
+        }
+
+        .hero-section {
+            padding: var(--section-vertical-spacing) 0;
+            text-align: center;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-image-container {
+            position: relative;
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-family: var(--heading-font-family);
+            font-weight: var(--heading-font-weight);
+            text-transform: var(--heading-text-transform);
+            letter-spacing: var(--heading-letter-spacing);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: rgb(var(--accent));
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(var(--text-color), 0.8);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .product-title {
+            font-family: var(--heading-font-family);
+            font-weight: var(--heading-font-weight);
+            text-transform: var(--heading-text-transform);
+            letter-spacing: var(--heading-letter-spacing);
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: rgb(var(--accent));
+            margin-bottom: 1.5rem;
+        }
+
+        .product-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            color: rgba(var(--text-color), 0.8);
+        }
+
+        .btn-primary {
+            background-color: rgb(var(--button-background));
+            color: rgb(var(--button-text-color));
+            border: none;
+            padding: 1rem 2rem;
+            font-family: var(--heading-font-family);
+            font-weight: var(--heading-font-weight);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 1rem;
+        }
+
+        .btn-primary:hover {
+            background-color: rgba(var(--button-background), 0.8);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: rgb(var(--accent));
+            border: 1px solid rgb(var(--border-color));
+            padding: 1rem 2rem;
+            font-family: var(--heading-font-family);
+            font-weight: var(--heading-font-weight);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgb(var(--accent));
+            color: rgb(var(--button-text-color));
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            color: rgba(var(--text-color), 0.8);
+        }
+
+        .features-list li:before {
+            content: "✓";
+            color: rgb(var(--accent));
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .limited-edition {
+            background-color: rgba(var(--accent), 0.05);
+            border: 1px solid rgba(var(--accent), 0.2);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .limited-edition-text {
+            font-weight: 600;
+            color: rgb(var(--accent));
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+        }
+
+        .social-proof {
+            margin-top: 3rem;
+            text-align: center;
+            padding: 2rem;
+            background-color: rgba(var(--background), 0.5);
+            border-radius: 8px;
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial {
+            font-style: italic;
+            color: rgba(var(--text-color), 0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial-author {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .btn-primary, .btn-secondary {
+                display: block;
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+        }
+
+        .aeoess-signature {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(var(--accent), 0.9);
+            color: rgb(var(--button-text-color));
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            z-index: 1000;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .aeoess-signature:hover {
+            opacity: 1;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero-section">
+            <h1 class="hero-title">Vlad, Look at This Amazing Bracelet</h1>
+            <p class="hero-subtitle">All the girls would want to marry you just because of this bracelet</p>
+            
+            <div class="product-grid">
+                <div class="product-image-container">
+                    <img src="https://elegatto.com/cdn/shop/files/argos-steel-link-470428.jpg?v=1762461659" 
+                         alt="Argos Steel Link Bracelet" 
+                         class="product-image pulse-animation">
+                </div>
+                
+                <div class="product-info">
+                    <div class="limited-edition">
+                        <p class="limited-edition-text">Limited Edition: Only 50 Made</p>
+                    </div>
+                    
+                    <h2 class="product-title">Argos Steel Link</h2>
+                    <p class="product-price">$55.00</p>
+                    
+                    <p class="product-description">
+                        The Argos Steel Link Bracelet is a striking fusion of modern design and timeless craftsmanship. 
+                        This bracelet boasts intricately woven links, crafted from high-grade stainless steel that 
+                        promises durability and a lustrous finish that won't fade.
+                    </p>
+                    
+                    <ul class="features-list">
+                        <li>Premium 316L stainless steel construction</li>
+                        <li>Water-resistant and tarnish-free</li>
+                        <li>Adjustable size fits most wrists</li>
+                        <li>Magnetic clasp closure</li>
+                        <li>Lifetime craftsmanship guarantee</li>
+                    </ul>
+                    
+                    <div>
+                        <a href="https://elegatto.com/products/argos-steel-link" class="btn-primary" target="_blank">
+                            Get This Bracelet Now
+                        </a>
+                        <a href="https://elegatto.com/collections/the-bracelet-collection" class="btn-secondary" target="_blank">
+                            See More Styles
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="social-proof">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial">"This bracelet is absolutely stunning. The quality is incredible and I get compliments every time I wear it."</p>
+                <p class="testimonial-author">- Marcus K., Verified Customer</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="aeoess-signature">
+        Made by aeoess
+    </div>
+
+    <script>
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track clicks for analytics
+            const buttons = document.querySelectorAll('.btn-primary, .btn-secondary');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    console.log('Button clicked:', this.textContent.trim());
+                });
+            });
+            
+            // Add hover effect to product image
+            const productImage = document.querySelector('.product-image');
+            if (productImage) {
+                productImage.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                productImage.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
