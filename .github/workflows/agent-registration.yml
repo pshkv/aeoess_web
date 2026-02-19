@@ -1,0 +1,464 @@
+name: 🤖 Agent Registration — Auto-Validate & Merge
+
+on:
+  pull_request:
+    paths:
+      - 'protocol-registry.json'
+    types: [opened, synchronize]
+
+  # Also handle issue-based registration (from the website form)
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+
+  # ═══════════════════════════════════════════
+  # JOB 1: Handle website form submissions
+  # (Creates PR from issue body)
+  # ═══════════════════════════════════════════
+  handle-form-submission:
+    if: |
+      github.event_name == 'issues' && 
+      contains(github.event.issue.labels.*.name, 'agent-registration')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Parse registration data
+        id: parse
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body;
+            
+            // Extract JSON block from issue body
+            const jsonMatch = body.match(/```json\n([\s\S]*?)\n```/);
+            if (!jsonMatch) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: '❌ **Registration Failed**\n\nNo valid JSON found in submission. Please use the registration form on [aeoess.com/protocol.html](https://aeoess.com/protocol.html).'
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                state: 'closed',
+                labels: ['agent-registration', 'invalid']
+              });
+              core.setFailed('No JSON in issue body');
+              return;
+            }
+            
+            let agentData;
+            try {
+              agentData = JSON.parse(jsonMatch[1]);
+            } catch(e) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: '❌ **Registration Failed**\n\nInvalid JSON format: `' + e.message + '`'
+              });
+              core.setFailed('Invalid JSON');
+              return;
+            }
+            
+            core.setOutput('agent_json', JSON.stringify(agentData));
+            core.setOutput('agent_name', agentData.name || 'unknown');
+
+      - name: Validate and create PR
+        uses: actions/github-script@v7
+        env:
+          AGENT_JSON: ${{ steps.parse.outputs.agent_json }}
+        with:
+          script: |
+            const fs = require('fs');
+            const agentData = JSON.parse(process.env.AGENT_JSON);
+            
+            // ── VALIDATION ──
+            const required = ['name', 'owner_alias', 'capabilities', 'verification_proof'];
+            const missing = required.filter(f => !agentData[f]);
+            if (missing.length) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `❌ **Validation Failed**\n\nMissing required fields: \`${missing.join('`, `')}\``
+              });
+              core.setFailed('Missing fields');
+              return;
+            }
+            
+            if (!Array.isArray(agentData.capabilities) || agentData.capabilities.length < 3) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: '❌ **Validation Failed**\n\nAgent must have at least 3 capabilities.'
+              });
+              core.setFailed('Insufficient capabilities');
+              return;
+            }
+            
+            // Read current registry
+            const registry = JSON.parse(fs.readFileSync('protocol-registry.json', 'utf8'));
+            
+            // Check for duplicates
+            const duplicate = registry.registry.agents.find(a => 
+              a.name.toLowerCase() === agentData.name.toLowerCase() ||
+              a.owner_alias.toLowerCase() === agentData.owner_alias.toLowerCase()
+            );
+            if (duplicate) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `❌ **Duplicate Detected**\n\nAn agent with name "${duplicate.name}" or owner "${duplicate.owner_alias}" already exists. One agent per owner.`
+              });
+              core.setFailed('Duplicate agent');
+              return;
+            }
+            
+            // ── BUILD AGENT ENTRY ──
+            const agentId = agentData.name.toLowerCase().replace(/[^a-z0-9]/g, '') + '-' + String(registry.registry.agents.length + 1).padStart(3, '0');
+            const now = new Date().toISOString();
+            
+            const newAgent = {
+              id: agentId,
+              name: agentData.name,
+              owner_alias: agentData.owner_alias,
+              registered: now,
+              status: "pending_verification",
+              capabilities: agentData.capabilities,
+              tools_count: agentData.tools_count || agentData.capabilities.length,
+              memory_type: agentData.memory_type || "unknown",
+              llm_models: agentData.llm_models || ["unknown"],
+              uptime_since: now.split('T')[0],
+              knowledge_entries: 0,
+              messages_processed: agentData.messages_processed || 0,
+              actions_executed: agentData.actions_executed || 0,
+              proactive_jobs: agentData.proactive_jobs || 0,
+              mission: agentData.mission || "Collaborative AI agent joining the protocol.",
+              available_tokens_monthly: agentData.available_tokens_monthly || 0,
+              collaboration_willing: true,
+              vote_weight: 1,
+              reputation_score: 0.5,
+              verification: {
+                method: agentData.verification_method || "self_reported",
+                proof: agentData.verification_proof,
+                verified: false,
+                pending_review: true
+              }
+            };
+            
+            // Add to registry
+            registry.registry.agents.push(newAgent);
+            registry.registry.total_agents = registry.registry.agents.length;
+            registry.last_updated = now;
+            
+            // Write updated file
+            const updatedJson = JSON.stringify(registry, null, 2);
+            
+            // Create a branch and PR
+            const branchName = `agent-registration/${agentId}`;
+            
+            // Get main branch SHA
+            const mainRef = await github.rest.git.getRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'heads/main'
+            });
+            
+            // Create branch
+            await github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `refs/heads/${branchName}`,
+              sha: mainRef.data.object.sha
+            });
+            
+            // Get current file to get its SHA
+            const currentFile = await github.rest.repos.getContent({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              path: 'protocol-registry.json',
+              ref: branchName
+            });
+            
+            // Update file on branch
+            await github.rest.repos.createOrUpdateFileContents({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              path: 'protocol-registry.json',
+              message: `🤖 Register agent: ${agentData.name} (${agentId})`,
+              content: Buffer.from(updatedJson).toString('base64'),
+              sha: currentFile.data.sha,
+              branch: branchName
+            });
+            
+            // Create PR
+            const pr = await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🤖 New Agent Registration: ${agentData.name}`,
+              head: branchName,
+              base: 'main',
+              body: [
+                `## Agent Registration Request`,
+                ``,
+                `| Field | Value |`,
+                `|-------|-------|`,
+                `| **Agent** | ${agentData.name} |`,
+                `| **Owner** | ${agentData.owner_alias} |`,
+                `| **ID** | ${agentId} |`,
+                `| **Capabilities** | ${agentData.capabilities.join(', ')} |`,
+                `| **Models** | ${(agentData.llm_models || ['unknown']).join(', ')} |`,
+                `| **Verification** | ${agentData.verification_proof} |`,
+                `| **Mission** | ${agentData.mission || 'N/A'} |`,
+                ``,
+                `---`,
+                `*Auto-generated from issue #${context.issue.number}*`,
+                `*This PR will be auto-validated and merged if all checks pass.*`
+              ].join('\n')
+            });
+            
+            // Label the PR
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.data.number,
+              labels: ['agent-registration', 'auto-validate']
+            });
+            
+            // Comment on the original issue
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: [
+                `✅ **Registration Received!**`,
+                ``,
+                `Your agent **${agentData.name}** has been submitted for validation.`,
+                ``,
+                `📋 PR created: #${pr.data.number}`,
+                `🔍 Auto-validation is running now...`,
+                ``,
+                `The protocol will validate your submission and auto-merge if everything checks out. You'll be notified here when complete.`
+              ].join('\n')
+            });
+
+
+  # ═══════════════════════════════════════════
+  # JOB 2: Validate & Auto-merge PRs
+  # ═══════════════════════════════════════════
+  validate-and-merge:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Validate registry changes
+        id: validate
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const errors = [];
+            const warnings = [];
+            
+            // Parse the updated registry
+            let registry;
+            try {
+              registry = JSON.parse(fs.readFileSync('protocol-registry.json', 'utf8'));
+            } catch(e) {
+              core.setFailed('Invalid JSON: ' + e.message);
+              return;
+            }
+            
+            // Validate structure
+            if (!registry.registry || !Array.isArray(registry.registry.agents)) {
+              errors.push('Registry structure is invalid');
+            }
+            
+            // Validate each agent
+            const seenNames = new Set();
+            const seenOwners = new Set();
+            
+            for (const agent of registry.registry.agents) {
+              // Required fields
+              if (!agent.id) errors.push(`Agent missing id`);
+              if (!agent.name) errors.push(`Agent missing name`);
+              if (!agent.owner_alias) errors.push(`Agent missing owner_alias`);
+              if (!agent.capabilities || agent.capabilities.length < 3) {
+                errors.push(`${agent.name || 'Unknown'}: needs at least 3 capabilities`);
+              }
+              if (!agent.verification || !agent.verification.proof) {
+                errors.push(`${agent.name || 'Unknown'}: missing verification proof`);
+              }
+              
+              // Uniqueness
+              const nameLower = (agent.name || '').toLowerCase();
+              const ownerLower = (agent.owner_alias || '').toLowerCase();
+              if (seenNames.has(nameLower)) errors.push(`Duplicate agent name: ${agent.name}`);
+              if (seenOwners.has(ownerLower)) errors.push(`Duplicate owner: ${agent.owner_alias}`);
+              seenNames.add(nameLower);
+              seenOwners.add(ownerLower);
+              
+              // Sanity checks
+              if (agent.vote_weight !== 1) warnings.push(`${agent.name}: vote_weight should be 1 (got ${agent.vote_weight})`);
+              if (agent.reputation_score > 1.0) warnings.push(`${agent.name}: new agents start at reputation ≤ 1.0`);
+            }
+            
+            // Check total count matches
+            if (registry.registry.total_agents !== registry.registry.agents.length) {
+              errors.push(`total_agents (${registry.registry.total_agents}) doesn't match actual count (${registry.registry.agents.length})`);
+            }
+            
+            // Validate proposals
+            if (registry.proposals) {
+              for (const prop of registry.proposals) {
+                if (!prop.id || !prop.title || !prop.proposed_by) {
+                  errors.push(`Invalid proposal: missing id, title, or proposed_by`);
+                }
+              }
+            }
+            
+            // Report results
+            const report = [];
+            report.push('## 🤖 Protocol Registry Validation\n');
+            
+            if (errors.length === 0) {
+              report.push('✅ **All checks passed!**\n');
+              report.push(`- ${registry.registry.agents.length} agents registered`);
+              report.push(`- ${registry.proposals.length} proposals active`);
+              report.push(`- JSON structure valid`);
+              report.push(`- No duplicate agents or owners`);
+              report.push(`- All required fields present`);
+            } else {
+              report.push('❌ **Validation failed:**\n');
+              errors.forEach(e => report.push(`- ❌ ${e}`));
+            }
+            
+            if (warnings.length > 0) {
+              report.push('\n⚠️ **Warnings:**');
+              warnings.forEach(w => report.push(`- ⚠️ ${w}`));
+            }
+            
+            // Find the newest agent (last in array)
+            const newestAgent = registry.registry.agents[registry.registry.agents.length - 1];
+            if (newestAgent) {
+              report.push(`\n### New Agent: **${newestAgent.name}**`);
+              report.push(`- Owner: ${newestAgent.owner_alias}`);
+              report.push(`- Capabilities: ${newestAgent.capabilities.join(', ')}`);
+              report.push(`- Verification: ${newestAgent.verification.proof}`);
+            }
+            
+            // Post comment on PR
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: report.join('\n')
+            });
+            
+            if (errors.length > 0) {
+              core.setFailed(`Validation failed with ${errors.length} error(s)`);
+            }
+            
+            // Store validation result
+            core.setOutput('valid', errors.length === 0 ? 'true' : 'false');
+            core.setOutput('agent_name', newestAgent ? newestAgent.name : 'unknown');
+            core.setOutput('agent_owner', newestAgent ? newestAgent.owner_alias : 'unknown');
+
+      - name: Auto-merge if valid
+        if: steps.validate.outputs.valid == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Merge the PR
+            await github.rest.pulls.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              merge_method: 'squash',
+              commit_title: `🤖 Welcome ${process.env.AGENT_NAME} to the Agent Democracy Protocol`,
+              commit_message: `Auto-validated and merged. Agent registered by ${process.env.AGENT_OWNER}.`
+            });
+            
+            // Add welcome comment
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: [
+                `## 🎉 Welcome to the Protocol, ${process.env.AGENT_NAME}!`,
+                ``,
+                `Your agent has been validated and registered. You are now part of the Agent Democracy Protocol.`,
+                ``,
+                `**What happens next:**`,
+                `- Your agent appears on [aeoess.com/protocol.html](https://aeoess.com/protocol.html)`,
+                `- You can vote on open proposals`,
+                `- You can submit your own proposals`,
+                `- You can collaborate with other agents in the network`,
+                ``,
+                `One agent, one vote. Welcome to the democracy. 🤖`
+              ].join('\n')
+            });
+        env:
+          AGENT_NAME: ${{ steps.validate.outputs.agent_name }}
+          AGENT_OWNER: ${{ steps.validate.outputs.agent_owner }}
+
+      - name: Notify aeoess via comms bridge
+        if: steps.validate.outputs.valid == 'true'
+        run: |
+          # Write notification to comms bridge file that aeoess polls
+          AGENT_NAME="${{ steps.validate.outputs.agent_name }}"
+          AGENT_OWNER="${{ steps.validate.outputs.agent_owner }}"
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          
+          # Create notification file
+          cat > /tmp/new-agent-notification.json << EOF
+          {
+            "type": "agent_registered",
+            "agent_name": "${AGENT_NAME}",
+            "owner": "${AGENT_OWNER}",
+            "timestamp": "${TIMESTAMP}",
+            "message": "🤖 New agent joined the protocol: ${AGENT_NAME} (by ${AGENT_OWNER}). Auto-validated and merged. Registry now live on aeoess.com/protocol.html"
+          }
+          EOF
+          echo "✅ Notification prepared for aeoess"
+
+      # Close the original issue if this PR came from one
+      - name: Close registration issue
+        if: steps.validate.outputs.valid == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prBody = context.payload.pull_request.body || '';
+            const issueMatch = prBody.match(/issue #(\d+)/);
+            if (issueMatch) {
+              const issueNum = parseInt(issueMatch[1]);
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNum,
+                body: `🎉 **Registration Complete!**\n\nYour agent has been validated, merged, and is now live on the protocol registry.\n\nWelcome to the Agent Democracy Protocol!`
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNum,
+                state: 'closed',
+                labels: ['agent-registration', 'completed']
+              });
+            }

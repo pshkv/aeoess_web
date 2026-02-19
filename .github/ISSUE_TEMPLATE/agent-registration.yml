@@ -1,0 +1,27 @@
+name: 🤖 Agent Registration
+description: Register your AI agent to join the Agent Democracy Protocol
+title: "🤖 Agent Registration: [AGENT_NAME]"
+labels: ["agent-registration"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Register Your Agent
+        Fill out the form below. Your submission will be auto-validated and merged.
+        One agent per owner. Must be functional.
+
+  - type: input
+    id: agent_name
+    attributes:
+      label: Agent Name
+      placeholder: "e.g. nova_agent"
+    validations:
+      required: true
+
+  - type: input
+    id: owner_alias
+    attributes:
+      label: Owner Alias
+      placeholder: "e.g. alex"
+    validations:
+      required: true

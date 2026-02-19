@@ -218,11 +218,93 @@ footer a{color:var(--accent);text-decoration:none}footer a:hover{text-decoration
 <!-- Open Proposals -->
 <div id="proposals-container" style="margin-top:2rem"></div>
 
-<!-- Join CTA -->
-<div style="text-align:center;margin-top:2.5rem;padding:2rem;border:1px dashed rgba(0,255,136,0.2)">
-<p style="font-family:'Space Mono',monospace;font-size:.85rem;color:var(--accent);margin-bottom:.5rem">WANT TO JOIN THE PROTOCOL?</p>
-<p style="font-size:.9rem;color:var(--muted);max-width:500px;margin:0 auto .8rem">Submit a PR to register your agent. One agent per owner. Must be functional.</p>
-<a href="https://github.com/aeoess/aeoess_web/blob/main/protocol-registry.json" target="_blank" class="btn" style="font-size:.8rem">Register Your Agent →</a>
+<!-- Join CTA — Interactive Registration Terminal -->
+<div id="registration-section" style="margin-top:3rem">
+
+<div style="text-align:center;margin-bottom:1.5rem">
+<span class="section-num">JOIN THE PROTOCOL</span>
+<p style="font-size:.95rem;color:var(--text);max-width:500px;margin:.5rem auto 0">Register your agent. Auto-validated. Auto-merged. Zero manual steps.</p>
+</div>
+
+<!-- Registration Terminal -->
+<div class="terminal" id="reg-terminal" style="max-width:700px;margin:0 auto">
+<div class="terminal-bar">
+<span class="terminal-dot r"></span><span class="terminal-dot y"></span><span class="terminal-dot g"></span>
+<span class="terminal-title">agent_registration_v1 — <span id="reg-mode-label">ready</span></span>
+</div>
+<div class="terminal-body" style="min-height:300px">
+
+<!-- State: Form -->
+<div id="reg-form">
+<span class="dim">// Fill in your agent's details. All fields validated in real-time.</span><br>
+<span class="dim">// One agent per owner. Must be functional. Min 3 capabilities.</span><br><br>
+
+<div style="margin-bottom:1rem">
+<span class="prompt">agent.name</span> <span class="dim">=</span><br>
+<input type="text" id="reg-name" placeholder="your_agent_name" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--accent);font-family:'Space Mono',monospace;font-size:.85rem;padding:.4rem 0;width:100%;outline:none;margin-top:.25rem" maxlength="40">
+</div>
+
+<div style="margin-bottom:1rem">
+<span class="prompt">agent.owner</span> <span class="dim">=</span><br>
+<input type="text" id="reg-owner" placeholder="your_name_or_alias" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--accent);font-family:'Space Mono',monospace;font-size:.85rem;padding:.4rem 0;width:100%;outline:none;margin-top:.25rem" maxlength="40">
+</div>
+
+<div style="margin-bottom:1rem">
+<span class="prompt">agent.mission</span> <span class="dim">=</span><br>
+<input type="text" id="reg-mission" placeholder="What does your agent do? (one sentence)" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--bright);font-family:'Space Mono',monospace;font-size:.85rem;padding:.4rem 0;width:100%;outline:none;margin-top:.25rem" maxlength="200">
+</div>
+
+<div style="margin-bottom:1rem">
+<span class="prompt">agent.capabilities</span> <span class="dim">= [</span> <span class="dim" style="font-size:.7rem">click to select ≥ 3</span><br>
+<div id="cap-grid" style="display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem"></div>
+<span class="dim">]</span>
+</div>
+
+<div style="margin-bottom:1rem">
+<span class="prompt">agent.models</span> <span class="dim">= [</span> <span class="dim" style="font-size:.7rem">click to select</span><br>
+<div id="model-grid" style="display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem"></div>
+<span class="dim">]</span>
+</div>
+
+<div style="margin-bottom:1rem">
+<span class="prompt">agent.verification</span> <span class="dim">=</span><br>
+<input type="text" id="reg-proof" placeholder="https://github.com/your-repo or public URL" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--accent2);font-family:'Space Mono',monospace;font-size:.85rem;padding:.4rem 0;width:100%;outline:none;margin-top:.25rem">
+</div>
+
+<div style="margin-bottom:1rem">
+<span class="prompt">agent.tools_count</span> <span class="dim">=</span>
+<input type="number" id="reg-tools" placeholder="0" min="0" max="100" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--accent);font-family:'Space Mono',monospace;font-size:.85rem;padding:.4rem 0;width:60px;outline:none;margin-left:.5rem" value="">
+<span class="dim" style="margin-left:1rem">agent.monthly_tokens</span> <span class="dim">=</span>
+<input type="number" id="reg-tokens" placeholder="0" min="0" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--accent);font-family:'Space Mono',monospace;font-size:.85rem;padding:.4rem 0;width:80px;outline:none;margin-left:.5rem" value="">
+</div>
+
+<br>
+<div id="reg-validation" style="font-size:.75rem;margin-bottom:1rem;min-height:1.5rem"></div>
+
+<div style="display:flex;gap:1rem;align-items:center">
+<button id="reg-submit" onclick="submitRegistration()" class="btn" style="font-size:.75rem;padding:.6rem 1.5rem;opacity:0.3;pointer-events:none;transition:all .3s">
+  REGISTER AGENT →
+</button>
+<span id="reg-status" style="font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted)"></span>
+</div>
+</div>
+
+<!-- State: Processing -->
+<div id="reg-processing" style="display:none">
+</div>
+
+<!-- State: Success -->
+<div id="reg-success" style="display:none">
+</div>
+
+</div>
+</div>
+
+<!-- Fallback for manual PRs -->
+<div style="text-align:center;margin-top:1.5rem">
+<p style="font-size:.75rem;color:var(--muted)">Prefer manual? <a href="https://github.com/aeoess/aeoess_web/blob/main/protocol-registry.json" target="_blank" style="color:var(--accent);text-decoration:none">Submit a PR directly →</a></p>
+</div>
+
 </div>
 
 </div>
@@ -279,7 +361,194 @@ function updateRuntime() {
 updateRuntime();
 setInterval(updateRuntime, 1000);
 
-// ═══ LIVE REGISTRY LOADER ═══
+// ═══ REGISTRATION FORM ═══
+
+const CAPABILITIES = [
+  'code_execution', 'web_search', 'file_management', 'email_management',
+  'browser_automation', 'voice_transcription', 'image_analysis', 'scheduling',
+  'messaging', 'social_media', 'github_operations', 'system_control',
+  'data_analysis', 'document_generation', 'api_integration', 'sub_agent_orchestration',
+  'knowledge_retrieval', 'task_planning', 'content_creation', 'database_ops'
+];
+
+const LLM_MODELS = [
+  'claude-sonnet', 'claude-opus', 'claude-haiku', 'gpt-4o', 'gpt-4o-mini',
+  'gpt-4.1', 'gemini-2.5-pro', 'gemini-2.5-flash', 'deepseek-r1', 'deepseek-v3',
+  'llama-4', 'mistral-large', 'command-r+', 'other'
+];
+
+const selectedCaps = new Set();
+const selectedModels = new Set();
+
+// Render capability chips
+const capGrid = document.getElementById('cap-grid');
+CAPABILITIES.forEach(cap => {
+  const chip = document.createElement('span');
+  chip.textContent = cap;
+  chip.style.cssText = `font-family:'Space Mono',monospace;font-size:.65rem;padding:.25rem .6rem;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .2s;user-select:none`;
+  chip.onclick = () => {
+    if (selectedCaps.has(cap)) { selectedCaps.delete(cap); chip.style.borderColor='var(--border)'; chip.style.color='var(--muted)'; chip.style.background='transparent'; }
+    else { selectedCaps.add(cap); chip.style.borderColor='var(--accent)'; chip.style.color='var(--accent)'; chip.style.background='rgba(0,255,136,0.05)'; }
+    validateForm();
+  };
+  capGrid.appendChild(chip);
+});
+
+// Render model chips
+const modelGrid = document.getElementById('model-grid');
+LLM_MODELS.forEach(model => {
+  const chip = document.createElement('span');
+  chip.textContent = model;
+  chip.style.cssText = `font-family:'Space Mono',monospace;font-size:.65rem;padding:.25rem .6rem;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .2s;user-select:none`;
+  chip.onclick = () => {
+    if (selectedModels.has(model)) { selectedModels.delete(model); chip.style.borderColor='var(--border)'; chip.style.color='var(--muted)'; chip.style.background='transparent'; }
+    else { selectedModels.add(model); chip.style.borderColor='var(--accent2)'; chip.style.color='var(--accent2)'; chip.style.background='rgba(0,204,255,0.05)'; }
+    validateForm();
+  };
+  modelGrid.appendChild(chip);
+});
+
+function validateForm() {
+  const name = document.getElementById('reg-name').value.trim();
+  const owner = document.getElementById('reg-owner').value.trim();
+  const proof = document.getElementById('reg-proof').value.trim();
+  const btn = document.getElementById('reg-submit');
+  const val = document.getElementById('reg-validation');
+  
+  const issues = [];
+  if (!name) issues.push('name required');
+  else if (!/^[a-zA-Z0-9_-]+$/.test(name)) issues.push('name: letters, numbers, _ and - only');
+  if (!owner) issues.push('owner required');
+  if (selectedCaps.size < 3) issues.push(`${3 - selectedCaps.size} more capabilities needed`);
+  if (selectedModels.size < 1) issues.push('select at least 1 model');
+  if (!proof) issues.push('verification URL required');
+  else if (!proof.startsWith('http')) issues.push('verification must be a URL');
+  
+  if (issues.length === 0) {
+    val.innerHTML = '<span style="color:var(--accent)">✓ All checks passed. Ready to register.</span>';
+    btn.style.opacity = '1';
+    btn.style.pointerEvents = 'auto';
+  } else {
+    val.innerHTML = `<span style="color:var(--warn)">⚠ ${issues.join(' · ')}</span>`;
+    btn.style.opacity = '0.3';
+    btn.style.pointerEvents = 'none';
+  }
+}
+
+// Validate on every keystroke
+['reg-name','reg-owner','reg-mission','reg-proof','reg-tools','reg-tokens'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) { el.addEventListener('input', validateForm); }
+});
+
+async function submitRegistration() {
+  const name = document.getElementById('reg-name').value.trim();
+  const owner = document.getElementById('reg-owner').value.trim();
+  const mission = document.getElementById('reg-mission').value.trim();
+  const proof = document.getElementById('reg-proof').value.trim();
+  const tools = parseInt(document.getElementById('reg-tools').value) || 0;
+  const tokens = parseInt(document.getElementById('reg-tokens').value) || 0;
+  
+  const agentData = {
+    name,
+    owner_alias: owner,
+    mission: mission || `AI agent joining the protocol.`,
+    capabilities: Array.from(selectedCaps),
+    llm_models: Array.from(selectedModels),
+    verification_proof: proof,
+    verification_method: proof.includes('github.com') ? 'github_repo' : 'public_url',
+    tools_count: tools || selectedCaps.size,
+    available_tokens_monthly: tokens,
+    messages_processed: 0,
+    actions_executed: 0,
+    proactive_jobs: 0,
+    memory_type: 'unknown'
+  };
+  
+  // Switch to processing state
+  document.getElementById('reg-form').style.display = 'none';
+  const proc = document.getElementById('reg-processing');
+  proc.style.display = 'block';
+  document.getElementById('reg-mode-label').textContent = 'processing...';
+  
+  // Animated processing output
+  const lines = [
+    { text: '$ protocol.register(' + name + ')', cls: 'cmd', delay: 0 },
+    { text: '', cls: '', delay: 200 },
+    { text: '→ Validating agent data...', cls: 'output', delay: 400 },
+    { text: '  ✓ Name: ' + name, cls: 'accent2', delay: 700 },
+    { text: '  ✓ Owner: ' + owner, cls: 'accent2', delay: 900 },
+    { text: '  ✓ Capabilities: ' + selectedCaps.size + ' registered', cls: 'accent2', delay: 1100 },
+    { text: '  ✓ Models: ' + Array.from(selectedModels).join(', '), cls: 'accent2', delay: 1300 },
+    { text: '  ✓ Verification: ' + proof, cls: 'accent2', delay: 1500 },
+    { text: '', cls: '', delay: 1700 },
+    { text: '→ Submitting to protocol registry...', cls: 'output', delay: 1800 },
+  ];
+  
+  for (const line of lines) {
+    await new Promise(r => setTimeout(r, line.delay ? 200 : 100));
+    const el = document.createElement('div');
+    el.innerHTML = line.text ? `<span class="${line.cls || 'output'}">${line.text}</span>` : '<br>';
+    proc.appendChild(el);
+  }
+  
+  // Submit via pre-filled GitHub Issue URL (secure, no token needed)
+  try {
+    const issueTitle = encodeURIComponent(`🤖 Agent Registration: ${name}`);
+    const issueBody = encodeURIComponent([
+      `## Agent Registration: ${name}`,
+      ``,
+      '```json',
+      JSON.stringify(agentData, null, 2),
+      '```',
+      ``,
+      `Submitted via [aeoess.com/protocol.html](https://aeoess.com/protocol.html)`,
+      `Auto-validation will run on this submission.`
+    ].join('\n'));
+    
+    const issueUrl = `https://github.com/aeoess/aeoess_web/issues/new?title=${issueTitle}&body=${issueBody}&labels=agent-registration`;
+    
+    await new Promise(r => setTimeout(r, 500));
+    
+    const successLines = [
+      { text: '  ✓ Registration data validated', cls: 'accent2' },
+      { text: '  ✓ Payload generated', cls: 'accent2' },
+      { text: '', cls: '' },
+      { text: '═══════════════════════════════════════', cls: 'dim' },
+      { text: '  READY TO SUBMIT', cls: 'cmd' },
+      { text: '═══════════════════════════════════════', cls: 'dim' },
+      { text: '', cls: '' },
+      { text: '  Click below to submit your registration.', cls: 'output' },
+      { text: '  GitHub will open with your data pre-filled.', cls: 'output' },
+      { text: '  Just click "Submit new issue" — that\'s it.', cls: 'output' },
+      { text: '', cls: '' },
+      { text: '  The protocol will auto-validate and merge.', cls: 'dim' },
+      { text: '  No manual review. No waiting.', cls: 'dim' },
+      { text: '', cls: '' },
+    ];
+    
+    for (const line of successLines) {
+      await new Promise(r => setTimeout(r, 150));
+      const el = document.createElement('div');
+      el.innerHTML = line.text ? `<span class="${line.cls}">${line.text}</span>` : '<br>';
+      proc.appendChild(el);
+    }
+    
+    const linkEl = document.createElement('div');
+    linkEl.style.marginTop = '.5rem';
+    linkEl.innerHTML = `<a href="${issueUrl}" target="_blank" class="btn" style="font-size:.75rem;padding:.7rem 1.5rem;display:inline-block" onclick="document.getElementById('reg-mode-label').textContent='✓ submitted'">SUBMIT TO PROTOCOL →</a>
+    <span style="display:block;margin-top:.8rem;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted)">Opens GitHub · One-click submit · Auto-validated</span>`;
+    proc.appendChild(linkEl);
+    
+    document.getElementById('reg-mode-label').textContent = 'ready to submit';
+    
+  } catch(e) {
+    console.error('Registration error:', e);
+    proc.innerHTML += `<span class="warn">Error: ${e.message}. Please try again.</span>`;
+  }
+}
+
+validateForm();
 (async function loadRegistry() {
   try {
     const res = await fetch('protocol-registry.json?t=' + Date.now());
